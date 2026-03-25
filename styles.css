@@ -1,3 +1,170 @@
+/* ============================================================
+   @font-face — Neue Haas Grotesk Display Pro
+   Naming: NHaasGroteskDSPro-{weight}{style}
+   Weight map: 15=100, 25=200, 35=300, 45=400, 55=450, 65=500, 75=700, 95=900
+   ============================================================ */
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-15UltTh.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-16UltThIt.woff2") format("woff2");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-25Th.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-26ThIt.woff2") format("woff2");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-35XLt.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-36XLtIt.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-45Lt.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-46LtIt.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-55Rg.woff2") format("woff2");
+  font-weight: 450;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-56It.woff2") format("woff2");
+  font-weight: 450;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-65Md.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-66MdIt.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-75Bd.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-76BdIt.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-95Blk.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskDSPro-96BlkIt.woff2") format("woff2");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ============================================================
+   @font-face — Neue Haas Grotesk Text Pro
+   Available: 55Rg (400), 65Md (500), 75Bd (700) + italics
+   ============================================================ */
+
+@font-face {
+  font-family: "Neue Haas Grotesk Text Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskTXPro-55Rg.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Text Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskTXPro-56It.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Text Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskTXPro-65Md.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Text Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskTXPro-66MdIt.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Text Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskTXPro-75Bd.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Text Pro";
+  src: url("./fonts/Neue Haas Grotesk/NHaasGroteskTXPro-76BdIt.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 /* Global */
 * {
   box-sizing: border-box;
@@ -5,19 +172,47 @@
   padding: 0;
 }
 
+:root {
+  --font-display: "Neue Haas Grotesk Display Pro", "Helvetica Neue", Arial, sans-serif;
+  --font-text: "Neue Haas Grotesk Text Pro", "Helvetica Neue", Arial, sans-serif;
+
+  /* Type scale tokens */
+  --type-display:      96px;
+  --type-h3:           48px;
+  --type-title-large:  40px;
+  --type-title-medium: 32px;
+  --type-title-small:  24px;
+  --type-body:         16px;
+  --type-body-sm:      11px;
+
+  /* Spacing tokens — 8px grid (--space-N = N × 8px) */
+  --space-1:  8px;
+  --space-2:  16px;
+  --space-3:  24px;
+  --space-4:  32px;
+  --space-5:  40px;
+  --space-6:  48px;
+  --space-7:  56px;
+  --space-8:  64px;
+  --space-9:  72px;
+  --space-10: 80px;
+  --space-11: 88px;
+  --space-12: 96px;
+  --space-13: 104px;
+  --space-14: 112px;
+  --space-15: 120px;
+}
+
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  line-height: 1.6;
+  font-family: var(--font-text);
+  font-size: var(--type-body);
+  line-height: 1.375; /* Body Base: 22px / 16px */
+  letter-spacing: -0.01em;
   color: #222;
   background: #E5E2DB;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-:root {
-  --font-display: "Neue Haas Grotesk Display Pro", "Helvetica Neue", Arial, sans-serif;
-  --font-text: "Neue Haas Grotesk Text Pro", "Helvetica Neue", Arial, sans-serif;
 }
 
 .site-header {
@@ -38,26 +233,26 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 2.5rem;
-  padding: 1rem 1.5rem;
+  gap: var(--space-5);
+  padding: var(--space-2) var(--space-3);
   box-sizing: border-box;
 }
 
 .site-header .nav-links {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: var(--space-5);
   flex: 1;
   justify-content: flex-start;
 }
 
 .site-header .nav-links a {
-  font-family: "Neue Haas Grotesk Text Pro", "Helvetica Neue", Arial, sans-serif;
-  font-size: 1.5rem;
+  font-family: var(--font-text);
+  font-size: var(--type-title-small);
   font-weight: 400;
-  line-height: 120%;
+  line-height: 1.2;
   letter-spacing: 0;
-  color: #000000;
+  color: #000;
   text-align: center;
   text-decoration: none;
 }
@@ -71,59 +266,199 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 0.5rem;
-  height: 2.5rem;
-  padding: 0.5rem 1rem;
+  gap: var(--space-1);
+  height: var(--space-5);
+  padding: var(--space-1) var(--space-2);
   border-radius: 1rem;
   background: #2d2018;
   color: #fff;
   text-align: center;
-  font-family: "Neue Haas Grotesk Text Pro", "Helvetica Neue", Arial, sans-serif;
-  font-size: 1rem;
+  font-family: var(--font-text);
+  font-size: var(--type-body);
   font-weight: 400;
-  line-height: 1.375rem;
-  letter-spacing: -0.01rem;
+  line-height: 1.375;
+  letter-spacing: -0.01em;
   text-decoration: none;
   border: none;
 }
 
-.container,
-.content-block {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
 .hero {
-  text-align: center;
-  padding: 4rem 1rem;
-  background: #e2e8f0;
-  border-radius: 0.75rem;
-  margin: 2rem auto;
-  max-width: 900px;
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: start;
+  padding: var(--space-8) 0;
+  background: transparent;
+  text-align: left;
 }
 
-.hero h2 {
-  margin-bottom: 0.7rem;
+.hero-left {
+  grid-column: span 4;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
 }
 
-button {
-  border: 1px solid #0f172a;
-  background: #0f172a;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 0.4rem;
-  cursor: pointer;
+.hero-right {
+  grid-column: 9 / span 4;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
-button:hover {
-  background: #1e293b;
+.hero-role {
+  font-family: var(--font-display);
+  font-size: var(--type-display);
+  font-weight: 450;
+  line-height: 104px; /* H1 / display spec */
+  letter-spacing: 0;
+  color: #000;
+  margin: 0;
+}
+
+.hero-tagline {
+  font-family: var(--font-display);
+  font-size: var(--type-title-large);
+  font-weight: 450;
+  line-height: 48px; /* Title Large spec */
+  letter-spacing: 0;
+  color: #000;
+  margin: 0;
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: var(--type-display);
+  font-weight: 450;
+  line-height: 104px; /* H1 / display spec */
+  letter-spacing: 0;
+  color: #000;
+  margin: 0;
+}
+
+.hero-bio {
+  font-family: var(--font-text);
+  font-size: var(--type-body-sm);
+  font-weight: 500;
+  line-height: 12px; /* Body Small: 100% snapped to 4px baseline */
+  letter-spacing: 0.33px; /* Body Small: 3% of 11px */
+  color: #000;
+  margin: 0;
+}
+
+/* 9-col: hero-left cols 1–4, hero-right cols 6–9 */
+@media (max-width: 1024px) {
+  .hero-right {
+    grid-column: 6 / span 4;
+  }
+}
+
+/* 6-col: both full-width, stacked */
+@media (max-width: 768px) {
+  .hero {
+    row-gap: var(--space-6);
+  }
+
+  .hero-left {
+    grid-column: span 6;
+  }
+
+  .hero-right {
+    grid-column: span 6;
+  }
+
+  .hero-role,
+  .hero-name {
+    font-size: var(--type-h3); /* step down: display (96) → H3 (48) */
+    line-height: 56px; /* H3 spec */
+  }
+
+  .hero-tagline {
+    font-size: var(--type-title-small); /* step down: title-large (40) → title-small (24) */
+    line-height: 28px; /* 1.2 × 24px, on 4px grid */
+  }
 }
 
 footer {
-  margin-top: 3rem;
-  padding: 1rem;
+  margin-top: var(--space-6);
+  padding: var(--space-2);
+  font-family: var(--font-text);
   text-align: center;
   border-top: 1px solid #cbd5e1;
   color: #475569;
+}
+
+/* Page structure + 12-col grid (24px margin / 16px gutter) */
+.page-shell {
+  max-width: 1440px;
+  min-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.grid-inner {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 16px;
+  row-gap: 16px;
+  width: 100%;
+}
+
+.grid-item {
+  grid-column: span 12;
+}
+
+.span-1  { grid-column: span 1; }
+.span-2  { grid-column: span 2; }
+.span-3  { grid-column: span 3; }
+.span-4  { grid-column: span 4; }
+.span-5  { grid-column: span 5; }
+.span-6  { grid-column: span 6; }
+.span-7  { grid-column: span 7; }
+.span-8  { grid-column: span 8; }
+.span-9  { grid-column: span 9; }
+.span-10 { grid-column: span 10; }
+.span-11 { grid-column: span 11; }
+.span-12 { grid-column: span 12; }
+
+/* Large tablet: 9-col */
+@media (max-width: 1024px) {
+  .page-shell { padding: 0 24px; }
+  .grid-inner { grid-template-columns: repeat(9, minmax(0, 1fr)); }
+  .span-1  { grid-column: span 1; }
+  .span-2  { grid-column: span 2; }
+  .span-3  { grid-column: span 3; }
+  .span-4  { grid-column: span 4; }
+  .span-5  { grid-column: span 5; }
+  .span-6  { grid-column: span 6; }
+  .span-7  { grid-column: span 7; }
+  .span-8  { grid-column: span 8; }
+  .span-9  { grid-column: span 9; }
+  .span-10, .span-11, .span-12 { grid-column: span 9; }
+}
+
+/* Small tablet: 6-col */
+@media (max-width: 768px) {
+  .page-shell { padding: 0 24px; }
+  .grid-inner { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .span-1 { grid-column: span 1; }
+  .span-2 { grid-column: span 2; }
+  .span-3 { grid-column: span 3; }
+  .span-4 { grid-column: span 4; }
+  .span-5 { grid-column: span 5; }
+  .span-6 { grid-column: span 6; }
+  .span-7, .span-8, .span-9, .span-10, .span-11, .span-12 { grid-column: span 6; }
+}
+
+/* Mobile + mini mobile: 6-col */
+@media (max-width: 425px) {
+  .page-shell { padding: 0 24px; }
+  .grid-inner { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .span-1 { grid-column: span 1; }
+  .span-2 { grid-column: span 2; }
+  .span-3 { grid-column: span 3; }
+  .span-4 { grid-column: span 4; }
+  .span-5 { grid-column: span 5; }
+  .span-6 { grid-column: span 6; }
+  .span-7, .span-8, .span-9, .span-10, .span-11, .span-12 { grid-column: span 6; }
 }
