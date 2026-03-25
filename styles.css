@@ -176,7 +176,8 @@
    spacing model. Without this, spacing tokens measure from the full line box
    (includes ascender/descender whitespace) and won't match Figma values.
    Supported: Chrome 123+, Safari 17.4+ */
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, p,
+.metric-value, .metric-label, .tag {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
@@ -473,8 +474,9 @@ body {
 /* 425px mobile: stacked vertical layout */
 @media (max-width: 425px) {
   .hero {
-    row-gap: var(--space-8); /* 64px between stacked sections */
+    row-gap: var(--space-7); /* 64px between stacked sections */
     align-items: start;
+    padding: var(--space-7) 0;
   }
 
   .hero-left {
@@ -517,6 +519,155 @@ body {
     letter-spacing: 0;
     color: #000;
   }
+}
+
+/* ============================================================
+   Case Studies Section
+   ============================================================ */
+
+.case-studies {
+  display: grid;
+  grid-template-columns: subgrid;
+  row-gap: var(--space-3); /* 24px between wrapped rows */
+  scroll-margin-top: 72px;    /* offset for sticky nav */
+}
+
+.case-study-card {
+  grid-column: span 4; /* 3 cards per row on 12-col */
+  background: #fff;
+  border-radius: 32px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-image {
+  width: 100%;
+  aspect-ratio: 453 / 340;
+}
+
+.card-body {
+  padding: var(--space-5) var(--space-4); /* 40px top/bottom, 32px sides */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5); /* 40px between tags / text / footer */
+  flex: 1;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1); /* 8px */
+}
+
+.tag {
+  font-family: var(--font-text);
+  font-size: var(--type-body-sm); /* 11px */
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0.33px;
+  color: #2d2018;
+  padding: var(--space-1) 12px; /* 8px 12px */
+  border: 1px solid #2d2018;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3); /* 24px */
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: var(--type-title-large); /* 40px */
+  font-weight: 450;
+  line-height: 48px;
+  letter-spacing: 0;
+  color: #000;
+  margin: 0;
+}
+
+.card-description {
+  font-family: var(--font-text);
+  font-size: var(--type-title-small); /* 24px */
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: #000;
+  margin: 0;
+}
+
+.card-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.card-metrics {
+  display: flex;
+  gap: var(--space-2); /* 16px */
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1); /* 8px */
+}
+
+.metric-value {
+  font-family: var(--font-text);
+  font-size: var(--type-title-small); /* 24px */
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: #000;
+}
+
+.metric-label {
+  font-family: var(--font-text);
+  font-size: var(--type-body-sm); /* 11px */
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0.33px;
+  color: #000;
+}
+
+.card-arrow {
+  display: block;
+  flex-shrink: 0;
+  color: #000;
+}
+
+/* Case studies responsive */
+@media (max-width: 1024px) {
+  .case-study-card { grid-column: span 3; } /* 3 per row on 9-col */
+
+  .card-body {
+    padding: var(--space-4) var(--space-3); /* 32px top/bottom, 24px left/right */
+    gap: var(--space-4);
+  }
+
+  .card-title {
+    font-size: var(--type-title-medium); /* 32px */
+    line-height: 40px;
+  }
+
+  .card-description {
+    font-size: var(--type-body); /* 16px */
+    line-height: 22px;
+    letter-spacing: -0.01em;
+  }
+}
+
+@media (max-width: 768px) {
+  .case-study-card { grid-column: span 4; } /* 2 per row on 9-col, 3rd wraps */
+}
+
+@media (max-width: 425px) {
+  .case-study-card { grid-column: span 6; } /* 1 per row on 6-col */
 }
 
 footer {
