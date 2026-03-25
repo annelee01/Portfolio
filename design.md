@@ -152,10 +152,11 @@ Fonts live in `./fonts/Neue Haas Grotesk/`. Both families must be declared with 
 
 Figma spacing tokens are measured **cap-height to baseline** (Figma's "leading trim" setting). CSS by default measures spacing from the full line box, which includes invisible ascender and descender whitespace above/below the text — making the same spacing token appear larger in the browser than in Figma.
 
-**Fix:** apply `text-box-trim` to all text elements in `styles.css`:
+**Fix:** apply `text-box-trim` to all text-bearing elements in `styles.css` — this includes block elements **and** any inline elements (`span`, `label`, etc.) that display text inside a component:
 
 ```css
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, p,
+.any-span-or-inline-text-class {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
@@ -165,6 +166,7 @@ h1, h2, h3, h4, h5, h6, p {
 - `cap alphabetic` defines the trim edges: top = cap height, bottom = alphabetic baseline.
 - **Browser support:** Chrome 123+, Safari 17.4+. Keep this applied globally — do not work around it with manual spacing offsets.
 - All spacing tokens (`--space-*`) are defined assuming this trim is active. If it is ever removed, visual spacing will no longer match Figma.
+- **When adding a new component:** any `span` or inline element that renders visible text must be added to this selector. Omitting it causes extra line-box leading that breaks spacing vs Figma.
 
 ## Spacing tokens
 
