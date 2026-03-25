@@ -4,7 +4,6 @@ function buildNavbar() {
 
   navbar.innerHTML = `
     <div class="inner-nav">
-      <a href="#contact" class="btn-contact">Contact</a>
       <nav class="nav-links">
         <a href="index.html">Case Studies</a>
         <a href="finde.html">Tech</a>
@@ -12,6 +11,14 @@ function buildNavbar() {
         <a href="#">Thought Leadership</a>
         <a href="#">Collaborators</a>
       </nav>
+      <a href="#contact" class="btn-contact">Contact</a>
+      <button class="nav-hamburger" aria-label="Open menu">
+        <div class="nav-hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
     </div>
   `;
 
