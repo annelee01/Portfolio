@@ -10,7 +10,9 @@ This file is the single source-of-truth for layout, grids, columns, and gutters 
 
 ## Lockdown variables
 
-- baseline: 4px (can be scaled via a modular `4x` grid)
+- **Typography baseline: 4px** — all font sizes, line-heights, and vertical type adjustments must be multiples of 4px. This gives finer granularity than 8px for typographic control (e.g. 20px, 28px line-heights are valid here but not on an 8px grid).
+
+- **Layout/spacing baseline: 8px** — all gaps, padding, and margins between components use the `--space-*` tokens, which are multiples of 8px. Since 8 is a multiple of 4, every spacing token is also valid on the 4px type grid.
 - margin: 24px (constant outer page padding)
 - gutter: 16px (fixed column gap)
 - max content width: 1440px (desktop)
@@ -19,7 +21,7 @@ This file is the single source-of-truth for layout, grids, columns, and gutters 
 
 - **Desktop (>= 1440px)**: 12-column grid.
 - **Large tablet (>= 1024px)**: 9-column grid.
-- **Small tablet (>= 768px)**: 6-column grid.
+- **Small tablet (>= 768px)**: 9-column grid.
 - **Mobile (>= 425px)**: 6-column grid.
 - **Mini mobile (< 425px)**: 6-column grid (still retains internal structure for text/buttons).
 
@@ -55,6 +57,13 @@ This file is the single source-of-truth for layout, grids, columns, and gutters 
   - font-weight: 450
   - line-height: 104px
   - letter-spacing: 0
+
+- H2:
+  - font-size: 64px
+  - font-family: Neue Haas Grotesk Display Pro 55 Roman
+  - font-weight: 450
+  - line-height: 64px
+  - letter-spacing: -1% (−0.01em)
 
 - H3:
   - font-size: 48px
@@ -95,8 +104,8 @@ This file is the single source-of-truth for layout, grids, columns, and gutters 
   - font-size: 11px
   - font-family: Neue Haas Grotesk Text Pro 65 Medium
   - font-weight: 500
-  - line-height: 100% (11px)
-  - letter-spacing: 3
+  - line-height: 14px
+  - letter-spacing: 2
 
 ### Font files & @font-face
 
@@ -124,6 +133,7 @@ Fonts live in `./fonts/Neue Haas Grotesk/`. Both families must be declared with 
 ### Type token mapping
 
 - `--type-display`: 96px
+- `--type-h2`: 64px
 - `--type-h3`: 48px
 - `--type-title-large`: 40px
 - `--type-title-medium`: 32px
@@ -137,6 +147,24 @@ Fonts live in `./fonts/Neue Haas Grotesk/`. Both families must be declared with 
 - Headings should scale in a modular ratio (`96 → 48 → 40 → 32 → 24 → 16 → 11`).
 - Use `line-height` 1.1–1.2 for display/headings and 1.35–1.5 for body text.
 - Ensure minimum readable font-size 11px (secondary text) and 16px for primary body copy.
+
+### Cap-height trimming
+
+Figma spacing tokens are measured **cap-height to baseline** (Figma's "leading trim" setting). CSS by default measures spacing from the full line box, which includes invisible ascender and descender whitespace above/below the text — making the same spacing token appear larger in the browser than in Figma.
+
+**Fix:** apply `text-box-trim` to all text elements in `styles.css`:
+
+```css
+h1, h2, h3, h4, h5, h6, p {
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+}
+```
+
+- `trim-both` removes the extra space above the cap height and below the baseline.
+- `cap alphabetic` defines the trim edges: top = cap height, bottom = alphabetic baseline.
+- **Browser support:** Chrome 123+, Safari 17.4+. Keep this applied globally — do not work around it with manual spacing offsets.
+- All spacing tokens (`--space-*`) are defined assuming this trim is active. If it is ever removed, visual spacing will no longer match Figma.
 
 ## Spacing tokens
 
