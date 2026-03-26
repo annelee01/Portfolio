@@ -177,7 +177,8 @@
    (includes ascender/descender whitespace) and won't match Figma values.
    Supported: Chrome 123+, Safari 17.4+ */
 h1, h2, h3, h4, h5, h6, p,
-.metric-value, .metric-label, .tag {
+.metric-value, .metric-label, .tag,
+.collab-cell-label, .collab-item-name, .collab-item-type {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
@@ -315,8 +316,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: var(--space-5);   /* 40px */
-    height: var(--space-5);  /* 40px */
+    width: var(--space-5);
+    height: var(--space-5);
     background: none;
     border: none;
     padding: 0;
@@ -330,14 +331,14 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: var(--space-1); /* 8px between bars */
+    gap: var(--space-1);
     width: var(--space-5);
     height: var(--space-5);
   }
 
   .site-header .nav-hamburger-icon span {
     display: block;
-    width: var(--space-5);  /* 40px */
+    width: var(--space-5);
     height: 4px;
     background: #000;
     border-radius: 100px;
@@ -349,7 +350,7 @@ body {
   display: grid;
   grid-template-columns: subgrid;
   align-items: end;
-  row-gap: var(--space-15); /* 120px between hero row and CTA row */
+  row-gap: var(--space-15); /* space between hero row and CTA row */
   padding: var(--space-12) 0;
   background: transparent;
   text-align: left;
@@ -373,7 +374,7 @@ body {
   font-family: var(--font-display);
   font-size: var(--type-display);
   font-weight: 450;
-  line-height: 104px; /* H1 / display spec */
+  line-height: 104px;
   letter-spacing: 0;
   color: #000;
   margin: 0;
@@ -383,7 +384,7 @@ body {
   font-family: var(--font-display);
   font-size: var(--type-title-large);
   font-weight: 450;
-  line-height: 48px; /* Title Large spec */
+  line-height: 48px;
   letter-spacing: 0;
   color: #000;
   margin: 0;
@@ -412,7 +413,7 @@ body {
 .hero-cta {
   grid-column: span 12;
   font-family: var(--font-display);
-  font-size: var(--type-title-large); /* 40px */
+  font-size: var(--type-title-large);
   font-weight: 450;
   line-height: 48px;
   letter-spacing: 0;
@@ -457,14 +458,14 @@ body {
   /* hero-right inherits 6 / span 4 from the 1024px rule above (also 9-col) */
 
   .hero-role {
-    font-size: var(--type-h2); /* 64px — steps down from 96px */
+    font-size: var(--type-h2);
     line-height: 64px;
     letter-spacing: -0.01em;
   }
 
   .hero-tagline {
     font-family: var(--font-text);
-    font-size: var(--type-title-small); /* 24px */
+    font-size: var(--type-title-small);
     font-weight: 400;
     line-height: 1.2;
     letter-spacing: 0;
@@ -474,14 +475,14 @@ body {
 /* 425px mobile: stacked vertical layout */
 @media (max-width: 425px) {
   .hero {
-    row-gap: var(--space-7); /* 64px between stacked sections */
+    row-gap: var(--space-7);
     align-items: start;
     padding: var(--space-7) 0;
   }
 
   .hero-left {
     grid-column: span 5;
-    gap: var(--space-4); /* 32px between role and tagline */
+    gap: var(--space-4);
   }
 
   .hero-right {
@@ -489,14 +490,14 @@ body {
   }
 
   .hero-role {
-    font-size: var(--type-h2); /* 64px — H2 style */
+    font-size: var(--type-h2);
     line-height: 64px;
     letter-spacing: -0.01em;
   }
 
   .hero-tagline {
     font-family: var(--font-text);
-    font-size: var(--type-title-small); /* 24px */
+    font-size: var(--type-title-small);
     font-weight: 400;
     line-height: 1.2;
     letter-spacing: 0;
@@ -504,7 +505,7 @@ body {
 
   .hero-name {
     font-family: var(--font-text);
-    font-size: var(--type-title-small); /* 24px */
+    font-size: var(--type-title-small);
     font-weight: 400;
     line-height: 1.2;
   }
@@ -530,11 +531,11 @@ body {
   grid-template-columns: subgrid;
   row-gap: var(--space-3); /* 24px between wrapped rows */
   scroll-margin-top: var(--space-9);
-  margin-bottom: var(--space-9); /* 72px */
+  margin-bottom: var(--space-9);
 }
 
 .case-study-card {
-  grid-column: span 4; /* 3 cards per row on 12-col */
+  grid-column: span 4;
   background: #fff;
   border-radius: 32px;
   overflow: hidden;
@@ -548,27 +549,27 @@ body {
 }
 
 .card-body {
-  padding: var(--space-5) var(--space-4); /* 40px top/bottom, 32px sides */
+  padding: var(--space-5) var(--space-4);
   display: flex;
   flex-direction: column;
-  gap: var(--space-5); /* 40px between tags / text / footer */
+  gap: var(--space-5);
   flex: 1;
 }
 
 .card-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-1); /* 8px */
+  gap: var(--space-1);
 }
 
 .tag {
   font-family: var(--font-text);
-  font-size: var(--type-body-sm); /* 11px */
+  font-size: var(--type-body-sm);
   font-weight: 500;
   line-height: 14px;
   letter-spacing: 0.33px;
   color: #2d2018;
-  padding: var(--space-1) 12px; /* 8px 12px */
+  padding: var(--space-1) 12px;
   border: 1px solid #2d2018;
   border-radius: 100px;
   white-space: nowrap;
@@ -577,12 +578,12 @@ body {
 .card-text {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3); /* 24px */
+  gap: var(--space-3);
 }
 
 .card-title {
   font-family: var(--font-display);
-  font-size: var(--type-title-large); /* 40px */
+  font-size: var(--type-title-large);
   font-weight: 450;
   line-height: 48px;
   letter-spacing: 0;
@@ -592,7 +593,7 @@ body {
 
 .card-description {
   font-family: var(--font-text);
-  font-size: var(--type-title-small); /* 24px */
+  font-size: var(--type-title-small);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0;
@@ -609,18 +610,18 @@ body {
 
 .card-metrics {
   display: flex;
-  gap: var(--space-2); /* 16px */
+  gap: var(--space-2);
 }
 
 .metric {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1); /* 8px */
+  gap: var(--space-1);
 }
 
 .metric-value {
   font-family: var(--font-text);
-  font-size: var(--type-title-small); /* 24px */
+  font-size: var(--type-title-small);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0;
@@ -629,7 +630,7 @@ body {
 
 .metric-label {
   font-family: var(--font-text);
-  font-size: var(--type-body-sm); /* 11px */
+  font-size: var(--type-body-sm);
   font-weight: 500;
   line-height: 14px;
   letter-spacing: 0.33px;
@@ -656,12 +657,12 @@ body {
   }
 
   .card-title {
-    font-size: var(--type-title-medium); /* 32px */
+    font-size: var(--type-title-medium);
     line-height: 40px;
   }
 
   .card-description {
-    font-size: var(--type-body); /* 16px */
+    font-size: var(--type-body);
     line-height: 22px;
     letter-spacing: -0.01em;
   }
@@ -728,16 +729,15 @@ body {
 .tech-card {
   background: #1c1c1c;
   border-radius: 32px;
-  padding: var(--space-4); /* 32px */
+  padding: var(--space-4);
   display: flex;
   flex-direction: column;
-  gap: var(--space-2); /* 16px between title and body */
+  gap: var(--space-2);
 }
 
-/* tech-card-title and tech-card-body are h3/p — covered by global text-box-trim */
 .tech-card-title {
   font-family: var(--font-text);
-  font-size: var(--type-title-small); /* 24px */
+  font-size: var(--type-title-small);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0;
@@ -747,7 +747,7 @@ body {
 
 .tech-card-body {
   font-family: var(--font-text);
-  font-size: var(--type-body); /* 16px */
+  font-size: var(--type-body);
   font-weight: 400;
   line-height: 22px;
   letter-spacing: -0.01em;
@@ -761,7 +761,7 @@ body {
 }
 
 .tech-screenshot {
-  background: #2a2a2a; /* placeholder — replace with img */
+  background: #2a2a2a;
   border-radius: var(--space-4);
   flex: 1;
   min-height: 443px;
@@ -774,17 +774,17 @@ body {
 
 .values-section {
   background: #dad2be;
-  padding: var(--space-15) 0; /* 120px top/bottom */
+  padding: var(--space-15) 0;
 }
 
 .values-heading {
   font-family: var(--font-display);
-  font-size: var(--type-title-large); /* 40px */
+  font-size: var(--type-title-large);
   font-weight: 450;
   line-height: 48px;
   letter-spacing: 0;
   color: #000;
-  margin: 0 0 var(--space-9); /* 72px below heading */
+  margin: 0 0 var(--space-9);
 }
 
 .values-pixel-art {
@@ -797,7 +797,7 @@ body {
 .values-col {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5); /* 40px between visual element and text */
+  gap: var(--space-5);
   align-self: end; /* bottom-align cols 2 & 3 to match col 1's taller height */
 }
 
@@ -808,12 +808,12 @@ body {
 .values-col-text {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2); /* 16px between title and body */
+  gap: var(--space-2);
 }
 
 .values-col-title {
   font-family: var(--font-text);
-  font-size: var(--type-title-small); /* 24px */
+  font-size: var(--type-title-small);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0;
@@ -823,12 +823,134 @@ body {
 
 .values-col-body {
   font-family: var(--font-text);
-  font-size: var(--type-body); /* 16px */
+  font-size: var(--type-body);
   font-weight: 400;
   line-height: 22px;
   letter-spacing: -0.01em;
   color: #000;
   margin: 0;
+}
+
+/* ============================================================
+   Collaborators Section
+   ============================================================ */
+
+.collab-section {
+  padding: var(--space-15) 0;
+}
+
+.collab-heading {
+  font-family: var(--font-display);
+  font-size: var(--type-title-large);
+  font-weight: 450;
+  line-height: 48px;
+  letter-spacing: 0;
+  color: #000;
+  margin: 0;
+  align-self: start;
+}
+
+.collab-content {
+  grid-column: 5 / span 6;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-15); /* 120px ≈ figma 123px between description and groups */
+}
+
+.collab-description {
+  font-family: var(--font-text);
+  font-size: var(--type-title-small); /* 24px */
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: #000;
+  margin: 0;
+}
+
+.collab-groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-11); /* 88px between project and agency groups */
+}
+
+.collab-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6); /* 48px ≈ figma 49px between heading and grid */
+}
+
+.collab-group--agencies .collab-grid {
+  max-width: 580px; /* agencies grid is narrower than projects grid */
+}
+
+.collab-group-heading {
+  font-family: var(--font-display);
+  font-size: var(--type-title-medium); /* 32px */
+  font-weight: 450;
+  line-height: 40px;
+  letter-spacing: 0;
+  color: #000;
+  margin: 0;
+}
+
+.collab-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.collab-row {
+  display: flex;
+}
+
+.collab-cell {
+  padding: 10px var(--space-1);
+  display: flex;
+  flex-direction: column;
+  min-height: 102px;
+}
+
+.collab-cell-label {
+  font-family: var(--font-text);
+  font-size: var(--type-body-sm); /* 11px */
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0.33px;
+  color: #000;
+}
+
+.collab-cell-items {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+}
+
+.collab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: calc(var(--space-1));
+  background: var(--cell-color, transparent);
+  padding: var(--space-1); 
+}
+
+.collab-item-name {
+  font-family: var(--font-text);
+  font-size: var(--type-body);
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.01em;
+  color: #000;
+}
+
+.collab-item-type {
+  font-family: var(--font-text);
+  font-size: var(--type-body-sm);
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0.33px;
+  color: #000;
 }
 
 footer {
@@ -970,4 +1092,61 @@ footer {
 
 @media (max-width: 425px) {
   .values-col { grid-column: span 6; }
+}
+
+/* ============================================================
+   Collab section responsive — after grid system so these win cascade
+   ============================================================ */
+@media (max-width: 1024px) {
+  .collab-heading { grid-column: span 9; }
+  .collab-content { grid-column: span 9; }
+  .collab-group--agencies .collab-grid { max-width: 100%; }
+}
+
+@media (max-width: 425px) {
+  .collab-heading { grid-column: span 6; }
+  .collab-content { grid-column: span 6; }
+
+  /* Row becomes a 6-col grid; cells slot into it by col-m-N class */
+  .collab-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .col-m-2 { grid-column: span 2; }
+  .col-m-4 { grid-column: span 4; }
+  .col-m-6 { grid-column: span 6; }
+
+  /* Force Intern cell to start at col 1, wrapping it to row 3 */
+  .collab-group--agencies .col-m-2 { grid-column: 1 / span 2; }
+
+  /* Cell: sized by cols/rows ratio, label floats over top-left */
+  .collab-cell {
+    position: relative;
+    background: var(--cell-color, transparent);
+    aspect-ratio: calc(var(--cols, 1) / var(--rows, 1));
+    min-height: unset;
+    padding: 0;
+  }
+  .collab-cell-label {
+    position: absolute;
+    top: var(--space-1);
+    left: var(--space-1);
+    z-index: 1;
+  }
+
+  /* Items grid fills full cell height */
+  .collab-cell-items {
+    display: grid;
+    grid-template-columns: repeat(var(--cols, 3), 1fr);
+    height: 100%;
+    align-items: center;
+  }
+
+  /* Each item is a 1:1 square block */
+  .collab-item {
+    background: none;
+    padding: 0;
+    aspect-ratio: 1;
+    justify-content: center;
+  }
 }
