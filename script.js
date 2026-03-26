@@ -5,13 +5,12 @@ function buildNavbar() {
   navbar.innerHTML = `
     <div class="inner-nav">
       <nav class="nav-links">
-        <a href="index.html">Case Studies</a>
-        <a href="finde.html">Tech</a>
-        <a href="verizon.html">Values</a>
-        <a href="#">Thought Leadership</a>
+        <a href="#case-studies">Case Studies</a>
+        <a href="#technology">Tech</a>
+        <a href="#values">Values</a>
         <a href="#">Collaborators</a>
       </nav>
-      <a href="#contact" class="btn-contact">Contact</a>
+      <a href="mailto:anne@anneleedesigns.com" class="btn-contact">Contact</a>
       <button class="nav-hamburger" aria-label="Open menu">
         <div class="nav-hamburger-icon">
           <span></span>
