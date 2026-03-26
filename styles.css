@@ -170,6 +170,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth
 }
 
 /* Cap-height trimming — aligns CSS line boxes to Figma's cap-height/baseline

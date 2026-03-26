@@ -8,7 +8,7 @@ function buildNavbar() {
         <a href="#case-studies">Case Studies</a>
         <a href="#technology">Tech</a>
         <a href="#values">Values</a>
-        <a href="#">Collaborators</a>
+        <a href="#collaborators">Collaborators</a>
       </nav>
       <a href="mailto:anne@anneleedesigns.com" class="btn-contact">Contact</a>
       <button class="nav-hamburger" aria-label="Open menu">
