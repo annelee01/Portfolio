@@ -531,7 +531,7 @@ body {
   grid-template-columns: subgrid;
   row-gap: var(--space-3); /* 24px between wrapped rows */
   scroll-margin-top: var(--space-9);
-  margin-bottom: var(--space-9);
+  margin-bottom: var(--space-15);
 }
 
 .case-study-card {
@@ -683,12 +683,13 @@ body {
 .tech-section {
   background: #000;
   color: #fff;
-  padding: var(--space-12) 0; /* 96px top/bottom */
+  padding: var(--space-15) 0;
 }
 
 .tech-heading {
   font-family: var(--font-display);
-  font-size: var(--type-title-large); /* 40px */
+  font-size: var(--type-title-large);
+  padding-bottom:var(--space-7);
   font-weight: 450;
   line-height: 48px;
   letter-spacing: 0;
@@ -784,7 +785,7 @@ body {
   line-height: 48px;
   letter-spacing: 0;
   color: #000;
-  margin: 0 0 var(--space-9);
+  margin: 0 0 var(--space-7);
 }
 
 .values-pixel-art {
@@ -850,37 +851,30 @@ body {
   align-self: start;
 }
 
-.collab-content {
-  grid-column: 5 / span 6;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-15); /* 120px ≈ figma 123px between description and groups */
-}
-
 .collab-description {
+  grid-column: 5 / span 6;
   font-family: var(--font-text);
-  font-size: var(--type-title-small); /* 24px */
+  font-size: var(--type-title-small);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0;
   color: #000;
   margin: 0;
+  align-self: start;
 }
 
 .collab-groups {
+  grid-column: 5 / span 6;
   display: flex;
   flex-direction: column;
   gap: var(--space-11); /* 88px between project and agency groups */
+  padding-top: var(--space-9); /* 72px + 16px row-gap = 88px figma gap below description */
 }
 
 .collab-group {
   display: flex;
   flex-direction: column;
   gap: var(--space-6); /* 48px ≈ figma 49px between heading and grid */
-}
-
-.collab-group--agencies .collab-grid {
-  max-width: 580px; /* agencies grid is narrower than projects grid */
 }
 
 .collab-group-heading {
@@ -893,23 +887,37 @@ body {
   margin: 0;
 }
 
+/* Module grid: 6 cols at desktop/tablet, each cell spans --cols modules */
 .collab-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
 }
 
 .collab-row {
-  display: flex;
+  display: contents;
 }
 
 .collab-cell {
-  padding: 10px var(--space-1);
+  grid-column: span var(--cols, 1);
+  aspect-ratio: calc(var(--cols, 1) / 1);
+  position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 102px;
+  background: var(--cell-color, transparent);
+}
+
+/* Branding: full row (6 modules wide), 1 row of 6 items at desktop/tablet */
+.collab-cell--branding {
+  grid-column: 1 / span 6;
+  aspect-ratio: 6 / 1;
 }
 
 .collab-cell-label {
+  position: absolute;
+  top: var(--space-1);
+  left: var(--space-1);
+  z-index: 1;
   font-family: var(--font-text);
   font-size: var(--type-body-sm); /* 11px */
   font-weight: 500;
@@ -918,28 +926,34 @@ body {
   color: #000;
 }
 
+/* Items grid: N columns matching --cols (or 6 for branding) */
 .collab-cell-items {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 1), 1fr);
+  height: 100%;
   align-items: center;
-  flex: 1;
+  align-content: center;
 }
 
+.collab-cell--branding .collab-cell-items {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* Each item is a 1:1 module square */
 .collab-item {
+  aspect-ratio: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  gap: calc(var(--space-1));
-  background: var(--cell-color, transparent);
-  padding: var(--space-1); 
+  gap: 4px;
 }
 
 .collab-item-name {
   font-family: var(--font-text);
   font-size: var(--type-body);
   font-weight: 400;
-  line-height: 22px;
   letter-spacing: -0.01em;
   color: #000;
 }
@@ -1097,56 +1111,40 @@ footer {
 /* ============================================================
    Collab section responsive — after grid system so these win cascade
    ============================================================ */
-@media (max-width: 1024px) {
-  .collab-heading { grid-column: span 9; }
-  .collab-content { grid-column: span 9; }
-  .collab-group--agencies .collab-grid { max-width: 100%; }
+
+/* 769px–1024px: side-by-side heading (3 cols) + description+groups (6 cols) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .collab-heading { grid-column: 1 / span 3; }
+  .collab-description { grid-column: 4 / span 6; }
+  .collab-groups { grid-column: 4 / span 6; }
 }
 
+/* ≤768px: stacked full-width */
+@media (max-width: 768px) {
+  .collab-heading { grid-column: 1 / span 9; }
+  .collab-description { grid-column: 1 / span 9; padding-top: var(--space-4); }
+  .collab-groups { grid-column: 1 / span 9; }
+}
+
+/* 425px: stacked layout, 3 modules per row */
 @media (max-width: 425px) {
-  .collab-heading { grid-column: span 6; }
-  .collab-content { grid-column: span 6; }
+  .collab-heading { grid-column: 1 / span 6; }
+  .collab-description { grid-column: 1 / span 6; padding-top: var(--space-4); }
+  .collab-groups { grid-column: 1 / span 6; }
 
-  /* Row becomes a 6-col grid; cells slot into it by col-m-N class */
-  .collab-row {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+  /* 3 modules per row (each module = 2 of 6 page cols) */
+  .collab-grid { grid-template-columns: repeat(3, 1fr); }
+
+  /* Branding: full width, 3 items/row × 2 rows */
+  .collab-cell--branding {
+    grid-column: 1 / span 3;
+    aspect-ratio: 3 / 2;
   }
-  .col-m-2 { grid-column: span 2; }
-  .col-m-4 { grid-column: span 4; }
-  .col-m-6 { grid-column: span 6; }
-
-  /* Force Intern cell to start at col 1, wrapping it to row 3 */
-  .collab-group--agencies .col-m-2 { grid-column: 1 / span 2; }
-
-  /* Cell: sized by cols/rows ratio, label floats over top-left */
-  .collab-cell {
-    position: relative;
-    background: var(--cell-color, transparent);
-    aspect-ratio: calc(var(--cols, 1) / var(--rows, 1));
-    min-height: unset;
-    padding: 0;
-  }
-  .collab-cell-label {
-    position: absolute;
-    top: var(--space-1);
-    left: var(--space-1);
-    z-index: 1;
+  .collab-cell--branding .collab-cell-items {
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  /* Items grid fills full cell height */
-  .collab-cell-items {
-    display: grid;
-    grid-template-columns: repeat(var(--cols, 3), 1fr);
-    height: 100%;
-    align-items: center;
-  }
-
-  /* Each item is a 1:1 square block */
-  .collab-item {
-    background: none;
-    padding: 0;
-    aspect-ratio: 1;
-    justify-content: center;
-  }
+  /* Intern forced to col 1, cascades to its own row below Mid-Level */
+  .collab-group--agencies .collab-cell:last-child { grid-column: 1 / span 1; }
 }
+
