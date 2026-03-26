@@ -529,7 +529,8 @@ body {
   display: grid;
   grid-template-columns: subgrid;
   row-gap: var(--space-3); /* 24px between wrapped rows */
-  scroll-margin-top: 72px;    /* offset for sticky nav */
+  scroll-margin-top: var(--space-9);
+  margin-bottom: var(--space-9); /* 72px */
 }
 
 .case-study-card {
@@ -650,6 +651,10 @@ body {
     gap: var(--space-4);
   }
 
+  .card-text {
+    gap: var(--space-2);
+  }
+
   .card-title {
     font-size: var(--type-title-medium); /* 32px */
     line-height: 40px;
@@ -670,6 +675,99 @@ body {
   .case-study-card { grid-column: span 6; } /* 1 per row on 6-col */
 }
 
+/* ============================================================
+   Technology Section
+   ============================================================ */
+
+.tech-section {
+  background: #000;
+  color: #fff;
+  padding: var(--space-12) 0; /* 96px top/bottom */
+}
+
+.tech-heading {
+  font-family: var(--font-display);
+  font-size: var(--type-title-large); /* 40px */
+  font-weight: 450;
+  line-height: 48px;
+  letter-spacing: 0;
+  color: #fff;
+}
+
+/* Col 1: space-between to match col 2 height */
+.tech-col-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Col 2: rainbow circle SVG */
+.tech-col-rainbow {
+  overflow: hidden;
+  border-radius: 32px;
+  position: relative;
+  min-height: 643px;
+}
+
+.tech-rainbow-svg {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Col 3: gap 31px ≈ var(--space-4) */
+.tech-col-3 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.tech-card {
+  background: #1c1c1c;
+  border-radius: 32px;
+  padding: var(--space-4); /* 32px */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2); /* 16px between title and body */
+}
+
+/* tech-card-title and tech-card-body are h3/p — covered by global text-box-trim */
+.tech-card-title {
+  font-family: var(--font-text);
+  font-size: var(--type-title-small); /* 24px */
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: #fff;
+  margin: 0;
+}
+
+.tech-card-body {
+  font-family: var(--font-text);
+  font-size: var(--type-body); /* 16px */
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin: 0;
+}
+
+.tech-pixel-totem {
+  width: 100%;
+  display: block;
+}
+
+.tech-screenshot {
+  background: #2a2a2a; /* placeholder — replace with img */
+  border-radius: var(--space-4);
+  flex: 1;
+  min-height: 443px;
+}
+
+
 footer {
   margin-top: var(--space-6);
   padding: var(--space-2);
@@ -685,14 +783,14 @@ footer {
   min-width: 320px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--space-3);
 }
 
 .grid-inner {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 16px;
-  row-gap: 16px;
+  column-gap: var(--space-2);
+  row-gap: var(--space-2);
   width: 100%;
 }
 
@@ -748,7 +846,7 @@ footer {
 /* Mobile + mini mobile: 6-col */
 @media (max-width: 425px) {
   .page-shell { padding: 0 24px; }
-  .grid-inner { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .grid-inner { grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: var(--space-3); }
   .span-1 { grid-column: span 1; }
   .span-2 { grid-column: span 2; }
   .span-3 { grid-column: span 3; }
@@ -756,4 +854,34 @@ footer {
   .span-5 { grid-column: span 5; }
   .span-6 { grid-column: span 6; }
   .span-7, .span-8, .span-9, .span-10, .span-11, .span-12 { grid-column: span 6; }
+}
+
+/* ============================================================
+   Tech section responsive — after grid system so these win cascade
+   ============================================================ */
+@media (max-width: 1024px) {
+  .tech-col-1,
+  .tech-col-rainbow,
+  .tech-col-3 { grid-column: span 3; } /* override span-4 → span-3 on 9-col */
+
+  .tech-col-rainbow { min-height: 457px; }
+  .tech-screenshot { min-height: 0; }
+  .tech-col-3 { gap: var(--space-6); }
+}
+
+@media (max-width: 768px) {
+  .tech-col-1 { grid-column: span 4; }
+  .tech-col-rainbow { grid-column: span 1; }
+  .tech-col-3 { grid-column: span 4; }
+}
+
+@media (max-width: 425px) {
+  .tech-col-1,
+  .tech-col-rainbow,
+  .tech-col-3 { grid-column: span 6; }
+
+  .tech-col-1 { justify-content: flex-start; gap: var(--space-3); }
+  .tech-col-3 { gap: var(--space-3); }
+  .tech-screenshot { aspect-ratio: 4 / 3; flex: none; }
+  .tech-card { padding: var(--space-4) var(--space-3); }
 }
