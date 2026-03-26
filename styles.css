@@ -768,6 +768,69 @@ body {
 }
 
 
+/* ============================================================
+   Values Section
+   ============================================================ */
+
+.values-section {
+  background: #dad2be;
+  padding: var(--space-15) 0; /* 120px top/bottom */
+}
+
+.values-heading {
+  font-family: var(--font-display);
+  font-size: var(--type-title-large); /* 40px */
+  font-weight: 450;
+  line-height: 48px;
+  letter-spacing: 0;
+  color: #000;
+  margin: 0 0 var(--space-9); /* 72px below heading */
+}
+
+.values-pixel-art {
+  display: block;
+  width: 352px;
+  max-width: 100%;
+  height: auto;
+}
+
+.values-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5); /* 40px between visual element and text */
+  align-self: end; /* bottom-align cols 2 & 3 to match col 1's taller height */
+}
+
+.values-col-image {
+  display: none; /* hidden at desktop; shown at 1024px */
+}
+
+.values-col-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2); /* 16px between title and body */
+}
+
+.values-col-title {
+  font-family: var(--font-text);
+  font-size: var(--type-title-small); /* 24px */
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: #000;
+  margin: 0;
+}
+
+.values-col-body {
+  font-family: var(--font-text);
+  font-size: var(--type-body); /* 16px */
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.01em;
+  color: #000;
+  margin: 0;
+}
+
 footer {
   margin-top: var(--space-6);
   padding: var(--space-2);
@@ -884,4 +947,27 @@ footer {
   .tech-col-3 { gap: var(--space-3); }
   .tech-screenshot { aspect-ratio: 4 / 3; flex: none; }
   .tech-card { padding: var(--space-4) var(--space-3); }
+}
+
+/* ============================================================
+   Values section responsive — after grid system so these win cascade
+   ============================================================ */
+/* Values col 2 and 3: 1-col gap on either side of the middle column */
+.values-col:nth-child(3) { grid-column: 5 / span 3; }
+.values-col:nth-child(4) { grid-column: 9 / span 3; }
+
+@media (max-width: 1024px) {
+  .values-col { grid-column: span 3; align-self: stretch; }
+  .values-col:nth-child(3),
+  .values-col:nth-child(4) { grid-column: span 3; }
+  .values-col-image {
+    display: block;
+    aspect-ratio: 4 / 3;
+    border-radius: 32px;
+    background: #2a2a2a;
+  }
+}
+
+@media (max-width: 425px) {
+  .values-col { grid-column: span 6; }
 }
