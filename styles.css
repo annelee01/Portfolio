@@ -977,7 +977,7 @@ a {
 }
 
 .collab-groups {
-  grid-column: 5 / span 6;
+  grid-column: 5 / span 7;
   display: flex;
   flex-direction: column;
   gap: var(--space-11); /* 88px between project and agency groups */
@@ -1060,13 +1060,15 @@ a {
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 4px;
+  gap: var(--space-1);
+  padding-inline: var(--space-1);
 }
 
 .collab-item-name {
   font-family: var(--font-text);
   font-size: var(--type-body-size);
   font-weight: var(--type-body-weight);
+  line-height: var(--type-body-lh);
   letter-spacing: var(--type-body-ls);
   color: #000;
 }
@@ -1297,6 +1299,17 @@ footer {
   .collab-groups { grid-column: 4 / span 6; }
 }
 
+/* 501–720px and 769–1200px: collab-item-name scales down to match collab-item-type style */
+@media (min-width: 501px) and (max-width: 720px),
+       (min-width: 769px) and (max-width: 1200px) {
+  .collab-item-name {
+    font-size: var(--type-body-sm-size);
+    font-weight: var(--type-body-sm-weight);
+    line-height: var(--type-body-sm-lh);
+    letter-spacing: var(--type-body-sm-ls);
+  }
+}
+
 /* ≤768px: stacked full-width */
 @media (max-width: 768px) {
   .collab-heading { grid-column: 1 / span 9; }
@@ -1305,7 +1318,7 @@ footer {
 }
 
 /* 500px: stacked layout, 3 modules per row */
-@media (max-width: 500px) {
+@media (max-width: 570px) {
   .collab-heading { grid-column: 1 / span 6; }
   .collab-description { grid-column: 1 / span 6; padding-top: var(--space-4); }
   .collab-groups { grid-column: 1 / span 6; }
