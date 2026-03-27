@@ -179,7 +179,8 @@
    Supported: Chrome 123+, Safari 17.4+ */
 h1, h2, h3, h4, h5, h6, p,
 .metric-value, .metric-label, .tag,
-.collab-cell-label, .collab-item-name, .collab-item-type {
+.collab-cell-label, .collab-item-name, .collab-item-type,
+.nav-mobile-links a {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
@@ -348,6 +349,10 @@ a {
   margin-left: auto;
 }
 
+.nav-mobile-overlay {
+  display: none; /* hidden on desktop; mobile block overrides to flex */
+}
+
 /* Mobile navbar: Contact (left) + hamburger (right), no nav links */
 @media (max-width: 1023px) {
   .site-header .inner-nav {
@@ -393,6 +398,64 @@ a {
     background: #000;
     border-radius: 100px;
     flex-shrink: 0;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+  }
+
+  /* Hamburger → X: top bar down + rotate, middle fade, bottom bar up + rotate.
+     12px = half-span(2px) + gap(8px) + half-span(2px) */
+  .site-header .nav-hamburger.is-open .nav-hamburger-icon span:nth-child(1) {
+    transform: translateY(12px) rotate(45deg);
+  }
+
+  .site-header .nav-hamburger.is-open .nav-hamburger-icon span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .site-header .nav-hamburger.is-open .nav-hamburger-icon span:nth-child(3) {
+    transform: translateY(-12px) rotate(-45deg);
+  }
+
+  /* Mobile overlay — slides down from top, sits below sticky header (z-index 998 < 999) */
+  .nav-mobile-overlay {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+    background: #E5E2DB;
+    flex-direction: column;
+    /* 112px top padding = navbar height (72px) + --space-5 gap (40px), matching Figma y:112 */
+    padding: var(--space-14) var(--space-3) var(--space-3);
+    transform: translateY(-100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .nav-mobile-overlay.is-open {
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-mobile-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .nav-mobile-links a {
+    font-family: var(--font-text);
+    font-size: var(--type-title-s-size);
+    font-weight: var(--type-title-s-weight);
+    line-height: var(--type-title-s-lh);
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-mobile-overlay,
+  .site-header .nav-hamburger-icon span {
+    transition: none;
   }
 }
 
@@ -522,8 +585,8 @@ a {
   }
 }
 
-/* 425px mobile: stacked vertical layout */
-@media (max-width: 425px) {
+/* 500px mobile: stacked vertical layout */
+@media (max-width: 500px) {
   .hero {
     row-gap: var(--space-7);
     align-items: start;
@@ -722,7 +785,7 @@ a {
   .case-study-card { grid-column: span 4; } /* 2 per row on 9-col, 3rd wraps */
 }
 
-@media (max-width: 425px) {
+@media (max-width: 500px) {
   .case-study-card { grid-column: span 6; } /* 1 per row on 6-col */
 }
 
@@ -1080,7 +1143,7 @@ footer {
   }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 500px) {
   .footer-inner {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
@@ -1156,7 +1219,7 @@ footer {
 }
 
 /* Mobile + mini mobile: 6-col */
-@media (max-width: 425px) {
+@media (max-width: 500px) {
   .page-shell { padding: 0 24px; }
   .grid-inner { grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: var(--space-3); }
   .span-1 { grid-column: span 1; }
@@ -1187,7 +1250,7 @@ footer {
   .tech-col-3 { grid-column: span 4; }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 500px) {
   .tech-col-1,
   .tech-col-rainbow,
   .tech-col-3 { grid-column: span 6; }
@@ -1217,8 +1280,10 @@ footer {
   }
 }
 
-@media (max-width: 425px) {
-  .values-col { grid-column: span 6; }
+@media (max-width: 500px) {
+  .values-col,
+  .values-col:nth-child(3),
+  .values-col:nth-child(4) { grid-column: span 6; }
 }
 
 /* ============================================================
@@ -1239,8 +1304,8 @@ footer {
   .collab-groups { grid-column: 1 / span 9; }
 }
 
-/* 425px: stacked layout, 3 modules per row */
-@media (max-width: 425px) {
+/* 500px: stacked layout, 3 modules per row */
+@media (max-width: 500px) {
   .collab-heading { grid-column: 1 / span 6; }
   .collab-description { grid-column: 1 / span 6; padding-top: var(--space-4); }
   .collab-groups { grid-column: 1 / span 6; }
