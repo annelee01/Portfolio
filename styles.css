@@ -188,15 +188,55 @@ h1, h2, h3, h4, h5, h6, p,
   --font-display: "Neue Haas Grotesk Display Pro", "Helvetica Neue", Arial, sans-serif;
   --font-text: "Neue Haas Grotesk Text Pro", "Helvetica Neue", Arial, sans-serif;
 
-  /* Type scale tokens */
-  --type-display:      96px;
-  --type-h2:           64px;
-  --type-h3:           48px;
-  --type-title-large:  40px;
-  --type-title-medium: 32px;
-  --type-title-small:  24px;
-  --type-body:         16px;
-  --type-body-sm:      11px;
+  /* Type scale tokens (per design.md) — size / weight / line-height / letter-spacing */
+
+  /* Display — Neue Haas Display Pro 55 Roman */
+  --type-display-size:   96px;
+  --type-display-weight: 450;
+  --type-display-lh:     104px;
+  --type-display-ls:     0;
+
+  /* H2 — Neue Haas Display Pro 55 Roman */
+  --type-h2-size:   64px;
+  --type-h2-weight: 450;
+  --type-h2-lh:     64px;
+  --type-h2-ls:     -0.01em;
+
+  /* H3 — Neue Haas Display Pro 65 Medium */
+  --type-h3-size:   48px;
+  --type-h3-weight: 500;
+  --type-h3-lh:     56px;
+  --type-h3-ls:     -0.01em;
+
+  /* Title Large — Neue Haas Display Pro 55 Roman */
+  --type-title-l-size:   40px;
+  --type-title-l-weight: 450;
+  --type-title-l-lh:     48px;
+  --type-title-l-ls:     0;
+
+  /* Title Medium — Neue Haas Display Pro 55 Roman */
+  --type-title-m-size:   32px;
+  --type-title-m-weight: 450;
+  --type-title-m-lh:     40px;
+  --type-title-m-ls:     0;
+
+  /* Title Small — Neue Haas Text Pro 55 Roman */
+  --type-title-s-size:   24px;
+  --type-title-s-weight: 400;
+  --type-title-s-lh:     1.2;
+  --type-title-s-ls:     0;
+
+  /* Body — Neue Haas Text Pro 55 Roman */
+  --type-body-size:   16px;
+  --type-body-weight: 400;
+  --type-body-lh:     22px;
+  --type-body-ls:     -0.01em;
+
+  /* Body Small — Neue Haas Text Pro 65 Medium */
+  --type-body-sm-size:   11px;
+  --type-body-sm-weight: 500;
+  --type-body-sm-lh:     14px;
+  --type-body-sm-ls:     0.02em;
 
   /* Spacing tokens — 8px grid (--space-N = N × 8px) */
   --space-1:  8px;
@@ -218,9 +258,10 @@ h1, h2, h3, h4, h5, h6, p,
 
 body {
   font-family: var(--font-text);
-  font-size: var(--type-body);
-  line-height: 1.375; /* Body Base: 22px / 16px */
-  letter-spacing: -0.01em;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-lh);
+  letter-spacing: var(--type-body-ls);
   color: #222;
   background: #E5E2DB;
   min-height: 100vh;
@@ -259,10 +300,10 @@ body {
 
 .site-header .nav-links a {
   font-family: var(--font-text);
-  font-size: var(--type-title-small);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: 0;
+  font-size: var(--type-title-s-size);
+  font-weight: var(--type-title-s-weight);
+  line-height: var(--type-title-s-lh);
+  letter-spacing: var(--type-title-s-ls);
   color: #000;
   text-align: center;
   text-decoration: none;
@@ -291,10 +332,10 @@ body {
   color: #fff;
   text-align: center;
   font-family: var(--font-text);
-  font-size: var(--type-body);
-  font-weight: 400;
-  line-height: 1.375;
-  letter-spacing: -0.01em;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-lh);
+  letter-spacing: var(--type-body-ls);
   text-decoration: none;
   border: none;
 }
@@ -373,40 +414,40 @@ body {
 
 .hero-role {
   font-family: var(--font-display);
-  font-size: var(--type-display);
-  font-weight: 450;
-  line-height: 104px;
-  letter-spacing: 0;
+  font-size: var(--type-display-size);
+  font-weight: var(--type-display-weight);
+  line-height: var(--type-display-lh);
+  letter-spacing: var(--type-display-ls);
   color: #000;
   margin: 0;
 }
 
 .hero-tagline {
   font-family: var(--font-display);
-  font-size: var(--type-title-large);
-  font-weight: 450;
-  line-height: 48px;
-  letter-spacing: 0;
+  font-size: var(--type-title-l-size);
+  font-weight: var(--type-title-l-weight);
+  line-height: var(--type-title-l-lh);
+  letter-spacing: var(--type-title-l-ls);
   color: #000;
   margin: 0;
 }
 
 .hero-name {
   font-family: var(--font-display);
-  font-size: var(--type-h2);
-  font-weight: 450; /* Display Pro 55 Roman */
-  line-height: 64px;
-  letter-spacing: -0.01em;
+  font-size: var(--type-h2-size);
+  font-weight: var(--type-h2-weight);
+  line-height: var(--type-h2-lh);
+  letter-spacing: var(--type-h2-ls);
   color: #000;
   margin: 0;
 }
 
 .hero-bio {
   font-family: var(--font-text);
-  font-size: var(--type-body-sm);
-  font-weight: 500;
-  line-height: 14px; 
-  letter-spacing: 0.22px; /* Body Small: 2% of 11px */
+  font-size: var(--type-body-sm-size);
+  font-weight: var(--type-body-sm-weight);
+  line-height: var(--type-body-sm-lh);
+  letter-spacing: var(--type-body-sm-ls);
   color: #000;
   margin: 0;
 }
@@ -414,10 +455,10 @@ body {
 .hero-cta {
   grid-column: span 12;
   font-family: var(--font-display);
-  font-size: var(--type-title-large);
-  font-weight: 450;
-  line-height: 48px;
-  letter-spacing: 0;
+  font-size: var(--type-title-l-size);
+  font-weight: var(--type-title-l-weight);
+  line-height: var(--type-title-l-lh);
+  letter-spacing: var(--type-title-l-ls);
   color: #000;
 }
 
@@ -459,17 +500,17 @@ body {
   /* hero-right inherits 6 / span 4 from the 1024px rule above (also 9-col) */
 
   .hero-role {
-    font-size: var(--type-h2);
-    line-height: 64px;
-    letter-spacing: -0.01em;
+    font-size: var(--type-h2-size);
+    line-height: var(--type-h2-lh);
+    letter-spacing: var(--type-h2-ls);
   }
 
   .hero-tagline {
     font-family: var(--font-text);
-    font-size: var(--type-title-small);
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: 0;
+    font-size: var(--type-title-s-size);
+    font-weight: var(--type-title-s-weight);
+    line-height: var(--type-title-s-lh);
+    letter-spacing: var(--type-title-s-ls);
   }
 }
 
@@ -491,34 +532,34 @@ body {
   }
 
   .hero-role {
-    font-size: var(--type-h2);
-    line-height: 64px;
-    letter-spacing: -0.01em;
+    font-size: var(--type-h2-size);
+    line-height: var(--type-h2-lh);
+    letter-spacing: var(--type-h2-ls);
   }
 
   .hero-tagline {
     font-family: var(--font-text);
-    font-size: var(--type-title-small);
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: 0;
+    font-size: var(--type-title-s-size);
+    font-weight: var(--type-title-s-weight);
+    line-height: var(--type-title-s-lh);
+    letter-spacing: var(--type-title-s-ls);
   }
 
   .hero-name {
     font-family: var(--font-text);
-    font-size: var(--type-title-small);
-    font-weight: 400;
-    line-height: 1.2;
+    font-size: var(--type-title-s-size);
+    font-weight: var(--type-title-s-weight);
+    line-height: var(--type-title-s-lh);
   }
 
   .hero-cta {
     display: block;
     grid-column: span 5;
     font-family: var(--font-text);
-    font-size: var(--type-title-small);
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: 0;
+    font-size: var(--type-title-s-size);
+    font-weight: var(--type-title-s-weight);
+    line-height: var(--type-title-s-lh);
+    letter-spacing: var(--type-title-s-ls);
     color: #000;
   }
 }
@@ -565,10 +606,10 @@ body {
 
 .tag {
   font-family: var(--font-text);
-  font-size: var(--type-body-sm);
-  font-weight: 500;
-  line-height: 14px;
-  letter-spacing: 0.33px;
+  font-size: var(--type-body-sm-size);
+  font-weight: var(--type-body-sm-weight);
+  line-height: var(--type-body-sm-lh);
+  letter-spacing: var(--type-body-sm-ls);
   color: #2d2018;
   padding: var(--space-1) 12px;
   border: 1px solid #2d2018;
@@ -584,20 +625,20 @@ body {
 
 .card-title {
   font-family: var(--font-display);
-  font-size: var(--type-title-large);
-  font-weight: 450;
-  line-height: 48px;
-  letter-spacing: 0;
+  font-size: var(--type-title-l-size);
+  font-weight: var(--type-title-l-weight);
+  line-height: var(--type-title-l-lh);
+  letter-spacing: var(--type-title-l-ls);
   color: #000;
   margin: 0;
 }
 
 .card-description {
   font-family: var(--font-text);
-  font-size: var(--type-title-small);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: 0;
+  font-size: var(--type-title-s-size);
+  font-weight: var(--type-title-s-weight);
+  line-height: var(--type-title-s-lh);
+  letter-spacing: var(--type-title-s-ls);
   color: #000;
   margin: 0;
 }
@@ -622,19 +663,19 @@ body {
 
 .metric-value {
   font-family: var(--font-text);
-  font-size: var(--type-title-small);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: 0;
+  font-size: var(--type-title-s-size);
+  font-weight: var(--type-title-s-weight);
+  line-height: var(--type-title-s-lh);
+  letter-spacing: var(--type-title-s-ls);
   color: #000;
 }
 
 .metric-label {
   font-family: var(--font-text);
-  font-size: var(--type-body-sm);
-  font-weight: 500;
-  line-height: 14px;
-  letter-spacing: 0.33px;
+  font-size: var(--type-body-sm-size);
+  font-weight: var(--type-body-sm-weight);
+  line-height: var(--type-body-sm-lh);
+  letter-spacing: var(--type-body-sm-ls);
   color: #000;
 }
 
@@ -658,14 +699,14 @@ body {
   }
 
   .card-title {
-    font-size: var(--type-title-medium);
-    line-height: 40px;
+    font-size: var(--type-title-m-size);
+    line-height: var(--type-title-m-lh);
   }
 
   .card-description {
-    font-size: var(--type-body);
-    line-height: 22px;
-    letter-spacing: -0.01em;
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-lh);
+    letter-spacing: var(--type-body-ls);
   }
 }
 
@@ -689,11 +730,11 @@ body {
 
 .tech-heading {
   font-family: var(--font-display);
-  font-size: var(--type-title-large);
-  padding-bottom:var(--space-7);
-  font-weight: 450;
-  line-height: 48px;
-  letter-spacing: 0;
+  font-size: var(--type-title-l-size);
+  font-weight: var(--type-title-l-weight);
+  line-height: var(--type-title-l-lh);
+  letter-spacing: var(--type-title-l-ls);
+  padding-bottom: var(--space-7);
   color: #fff;
 }
 
@@ -739,20 +780,20 @@ body {
 
 .tech-card-title {
   font-family: var(--font-text);
-  font-size: var(--type-title-small);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: 0;
+  font-size: var(--type-title-s-size);
+  font-weight: var(--type-title-s-weight);
+  line-height: var(--type-title-s-lh);
+  letter-spacing: var(--type-title-s-ls);
   color: #fff;
   margin: 0;
 }
 
 .tech-card-body {
   font-family: var(--font-text);
-  font-size: var(--type-body);
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: -0.01em;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-lh);
+  letter-spacing: var(--type-body-ls);
   color: #fff;
   margin: 0;
 }
@@ -781,10 +822,10 @@ body {
 
 .values-heading {
   font-family: var(--font-display);
-  font-size: var(--type-title-large);
-  font-weight: 450;
-  line-height: 48px;
-  letter-spacing: 0;
+  font-size: var(--type-title-l-size);
+  font-weight: var(--type-title-l-weight);
+  line-height: var(--type-title-l-lh);
+  letter-spacing: var(--type-title-l-ls);
   color: #000;
   margin: 0 0 var(--space-7);
 }
@@ -815,20 +856,20 @@ body {
 
 .values-col-title {
   font-family: var(--font-text);
-  font-size: var(--type-title-small);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: 0;
+  font-size: var(--type-title-s-size);
+  font-weight: var(--type-title-s-weight);
+  line-height: var(--type-title-s-lh);
+  letter-spacing: var(--type-title-s-ls);
   color: #000;
   margin: 0;
 }
 
 .values-col-body {
   font-family: var(--font-text);
-  font-size: var(--type-body);
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: -0.01em;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-lh);
+  letter-spacing: var(--type-body-ls);
   color: #000;
   margin: 0;
 }
@@ -843,10 +884,10 @@ body {
 
 .collab-heading {
   font-family: var(--font-display);
-  font-size: var(--type-title-large);
-  font-weight: 450;
-  line-height: 48px;
-  letter-spacing: 0;
+  font-size: var(--type-title-l-size);
+  font-weight: var(--type-title-l-weight);
+  line-height: var(--type-title-l-lh);
+  letter-spacing: var(--type-title-l-ls);
   color: #000;
   margin: 0;
   align-self: start;
@@ -855,10 +896,10 @@ body {
 .collab-description {
   grid-column: 5 / span 6;
   font-family: var(--font-text);
-  font-size: var(--type-title-small);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: 0;
+  font-size: var(--type-title-s-size);
+  font-weight: var(--type-title-s-weight);
+  line-height: var(--type-title-s-lh);
+  letter-spacing: var(--type-title-s-ls);
   color: #000;
   margin: 0;
   align-self: start;
@@ -880,10 +921,10 @@ body {
 
 .collab-group-heading {
   font-family: var(--font-display);
-  font-size: var(--type-title-medium); /* 32px */
-  font-weight: 450;
-  line-height: 40px;
-  letter-spacing: 0;
+  font-size: var(--type-title-m-size);
+  font-weight: var(--type-title-m-weight);
+  line-height: var(--type-title-m-lh);
+  letter-spacing: var(--type-title-m-ls);
   color: #000;
   margin: 0;
 }
@@ -920,10 +961,10 @@ body {
   left: var(--space-1);
   z-index: 1;
   font-family: var(--font-text);
-  font-size: var(--type-body-sm); /* 11px */
-  font-weight: 500;
-  line-height: 14px;
-  letter-spacing: 0.33px;
+  font-size: var(--type-body-sm-size);
+  font-weight: var(--type-body-sm-weight);
+  line-height: var(--type-body-sm-lh);
+  letter-spacing: var(--type-body-sm-ls);
   color: #000;
 }
 
@@ -953,18 +994,18 @@ body {
 
 .collab-item-name {
   font-family: var(--font-text);
-  font-size: var(--type-body);
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  letter-spacing: var(--type-body-ls);
   color: #000;
 }
 
 .collab-item-type {
   font-family: var(--font-text);
-  font-size: var(--type-body-sm);
-  font-weight: 500;
-  line-height: 14px;
-  letter-spacing: 0.33px;
+  font-size: var(--type-body-sm-size);
+  font-weight: var(--type-body-sm-weight);
+  line-height: var(--type-body-sm-lh);
+  letter-spacing: var(--type-body-sm-ls);
   color: #000;
 }
 
@@ -972,6 +1013,10 @@ footer {
   margin-top: var(--space-6);
   padding: var(--space-2);
   font-family: var(--font-text);
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-lh);
+  letter-spacing: var(--type-body-ls);
   text-align: center;
   border-top: 1px solid #cbd5e1;
   color: #475569;
