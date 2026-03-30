@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html>
+<body style="margin:0;padding:0;background:#f5f0e8;">
+<canvas id="c" style="display:block;width:100%;"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const W = 780, H = 512;
+canvas.width = W;
+canvas.height = H;
+
+const baseColors = [
+  '#CAFFD6',
+  '#FFA961',
+  '#FDFD6D',
+  '#917851',
+  '#FA8DAA',
+  '#8B5586',
+  '#6791E3',
+  '#5C57A4',
+  '#1C1C1C',
+];
+
+const totalCols = baseColors.length;
+const rows = [1, 2, 4];
+const rowH = 128;
+const gradY = rowH * rows.length;
+const gradH = rowH;
+
+function hexToRgb(h) {
+  return [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)];
+}
+function lerpRgb(a, b, t) {
+  return a.map((v,i) => Math.round(v+(b[i]-v)*t));
+}
+function screenBlend(base, op) {
+  return base.map(b => { const bb=b/255, s=1-(1-bb)*(1-bb); return Math.round((bb+(s-bb)*op)*255); });
+}
+function multiplyBlend(base, op) {
+  return base.map(b => { const bb=b/255, m=bb*bb; return Math.round((bb+(m-bb)*op)*255); });
+}
+function gradientColorAt(x) {
+  const t = x/W*(totalCols-1);
+  const c1=Math.floor(t), c2=Math.min(c1+1,totalCols-1);
+  return lerpRgb(hexToRgb(baseColors[c1]), hexToRgb(baseColors[c2]), t-c1);
+}
+
+const screenOp = 0.45, multOp = 0.45;
+
+ctx.fillStyle = '#f5f0e8';
+ctx.fillRect(0, 0, W, H);
+
+rows.forEach((mult, ri) => {
+  const numRects = totalCols * mult;
+  const rectW = W / numRects;
+  const y = ri * rowH;
+
+  for (let i = 0; i < numRects; i++) {
+    const colorIdx = Math.min(Math.floor(i / mult), totalCols - 1);
+    const bc = hexToRgb(baseColors[colorIdx]);
+    const posInColor = i % mult;
+    const t = mult === 1 ? 0.5 : posInColor / (mult - 1);
+    const light = screenBlend(bc, screenOp);
+    const dark  = multiplyBlend(bc, multOp);
+
+    let rgb;
+    if (ri === 0) {
+      rgb = bc;
+    } else if (ri === 1) {
+      rgb = lerpRgb(light, dark, t);
+    } else {
+      const rectCenterX = (i + 0.5) * rectW;
+      const gradRgb = gradientColorAt(rectCenterX);
+      const sweepRgb = lerpRgb(light, dark, t);
+      rgb = lerpRgb(sweepRgb, gradRgb, 0.78);
+    }
+
+    ctx.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+    ctx.fillRect(i * rectW, y, rectW + 0.5, rowH);
+  }
+});
+
+for (let x = 0; x < W; x++) {
+  const rgb = gradientColorAt(x);
+  ctx.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+  ctx.fillRect(x, gradY, 1, gradH);
+}
+
+const imageData = ctx.getImageData(0, 0, W, H);
+const data = imageData.data;
+for (let i = 0; i < data.length; i += 4) {
+  const n = (Math.random() - 0.5) * 14;
+  data[i]   = Math.max(0, Math.min(255, data[i]   + n));
+  data[i+1] = Math.max(0, Math.min(255, data[i+1] + n));
+  data[i+2] = Math.max(0, Math.min(255, data[i+2] + n));
+}
+ctx.putImageData(imageData, 0, 0);
+</script>
+</body>
+</html>
