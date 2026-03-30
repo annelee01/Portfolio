@@ -165,6 +165,125 @@
   font-display: swap;
 }
 
+/* ============================================================
+   @font-face — Helvetica Neue
+   Weight map: UltraLight=100, Thin=200, Light=300, Roman=400,
+               Medium=500, Bold=700, Heavy=800, Black=900
+   ============================================================ */
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-UltraLight.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-UltraLightItalic.woff2") format("woff2");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-Thin.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-ThinItalic.woff2") format("woff2");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-LightItalic.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-Roman.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-Heavy.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-HeavyItalic.woff2") format("woff2");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("./fonts/Helvetica Neue/HelveticaNeue-BlackItalic.woff2") format("woff2");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 /* Global */
 * {
   box-sizing: border-box;
@@ -177,7 +296,7 @@
    spacing model. Without this, spacing tokens measure from the full line box
    (includes ascender/descender whitespace) and won't match Figma values.
    Supported: Chrome 123+, Safari 17.4+ */
-h1, h2, h3, h4, h5, h6, p,
+h1, h2, h3, h4, h5, h6, p, button,
 .metric-value, .metric-label, .tag,
 .collab-cell-label, .collab-item-name, .collab-item-type,
 .nav-mobile-links a {
@@ -659,6 +778,199 @@ a {
 .card-image {
   width: 100%;
   aspect-ratio: 453 / 340;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.casper-card-image {
+  position: relative;
+  padding: var(--space-3);
+}
+
+.casper-cross-sell {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.verizon-scaler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 453px;
+  height: 340px;
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+.casper-cross-sell-nav {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+}
+
+.casper-cross-sell-card {
+  width: 280px;
+  height: 237px;
+  background: #D7F1FF;
+  border: 1px solid #D4E8F3;
+  border-radius: 6px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.casper-cross-sell-title {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 220px;
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  color: #515151;
+}
+
+.casper-title-name {
+  font-weight: 700;
+}
+
+.casper-cross-sell-product-wrap {
+  position: absolute;
+  left: 76px;
+  top: 99px;
+  width: 128px;
+  height: 44px;
+}
+
+.casper-cross-sell-product-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('casper-foundation.png') center / contain no-repeat;
+  filter: drop-shadow(0px 14px 10px rgba(34, 70, 83, 0.4));
+  mix-blend-mode: multiply;
+}
+
+.casper-cross-sell-product {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 1;
+}
+
+/* Verizon card illustration */
+.verizon-card-image {
+  position: relative;
+}
+
+.verizon-upgrade {
+  position: absolute;
+  padding: 40px 24px 0px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.verizon-upgrade-text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.verizon-upgrade-heading {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.03;
+  letter-spacing: -0.05em;
+  color: #000;
+}
+
+.verizon-upgrade-body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #000;
+}
+
+.verizon-upgrade-divider {
+  width: 379px;
+  height: 5px;
+  background: #000;
+  flex-shrink: 0;
+}
+
+.verizon-upgrade-device {
+  position: relative;
+  height: 188px;
+  flex-shrink: 0;
+}
+
+.verizon-device-label {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.06em;
+  color: #000;
+}
+
+.verizon-device-add {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: none;
+  border: 1px solid #000;
+  border-radius: 100px;
+  padding: 5px 12px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #000;
+  cursor: pointer;
+}
+
+.verizon-device-phone {
+  position: absolute;
+  top: 4px;
+  left: 250px;
+  width: 94px;
+  height: 184px;
+  object-fit: contain;
+}
+
+.casper-cross-sell-btn {
+  position: absolute;
+  left: 20px;
+  top: 183px;
+  width: 240px;
+  height: 34px;
+  background: #fff;
+  border: none;
+  border-radius: 6px;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.028em;
+  color: #00237E;
+  cursor: pointer;
 }
 
 .card-body {
@@ -754,6 +1066,101 @@ a {
   display: block;
   flex-shrink: 0;
   color: #000;
+}
+
+/* Finde card illustration */
+.finde-card-image {
+  position: relative;
+  background: #f7f7f7;
+}
+
+.finde-scaler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 453px;
+  height: 340px;
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+.finde-phone-body {
+  position: absolute;
+  left: 29px;
+  top: 8px;
+  width: 390px;
+  background: #fff;
+}
+
+.finde-filter-bar {
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  gap: 38px;
+}
+
+.finde-chip {
+  background: #f0edea;
+  border-radius: 100px;
+  padding: 8px 16px;
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #000;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+}
+
+.finde-filter-label {
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #000;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+}
+
+.finde-close {
+  margin-left: auto;
+  margin-right: -10px;
+  margin-top:-24px;
+  flex-shrink: 0;
+  color: #000;
+}
+
+.finde-filter-divider {
+  height: 1px;
+  background: #d6d6d6;
+}
+
+.finde-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.finde-row {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  color: #000;
+}
+
+.finde-icon-zone {
+  width: 62px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.finde-name {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #000;
+  letter-spacing: 0.02em;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 /* Case studies responsive */
@@ -910,7 +1317,22 @@ a {
   margin: 0 0 var(--space-7);
 }
 
-.values-pixel-art {
+.illustration-values-pixel-art {
+  display: block;
+  width: 352px;
+  max-width: 100%;
+  height: auto;
+}
+
+.illustration-values-systems {
+  display: block;
+  width: 352px;
+  max-width: 100%;
+  aspect-ratio: 780 / 512;
+  overflow: hidden;
+}
+
+.illustration-values-ethical-work {
   display: block;
   width: 352px;
   max-width: 100%;
@@ -922,10 +1344,6 @@ a {
   flex-direction: column;
   gap: var(--space-5);
   align-self: end; /* bottom-align cols 2 & 3 to match col 1's taller height */
-}
-
-.values-col-image {
-  display: none; /* hidden at desktop; shown at 1024px */
 }
 
 .values-col-text {
@@ -1283,12 +1701,6 @@ footer {
   .values-col { grid-column: span 3; align-self: stretch; }
   .values-col:nth-child(3),
   .values-col:nth-child(4) { grid-column: span 3; }
-  .values-col-image {
-    display: block;
-    aspect-ratio: 4 / 3;
-    border-radius: 32px;
-    background: #2a2a2a;
-  }
 }
 
 @media (max-width: 500px) {
