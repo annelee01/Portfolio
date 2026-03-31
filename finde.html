@@ -3,27 +3,125 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Finde Project</title>
+  <title>Finde — Anne Lee</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
   <header id="site-navbar" class="site-header"></header>
-  <main class="page-shell">
-    <div class="grid-inner">
-      <section class="span-12">
-        <h2>Finde</h2>
-        <p>Case study details for Finde project go here.</p>
-        <ul>
-          <li>User research and workflow mapping</li>
-          <li>Accessibility-first implementation</li>
-          <li>Deployment with CI/CD</li>
-        </ul>
-      </section>
+
+  <main class="cs-page">
+
+    <!-- ── Hero ─────────────────────────────────────────────── -->
+    <section class="cs-hero">
+      <div class="page-shell">
+        <div class="grid-inner">
+
+          <div class="cs-hero-left">
+            <div class="cs-hero-headline">
+              <h1 class="cs-title">Finde</h1>
+              <p class="cs-subtitle">Building a marketplace from zero to launch.</p>
+            </div>
+            <p class="cs-footnote">An independent online marketplace designed and engineered from the ground up.</p>
+          </div>
+
+          <div class="cs-hero-right">
+            <div class="cs-hero-card">
+              <div class="cs-card-meta-item">
+                <span class="cs-label">PRODUCT</span>
+                <p class="cs-card-value">Finde Marketplace</p>
+              </div>
+              <div class="cs-card-meta-item">
+                <span class="cs-label">ROLE</span>
+                <p class="cs-card-value">Founder, Designer &amp; Engineer</p>
+              </div>
+            </div>
+            <div class="cs-hero-img-wrap">
+              <img src="img/finde-hero.jpg" alt="Finde project" class="cs-hero-img" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Navigation strip ─────────────────────────────────── -->
+    <div class="cs-nav-strip">
+      <div class="page-shell">
+        <div class="cs-nav-inner">
+          <div class="cs-nav-right">
+            <div class="cs-progress" role="img" aria-label="Case study 3 of 3">
+              <span class="cs-progress-seg"></span>
+              <span class="cs-progress-seg"></span>
+              <span class="cs-progress-seg cs-progress-seg--active"></span>
+            </div>
+            <div class="cs-arrows">
+              <button class="cs-arrow cs-arrow--prev" aria-label="Previous case study">
+                <span class="cs-arrow-glyph" aria-hidden="true">←</span>
+              </button>
+              <button class="cs-arrow cs-arrow--next" aria-label="Next case study" disabled>
+                <span class="cs-arrow-glyph" aria-hidden="true">→</span>
+              </button>
+            </div>
+            <p class="cs-keyboard-hint">Use your keyboard arrows</p>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- ── Showcase — swappable full-width dark band ─────────── -->
+    <section class="cs-showcase" aria-label="Project visuals">
+      <div class="cs-showcase-inner">
+        <!-- Replace with project-specific imagery or mockups -->
+      </div>
+    </section>
+
+    <!-- ── Detail: overview + metadata ─────────────────────── -->
+    <section class="cs-detail">
+      <div class="page-shell">
+        <div class="grid-inner">
+
+          <div class="cs-overview">
+            <p>Founded and built Finde — an online marketplace connecting buyers and sellers — from concept to launch. Owned every layer: user research, UX strategy, visual design, and full-stack engineering. Established the product foundations and brand identity that positioned Finde as a distinct alternative in the marketplace space.</p>
+          </div>
+
+          <div class="cs-metadata">
+            <div class="cs-meta-group">
+              <span class="cs-label">PRODUCT</span>
+              <p class="cs-meta-value">Finde Marketplace</p>
+            </div>
+            <div class="cs-meta-group">
+              <span class="cs-label">ROLE</span>
+              <p class="cs-meta-value">Founder, Designer &amp; Engineer</p>
+            </div>
+            <div class="cs-meta-group">
+              <span class="cs-label">CHALLENGE</span>
+              <p class="cs-meta-value">Designing a trustworthy marketplace experience while working as a solo founder across design and engineering.</p>
+            </div>
+            <div class="cs-meta-group">
+              <span class="cs-label">APPROACH</span>
+              <p class="cs-meta-value">Accessibility-first design, CI/CD deployment pipeline, and iterative user testing to shape the core flows.</p>
+            </div>
+            <div class="cs-meta-group">
+              <span class="cs-label">IMPACT</span>
+              <p class="cs-meta-value">Launched a fully functioning marketplace from zero within a single product cycle.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Bottom navigation ────────────────────────────────── -->
+    <nav class="cs-bottom-nav" aria-label="Case study navigation">
+      <div class="page-shell">
+        <a href="casper.html" class="cs-prev-link">← Previous</a>
+        <a href="verizon.html" class="cs-next-link">Back to start →</a>
+      </div>
+    </nav>
+
   </main>
-  <footer>
-    <p>&copy; 2026 My Portfolio</p>
-  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
