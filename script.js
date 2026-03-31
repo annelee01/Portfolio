@@ -350,11 +350,44 @@ function initCardScaling() {
   cards.forEach(({ container }) => { if (container) ro.observe(container); });
 }
 
+function initCaseStudyPagination() {
+  const slides = document.querySelectorAll('.cs-hero-slide');
+  if (!slides.length) return;
+
+  const prevBtn = document.querySelector('.cs-arrow--prev');
+  const nextBtn = document.querySelector('.cs-arrow--next');
+  const dots    = document.querySelectorAll('.cs-progress-seg');
+  let current   = 0;
+  const total   = slides.length;
+
+  function goTo(index) {
+    slides[current].classList.remove('cs-hero-slide--active');
+    dots[current].classList.remove('cs-progress-seg--active');
+    current = index;
+    slides[current].classList.add('cs-hero-slide--active');
+    dots[current].classList.add('cs-progress-seg--active');
+    if (prevBtn) prevBtn.disabled = current === 0;
+    if (nextBtn) nextBtn.disabled = current === total - 1;
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { if (current < total - 1) goTo(current + 1); });
+
+  document.addEventListener('keydown', (e) => {
+    if (!document.querySelector('.cs-hero-slide')) return;
+    if (e.key === 'ArrowLeft'  && current > 0)         goTo(current - 1);
+    if (e.key === 'ArrowRight' && current < total - 1) goTo(current + 1);
+  });
+
+  goTo(0); // set initial state: slide 0 active, prev disabled
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   buildNavbar();
   initTechGridAnimation();
   initValuesSystemsIllustration();
   initCardScaling();
+  initCaseStudyPagination();
 
   const introBtn = document.getElementById('introBtn');
   if (introBtn) {

@@ -361,6 +361,11 @@ h1, h2, h3, h4, h5, h6, p, button,
   --type-body-sm-lh:     14px;
   --type-body-sm-ls:     0.02em;
 
+  /* Single column width at each breakpoint — drives cs-progress-seg width.
+     Formula: (viewport_or_max - 2×margin - (cols-1)×gutter) / cols
+     Desktop 12-col uses min(100vw, 1440px) to cap at max content width. */
+  --cs-col-width: calc((min(100vw, 1440px) - 2 * var(--space-3) - 11 * var(--space-2)) / 12);
+
   /* Spacing tokens — 8px grid (--space-N = N × 8px) */
   --space-1:  8px;
   --space-2:  16px;
@@ -1784,13 +1789,22 @@ footer {
   margin: 0;
 }
 
-/* Right: split card + image, cols 6–12 (7 cols) */
+/* Right: slide container, cols 6–12 (7 cols).
+   Each .cs-hero-slide is a card+image pair — shown one at a time. */
 .cs-hero-right {
   grid-column: 6 / span 7;
-  display: grid;
+  height: 526px;
+}
+
+.cs-hero-slide {
+  display: none;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-2); /* 16px — matches grid gutter */
-  height: 526px;
+  height: 100%;
+}
+
+.cs-hero-slide--active {
+  display: grid;
 }
 
 /* Dark overlay card (left half)
@@ -1852,7 +1866,7 @@ footer {
   padding-bottom: var(--space-15); /* 120px — consistent height before showcase across all case studies */
 }
 
-/* Grid mirrors the 12-col hero so nav elements sit under hero-right (col 6–12) */
+/* Grid mirrors the 12-col hero so nav elements sit centered under hero-right (col 6–12) */
 .cs-nav-inner {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -1863,11 +1877,11 @@ footer {
   grid-column: 6 / span 7;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center; /* centered under the full width of cs-hero-right */
   gap: var(--space-3);
 }
 
-/* 2px progress bar — segments with 16px gap */
+/* 2px progress bar — each segment = one column width at the active breakpoint */
 .cs-progress {
   display: flex;
   align-items: center;
@@ -1877,10 +1891,11 @@ footer {
 
 .cs-progress-seg {
   display: block;
-  width: 32px;
+  width: var(--cs-col-width); /* tracks the current grid column width */
   height: 2px;
   background: #B5B5B5;
   border-radius: 1px;
+  flex-shrink: 0;
 }
 
 .cs-progress-seg--active {
@@ -1915,12 +1930,14 @@ footer {
   cursor: default;
 }
 
-.cs-arrow-glyph {
-  font-family: var(--font-display);
-  font-size: var(--type-title-l-size); /* 40px */
-  font-weight: var(--type-title-l-weight);
-  line-height: 1;
+.cs-arrow svg {
+  display: block;
   color: #000;
+}
+
+/* Flip the same SVG arrow to point left for the previous button */
+.cs-arrow--prev svg {
+  transform: scaleX(-1);
 }
 
 .cs-keyboard-hint {
@@ -2046,6 +2063,7 @@ footer {
 
 /* 1024px (9-col): hero stacks vertically, detail side-by-side in 9 cols */
 @media (max-width: 1024px) {
+  :root { --cs-col-width: calc((100vw - 2 * var(--space-3) - 8 * var(--space-2)) / 9); }
   .cs-hero-left {
     grid-column: span 9;
     height: auto;
@@ -2054,6 +2072,7 @@ footer {
     grid-column: span 9;
     height: auto;
   }
+  .cs-hero-slide { height: auto; }
   .cs-hero-card,
   .cs-hero-img-wrap { min-height: 320px; }
   .cs-overview  { grid-column: 1 / span 5; }
@@ -2069,16 +2088,14 @@ footer {
 
 /* 500px (6-col): scale down display type, single-column hero panels */
 @media (max-width: 500px) {
+  :root { --cs-col-width: calc((100vw - 2 * var(--space-3) - 5 * var(--space-2)) / 6); }
   .cs-title {
     font-size: var(--type-h2-size);
     line-height: var(--type-h2-lh);
   }
   .cs-hero-left  { grid-column: span 6; }
-  .cs-hero-right {
-    grid-column: span 6;
-    grid-template-columns: 1fr;
-    height: auto;
-  }
+  .cs-hero-right { grid-column: span 6; height: auto; }
+  .cs-hero-slide { grid-template-columns: 1fr; height: auto; }
   .cs-hero-card,
   .cs-hero-img-wrap { min-height: 240px; }
   .cs-overview { grid-column: span 6; }
