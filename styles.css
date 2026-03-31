@@ -299,7 +299,10 @@
 h1, h2, h3, h4, h5, h6, p, button,
 .metric-value, .metric-label, .tag,
 .collab-cell-label, .collab-item-name, .collab-item-type,
-.nav-mobile-links a {
+.nav-mobile-links a,
+.cs-title, .cs-subtitle, .cs-footnote,
+.cs-card-value, .cs-keyboard-hint,
+.cs-meta-value, .cs-label, .cs-next-link, .cs-prev-link, .cs-sup {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
@@ -1717,6 +1720,369 @@ footer {
   .values-col,
   .values-col:nth-child(3),
   .values-col:nth-child(4) { grid-column: span 6; }
+}
+
+/* ============================================================
+   Case Study pages — template layout (cs-*)
+   Shared by: finde.html, verizon.html, casper.html
+   Layout: 12-col grid, hero split (cols 1–4 | cols 6–12),
+           detail section (overview cols 2–5 | metadata cols 7–9)
+   ============================================================ */
+
+/* ── Hero ───────────────────────────────────────────────────── */
+
+.cs-hero {
+  padding-top: var(--space-5); /* 40px — gap between navbar and hero content */
+}
+
+.cs-hero-left {
+  grid-column: span 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 526px;
+}
+
+.cs-hero-headline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6); /* 48px — Figma Frame 597 gap */
+}
+
+.cs-title {
+  font-family: var(--font-display);
+  font-size: var(--type-display-size);
+  font-weight: var(--type-display-weight);
+  line-height: var(--type-display-lh);
+  letter-spacing: var(--type-display-ls);
+  color: #000;
+  margin: 0;
+}
+
+.cs-sup {
+  font-size: 0.4em;
+  vertical-align: super;
+}
+
+.cs-subtitle {
+  font-family: var(--font-display);
+  font-size: var(--type-title-l-size);
+  font-weight: var(--type-title-l-weight);
+  line-height: var(--type-title-l-lh);
+  letter-spacing: var(--type-title-l-ls);
+  color: #000;
+  margin: 0;
+}
+
+.cs-footnote {
+  font-family: var(--font-text);
+  font-size: var(--type-body-sm-size);
+  font-weight: var(--type-body-sm-weight);
+  line-height: var(--type-body-sm-lh);
+  letter-spacing: var(--type-body-sm-ls);
+  color: #000;
+  margin: 0;
+}
+
+/* Right: split card + image, cols 6–12 (7 cols) */
+.cs-hero-right {
+  grid-column: 6 / span 7;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2); /* 16px — matches grid gutter */
+  height: 526px;
+}
+
+/* Dark overlay card (left half)
+   PRODUCT anchored top, ROLE anchored bottom — space-between pushes them apart */
+.cs-hero-card {
+  border-radius: 48px;
+  background: #141414;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-6) var(--space-5); /* 48px top/bottom, 40px left/right */
+}
+
+.cs-card-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1); /* 8px */
+}
+
+.cs-label {
+  font-family: var(--font-text);
+  font-size: var(--type-body-sm-size);
+  font-weight: var(--type-body-sm-weight);
+  line-height: var(--type-body-sm-lh);
+  letter-spacing: var(--type-body-sm-ls);
+  color: inherit;
+  display: block;
+}
+
+.cs-card-value {
+  font-family: var(--font-text);
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-lh);
+  letter-spacing: var(--type-body-ls);
+  color: inherit;
+  margin: 0;
+}
+
+/* Hero image (right half) */
+.cs-hero-img-wrap {
+  border-radius: 48px;
+  overflow: hidden;
+  height: 100%;
+  background: #D9D9D9; /* placeholder until image loads */
+}
+
+.cs-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Navigation strip ───────────────────────────────────────── */
+
+.cs-nav-strip {
+  padding-top: var(--space-3);    /* 24px below hero */
+  padding-bottom: var(--space-15); /* 120px — consistent height before showcase across all case studies */
+}
+
+/* Grid mirrors the 12-col hero so nav elements sit under hero-right (col 6–12) */
+.cs-nav-inner {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--space-2);
+}
+
+.cs-nav-right {
+  grid-column: 6 / span 7;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+/* 2px progress bar — segments with 16px gap */
+.cs-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2); /* 16px */
+  height: 2px;
+}
+
+.cs-progress-seg {
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: #B5B5B5;
+  border-radius: 1px;
+}
+
+.cs-progress-seg--active {
+  background: #535353;
+}
+
+/* Arrow navigation — circular stroke buttons */
+.cs-arrows {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8); /* 64px — Figma Group 591 gap */
+}
+
+.cs-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: 1px solid #000;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: opacity 0.15s ease;
+}
+
+.cs-arrow[disabled] {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.cs-arrow-glyph {
+  font-family: var(--font-display);
+  font-size: var(--type-title-l-size); /* 40px */
+  font-weight: var(--type-title-l-weight);
+  line-height: 1;
+  color: #000;
+}
+
+.cs-keyboard-hint {
+  font-family: var(--font-text);
+  font-size: var(--type-body-sm-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-sm-lh);
+  letter-spacing: var(--type-body-sm-ls);
+  color: #2C2C2C;
+  margin: 0;
+}
+
+/* ── Case study navigation links (top Next + bottom Prev/Next) ── */
+
+.cs-next-bar {
+  padding-top: var(--space-5);     /* 40px */
+  padding-bottom: var(--space-10); /* 80px */
+}
+
+.cs-next-bar .page-shell {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Bottom nav: Previous (left) and Next (right) after detail section */
+.cs-bottom-nav {
+  padding-top: var(--space-10);    /* 80px */
+  padding-bottom: var(--space-12); /* 96px */
+  border-top: 1px solid #000;
+}
+
+.cs-bottom-nav .page-shell {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.cs-next-link,
+.cs-prev-link {
+  font-family: var(--font-text);
+  font-size: var(--type-title-s-size);
+  font-weight: var(--type-title-s-weight);
+  line-height: var(--type-title-s-lh);
+  color: #000;
+  text-decoration: none;
+}
+
+.cs-next-link:hover,
+.cs-prev-link:hover {
+  color: #2d2018;
+}
+
+/* ── Showcase — full-width dark band ────────────────────────── */
+
+.cs-showcase {
+  background: #000;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cs-showcase-inner {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-3);
+}
+
+/* ── Detail section ─────────────────────────────────────────── */
+
+.cs-detail {
+  padding-top: var(--space-15);    /* 120px */
+  padding-bottom: var(--space-15);
+}
+
+/* Overview: col 2 / span 4 (x≈170 in Figma) */
+.cs-overview {
+  grid-column: 2 / span 4;
+}
+
+.cs-overview p {
+  font-family: var(--font-text);
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-lh);
+  letter-spacing: var(--type-body-ls);
+  color: #000;
+  margin: 0;
+}
+
+/* Metadata column: col 7 / span 3 (x≈760 in Figma) */
+.cs-metadata {
+  grid-column: 7 / span 3;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-9); /* 72px between meta groups */
+  color: #000;
+}
+
+.cs-meta-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1); /* 8px between label and value */
+}
+
+.cs-meta-value {
+  font-family: var(--font-text);
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-lh);
+  letter-spacing: var(--type-body-ls);
+  color: inherit;
+  margin: 0;
+}
+
+/* ── Case study responsive ──────────────────────────────────── */
+
+/* 1280px: right panel shifts to col 5 to give more image room */
+@media (max-width: 1280px) {
+  .cs-hero-right { grid-column: 5 / span 8; }
+}
+
+/* 1024px (9-col): hero stacks vertically, detail side-by-side in 9 cols */
+@media (max-width: 1024px) {
+  .cs-hero-left {
+    grid-column: span 9;
+    height: auto;
+  }
+  .cs-hero-right {
+    grid-column: span 9;
+    height: auto;
+  }
+  .cs-hero-card,
+  .cs-hero-img-wrap { min-height: 320px; }
+  .cs-overview  { grid-column: 1 / span 5; }
+  .cs-metadata  { grid-column: 6 / span 4; }
+  .cs-nav-right { grid-column: 1 / span 9; }
+}
+
+/* 768px: detail columns go full-width and stack */
+@media (max-width: 768px) {
+  .cs-overview { grid-column: 1 / span 9; }
+  .cs-metadata { grid-column: 1 / span 9; }
+}
+
+/* 500px (6-col): scale down display type, single-column hero panels */
+@media (max-width: 500px) {
+  .cs-title {
+    font-size: var(--type-h2-size);
+    line-height: var(--type-h2-lh);
+  }
+  .cs-hero-left  { grid-column: span 6; }
+  .cs-hero-right {
+    grid-column: span 6;
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .cs-hero-card,
+  .cs-hero-img-wrap { min-height: 240px; }
+  .cs-overview { grid-column: span 6; }
+  .cs-metadata { grid-column: span 6; }
 }
 
 /* ============================================================
