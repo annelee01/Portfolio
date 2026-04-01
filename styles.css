@@ -363,8 +363,8 @@ h1, h2, h3, h4, h5, h6, p, button,
 
   /* Single column width at each breakpoint — drives cs-progress-seg width.
      Formula: (viewport_or_max - 2×margin - (cols-1)×gutter) / cols
-     Desktop 12-col uses min(100vw, 1440px) to cap at max content width. */
-  --cs-col-width: calc((min(100vw, 1440px) - 2 * var(--space-3) - 11 * var(--space-2)) / 12);
+     Desktop 12-col uses min(100vw, 1600px) to cap at max content width. */
+  --cs-col-width: calc((min(100vw, 1600px) - 2 * var(--space-3) - 11 * var(--space-2)) / 12);
 
   /* Spacing tokens — 8px grid (--space-N = N × 8px) */
   --space-1:  8px;
@@ -414,7 +414,7 @@ a {
 }
 
 .site-header .inner-nav {
-  width: 90rem;
+  width: 100rem;
   max-width: 100%;
   display: flex;
   align-items: center;
@@ -1601,7 +1601,7 @@ footer {
 
 /* Page structure + 12-col grid (24px margin / 16px gutter) */
 .page-shell {
-  max-width: 1440px;
+  max-width: 1600px;
   min-width: 320px;
   width: 100%;
   margin: 0 auto;
@@ -1988,17 +1988,19 @@ footer {
   border-bottom: 1px solid currentColor;
   display: inline-flex;
   align-items: center;
-  gap: calc(var(--space-1) / 2);
+  gap: var(--space-1);
 }
 
 .cs-next-link svg {
   transform: rotate(-90deg);
   flex-shrink: 0;
+  margin-left: 3px; /* compensate for rotation visual overflow */
 }
 
 .cs-prev-link svg {
   transform: rotate(90deg);
   flex-shrink: 0;
+  margin-right: 3px; /* compensate for rotation visual overflow */
 }
 
 .cs-next-link:hover,
