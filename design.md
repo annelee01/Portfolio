@@ -15,11 +15,11 @@ This file is the single source-of-truth for layout, grids, columns, and gutters 
 - **Layout/spacing baseline: 8px** — all gaps, padding, and margins between components use the `--space-*` tokens, which are multiples of 8px. Since 8 is a multiple of 4, every spacing token is also valid on the 4px type grid.
 - margin: 24px (constant outer page padding)
 - gutter: 16px (fixed column gap)
-- max content width: 1440px (desktop)
+- max content width: 1600px (desktop)
 
 ## Core grid definitions
 
-- **Desktop (>= 1440px)**: 12-column grid.
+- **Desktop (>= 1600px)**: 12-column grid.
 - **Large tablet (>= 1024px)**: 9-column grid.
 - **Small tablet (>= 768px)**: 9-column grid.
 - **Mobile (>= 425px)**: 6-column grid.
