@@ -302,7 +302,7 @@ h1, h2, h3, h4, h5, h6, p, button,
 .nav-mobile-links a,
 .cs-title, .cs-subtitle, .cs-footnote,
 .cs-card-value, .cs-keyboard-hint,
-.cs-meta-value, .cs-label, .cs-next-link, .cs-prev-link, .cs-sup {
+.cs-label, .cs-next-link, .cs-prev-link {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
@@ -1737,7 +1737,7 @@ footer {
 /* ── Hero ───────────────────────────────────────────────────── */
 
 .cs-hero {
-  padding-top: var(--space-5); /* 40px — gap between navbar and hero content */
+  padding-top: var(--space-6);
 }
 
 .cs-hero-left {
@@ -1762,11 +1762,6 @@ footer {
   letter-spacing: var(--type-display-ls);
   color: #000;
   margin: 0;
-}
-
-.cs-sup {
-  font-size: 0.4em;
-  vertical-align: super;
 }
 
 .cs-subtitle {
@@ -1822,7 +1817,7 @@ footer {
 .cs-card-meta-item {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1); /* 8px */
+  gap: var(--space-2); 
 }
 
 .cs-label {
@@ -1886,7 +1881,6 @@ footer {
   display: flex;
   align-items: center;
   gap: var(--space-2); /* 16px */
-  height: 2px;
 }
 
 .cs-progress-seg {
@@ -1894,19 +1888,20 @@ footer {
   width: var(--cs-col-width); /* tracks the current grid column width */
   height: 2px;
   background: #B5B5B5;
-  border-radius: 1px;
+  border-radius: 2px;
   flex-shrink: 0;
 }
 
 .cs-progress-seg--active {
-  background: #535353;
+  background-color: #535353;
+  background-clip: content-box;
 }
 
 /* Arrow navigation — circular stroke buttons */
 .cs-arrows {
   display: flex;
   align-items: center;
-  gap: var(--space-8); /* 64px — Figma Group 591 gap */
+  gap: var(--space-2);
 }
 
 .cs-arrow {
@@ -1948,6 +1943,13 @@ footer {
   letter-spacing: var(--type-body-sm-ls);
   color: #2C2C2C;
   margin: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.cs-keyboard-hint--visible {
+  opacity: 1;
 }
 
 /* ── Case study navigation links (top Next + bottom Prev/Next) ── */
@@ -1983,6 +1985,20 @@ footer {
   line-height: var(--type-title-s-lh);
   color: #000;
   text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--space-1) / 2);
+}
+
+.cs-next-link svg {
+  transform: rotate(-90deg);
+  flex-shrink: 0;
+}
+
+.cs-prev-link svg {
+  transform: rotate(90deg);
+  flex-shrink: 0;
 }
 
 .cs-next-link:hover,
@@ -1990,78 +2006,14 @@ footer {
   color: #2d2018;
 }
 
-/* ── Showcase — full-width dark band ────────────────────────── */
-
-.cs-showcase {
-  background: #000;
-  min-height: 480px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cs-showcase-inner {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: var(--space-12) var(--space-3);
-}
-
-/* ── Detail section ─────────────────────────────────────────── */
-
-.cs-detail {
-  padding-top: var(--space-15);    /* 120px */
-  padding-bottom: var(--space-15);
-}
-
-/* Overview: col 2 / span 4 (x≈170 in Figma) */
-.cs-overview {
-  grid-column: 2 / span 4;
-}
-
-.cs-overview p {
-  font-family: var(--font-text);
-  font-size: var(--type-body-size);
-  font-weight: var(--type-body-weight);
-  line-height: var(--type-body-lh);
-  letter-spacing: var(--type-body-ls);
-  color: #000;
-  margin: 0;
-}
-
-/* Metadata column: col 7 / span 3 (x≈760 in Figma) */
-.cs-metadata {
-  grid-column: 7 / span 3;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-9); /* 72px between meta groups */
-  color: #000;
-}
-
-.cs-meta-group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1); /* 8px between label and value */
-}
-
-.cs-meta-value {
-  font-family: var(--font-text);
-  font-size: var(--type-body-size);
-  font-weight: var(--type-body-weight);
-  line-height: var(--type-body-lh);
-  letter-spacing: var(--type-body-ls);
-  color: inherit;
-  margin: 0;
-}
-
-/* ── Case study responsive ──────────────────────────────────── */
+/* ── Case study responsive ── (showcase + detail removed) ────── */
 
 /* 1280px: right panel shifts to col 5 to give more image room */
 @media (max-width: 1280px) {
   .cs-hero-right { grid-column: 5 / span 8; }
 }
 
-/* 1024px (9-col): hero stacks vertically, detail side-by-side in 9 cols */
+/* 1024px (9-col): hero stacks vertically */
 @media (max-width: 1024px) {
   :root { --cs-col-width: calc((100vw - 2 * var(--space-3) - 8 * var(--space-2)) / 9); }
   .cs-hero-left {
@@ -2075,15 +2027,7 @@ footer {
   .cs-hero-slide { height: auto; }
   .cs-hero-card,
   .cs-hero-img-wrap { min-height: 320px; }
-  .cs-overview  { grid-column: 1 / span 5; }
-  .cs-metadata  { grid-column: 6 / span 4; }
   .cs-nav-right { grid-column: 1 / span 9; }
-}
-
-/* 768px: detail columns go full-width and stack */
-@media (max-width: 768px) {
-  .cs-overview { grid-column: 1 / span 9; }
-  .cs-metadata { grid-column: 1 / span 9; }
 }
 
 /* 500px (6-col): scale down display type, single-column hero panels */
@@ -2098,8 +2042,6 @@ footer {
   .cs-hero-slide { grid-template-columns: 1fr; height: auto; }
   .cs-hero-card,
   .cs-hero-img-wrap { min-height: 240px; }
-  .cs-overview { grid-column: span 6; }
-  .cs-metadata { grid-column: span 6; }
 }
 
 /* ============================================================

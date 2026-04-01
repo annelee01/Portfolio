@@ -22,55 +22,120 @@
               <h1 class="cs-title">Finde</h1>
               <p class="cs-subtitle">Building a marketplace from zero to launch.</p>
             </div>
-            <p class="cs-footnote">An independent online marketplace designed and engineered from the ground up.</p>
+            <p class="cs-footnote"><a href="https://www.finde.clothing/browse" target="_blank" rel="noopener noreferrer">Finde</a> is a vintage fashion marketplace built to make secondhand discovery feel curated and intentional. Designed and engineered independently on Django, Python, and AWS, it aggregates structured inventory with a cross-category filtering system built for real-time, in-session search. The goal was to replicate the serendipity of in-store vintage shopping at the scale of an online marketplace.</p>
           </div>
 
+          <!-- Right: 6 paginated slides -->
           <div class="cs-hero-right">
-            <div class="cs-hero-slide cs-hero-slide--active">
+
+            <!-- Slide 1 — Product + Role -->
+            <div id="product" class="cs-hero-slide cs-hero-slide--active">
               <div class="cs-hero-card">
                 <div class="cs-card-meta-item">
                   <span class="cs-label">PRODUCT</span>
-                  <p class="cs-card-value">Finde Marketplace</p>
+                  <p class="cs-card-value">A vintage fashion marketplace designed around how secondhand discovery actually works. Structured listings, real-time cross-category filtering, and an experience shaped by how buying intent forms.</p>
                 </div>
                 <div class="cs-card-meta-item">
                   <span class="cs-label">ROLE</span>
-                  <p class="cs-card-value">Founder, Designer &amp; Engineer</p>
+                  <p class="cs-card-value">Founder, Product Designer & Builder</p>
                 </div>
               </div>
               <div class="cs-hero-img-wrap">
-                <img src="img/finde-hero.jpg" alt="Finde project" class="cs-hero-img" />
+                <!-- Suggested visual: Full-width desktop screenshot of finde.clothing/browse showing the curated listing grid -->
+                <img src="img/finde-browse-desktop.jpg" alt="Finde browse experience" class="cs-hero-img" />
               </div>
             </div>
-            <div class="cs-hero-slide">
+
+            <!-- Slide 2 — Problem + Scope -->
+            <div id="problem" class="cs-hero-slide">
               <div class="cs-hero-card">
                 <div class="cs-card-meta-item">
-                  <span class="cs-label">CHALLENGE</span>
-                  <p class="cs-card-value">Designing a trustworthy marketplace experience while operating as a solo founder across design and engineering.</p>
+                  <span class="cs-label">PROBLEM</span>
+                  <p class="cs-card-value">Secondhand marketplaces are fragmented by default: categories are unreliable, inventory quality varies wildly, and trust breaks down before purchase intent can form. Discovery is not just a browsing problem. It is a trust problem, and trust at scale is a growth problem.</p>
                 </div>
                 <div class="cs-card-meta-item">
-                  <span class="cs-label">APPROACH</span>
-                  <p class="cs-card-value">Accessibility-first design, CI/CD deployment pipeline, and iterative user testing to shape the core flows.</p>
+                  <span class="cs-label">SCOPE</span>
+                  <p class="cs-card-value">End-to-end build from concept to launch: brand identity, UI/UX design, and full-stack engineering.</p>
                 </div>
               </div>
               <div class="cs-hero-img-wrap">
-                <img src="img/finde-hero-2.jpg" alt="Finde project detail" class="cs-hero-img" />
+                <!-- Suggested visual: Diagram of the cold-start loop (sellers, inventory, buyers) as a cycle, with the eBay API break point annotated -->
+                <img src="img/finde-cold-start-diagram.jpg" alt="Cold-start marketplace loop" class="cs-hero-img" />
               </div>
             </div>
-            <div class="cs-hero-slide">
+
+            <!-- Slide 3 — Strategy -->
+            <div id="strategy" class="cs-hero-slide">
+              <div class="cs-hero-card">
+                <div class="cs-card-meta-item">
+                  <span class="cs-label">THE BET</span>
+                  <p class="cs-card-value">Prove that discovery drives engagement. Then use that demand signal to pull sellers in organically.</p>
+                </div>
+                <div class="cs-card-meta-item">
+                  <span class="cs-label">STRATEGY</span>
+                  <p class="cs-card-value">I bootstrapped supply through eBay's developer API, launching Finde with real structured inventory from day one. That gave me a live demand signal to validate buyer intent before attractong sellers and building out the supply side.</p>
+                </div>
+              </div>
+              <div class="cs-hero-img-wrap">
+                <!-- Suggested visual: Raw eBay API listing data alongside a styled Finde listing card, showing how supply was transformed into a curated experience -->
+                <img src="img/finde-api-strategy.jpg" alt="eBay API supply strategy" class="cs-hero-img" />
+              </div>
+            </div>
+
+            <!-- Slide 4 — Design Decisions -->
+            <div id="design" class="cs-hero-slide">
+              <div class="cs-hero-card">
+                <div class="cs-card-meta-item">
+                  <span class="cs-label">DESIGN</span>
+                  <p class="cs-card-value">Early user testing proved that emotional browsing happens before item filtering, so experience was designed discovery-first. Curated toggles like 'Date Night' were built around how buying decisions actually form.</p>
+                </div>
+                <div class="cs-card-meta-item">
+                  <span class="cs-label">FILTER SYSTEM</span>
+                  <p class="cs-card-value">Most marketplaces search within a category. Finde searches across all of them. Enter your size and keyword and see every matching garment type. Tops, bottoms, shoes — returned together in one tailored view, built around outfits rather than isolated items.</p>
+                </div>
+              </div>
+              <div class="cs-hero-img-wrap">
+                <!-- Suggested visual: Browse UI close-up showing the curated collection toggles with an active filter state applied -->
+                <img src="img/finde-filter-ux.jpg" alt="Finde filter and discovery UX" class="cs-hero-img" />
+              </div>
+            </div>
+
+            <!-- Slide 5 — Process + Architecture -->
+            <div id="process" class="cs-hero-slide">
+              <div class="cs-hero-card">
+                <div class="cs-card-meta-item">
+                  <span class="cs-label">PROCESS</span>
+                  <p class="cs-card-value">Each iteration of the filter system design was pressure-tested against competitive references and specific usability criteria. The final design: horizontal dynamic tabs for fast context-switching across the full viewport.</p>
+                </div>
+                <div class="cs-card-meta-item">
+                  <span class="cs-label">ARCHITECTURE</span>
+                  <p class="cs-card-value">Search results update instantly, without page reloads. The backend was built around that requirement before a single screen was designed.</p>
+                </div>
+              </div>
+              <div class="cs-hero-img-wrap">
+                <!-- Suggested visual: The final dynamic tab filter system in use, showing what worked rather than the rejected iterations -->
+                <img src="img/finde-filter-final.jpg" alt="Final filter system design" class="cs-hero-img" />
+              </div>
+            </div>
+
+            <!-- Slide 6 — Outcomes + What's Next -->
+            <div id="impact" class="cs-hero-slide">
               <div class="cs-hero-card">
                 <div class="cs-card-meta-item">
                   <span class="cs-label">IMPACT</span>
-                  <p class="cs-card-value">Launched a fully functioning marketplace from zero within a single product cycle.</p>
+                  <p class="cs-card-value">With an initial beta release, results were more qualitative than quantitative. Scale was not the immediate objective. Organic users reached 28 countries, and session data confirmed high-intent behavior: multiple successful filter and search interactions per visit.</p>
                 </div>
                 <div class="cs-card-meta-item">
-                  <span class="cs-label">STACK</span>
-                  <p class="cs-card-value">Full-stack build: design system, frontend, backend, and deployment — owned end-to-end.</p>
+                  <span class="cs-label">WHAT'S NEXT</span>
+                  <p class="cs-card-value">The next phase deepens engagement through editorialized lifestyle content and smarter query ranking, while direct seller outreach informs onboarding tools to grow the supply side. Invite-only curation keeps quality high as the marketplace scales.</p>
                 </div>
               </div>
               <div class="cs-hero-img-wrap">
-                <img src="img/finde-hero-3.jpg" alt="Finde launch" class="cs-hero-img" />
+                <!-- Suggested visual: World map showing organic user geography across 28 countries, or a session heatmap illustrating multi-interaction discovery behavior -->
+                <img src="img/finde-outcomes.jpg" alt="Finde global reach and outcomes" class="cs-hero-img" />
               </div>
             </div>
+
           </div>
 
         </div>
@@ -82,10 +147,13 @@
       <div class="page-shell">
         <div class="cs-nav-inner">
           <div class="cs-nav-right">
-            <div class="cs-progress" role="img" aria-label="Case study 3 of 3">
-              <span class="cs-progress-seg"></span>
-              <span class="cs-progress-seg"></span>
+            <div class="cs-progress" role="img" aria-label="Slide 1 of 6">
               <span class="cs-progress-seg cs-progress-seg--active"></span>
+              <span class="cs-progress-seg"></span>
+              <span class="cs-progress-seg"></span>
+              <span class="cs-progress-seg"></span>
+              <span class="cs-progress-seg"></span>
+              <span class="cs-progress-seg"></span>
             </div>
             <div class="cs-arrows">
               <button class="cs-arrow cs-arrow--prev" aria-label="Previous slide" disabled>
@@ -101,58 +169,28 @@
       </div>
     </div>
 
-    <!-- ── Showcase — swappable full-width dark band ─────────── -->
-    <section class="cs-showcase" aria-label="Project visuals">
-      <div class="cs-showcase-inner">
-        <!-- Replace with project-specific imagery or mockups -->
-      </div>
-    </section>
-
-    <!-- ── Detail: overview + metadata ─────────────────────── -->
-    <section class="cs-detail">
-      <div class="page-shell">
-        <div class="grid-inner">
-
-          <div class="cs-overview">
-            <p>Founded and built Finde — an online marketplace connecting buyers and sellers — from concept to launch. Owned every layer: user research, UX strategy, visual design, and full-stack engineering. Established the product foundations and brand identity that positioned Finde as a distinct alternative in the marketplace space.</p>
-          </div>
-
-          <div class="cs-metadata">
-            <div class="cs-meta-group">
-              <span class="cs-label">PRODUCT</span>
-              <p class="cs-meta-value">Finde Marketplace</p>
-            </div>
-            <div class="cs-meta-group">
-              <span class="cs-label">ROLE</span>
-              <p class="cs-meta-value">Founder, Designer &amp; Engineer</p>
-            </div>
-            <div class="cs-meta-group">
-              <span class="cs-label">CHALLENGE</span>
-              <p class="cs-meta-value">Designing a trustworthy marketplace experience while working as a solo founder across design and engineering.</p>
-            </div>
-            <div class="cs-meta-group">
-              <span class="cs-label">APPROACH</span>
-              <p class="cs-meta-value">Accessibility-first design, CI/CD deployment pipeline, and iterative user testing to shape the core flows.</p>
-            </div>
-            <div class="cs-meta-group">
-              <span class="cs-label">IMPACT</span>
-              <p class="cs-meta-value">Launched a fully functioning marketplace from zero within a single product cycle.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
     <!-- ── Bottom navigation ────────────────────────────────── -->
     <nav class="cs-bottom-nav" aria-label="Case study navigation">
       <div class="page-shell">
-        <a href="casper.html" class="cs-prev-link">← Previous</a>
-        <a href="verizon.html" class="cs-next-link">Back to start →</a>
+        <a href="casper.html" class="cs-prev-link"><svg class="hero-cta-arrow" width="12" height="18" viewBox="0 0 12 18" fill="none" aria-hidden="true"><line x1="6" y1="1" x2="6" y2="17" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"></line><polyline points="1,12 6,17 11,12" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline></svg> Previous Case Study</a>
+        <a href="verizon.html" class="cs-next-link">Back to start <svg class="hero-cta-arrow" width="12" height="18" viewBox="0 0 12 18" fill="none" aria-hidden="true"><line x1="6" y1="1" x2="6" y2="17" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"></line><polyline points="1,12 6,17 11,12" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline></svg></a>
       </div>
     </nav>
 
   </main>
+
+  <footer>
+    <div class="page-shell">
+      <div class="footer-inner">
+        <div class="footer-blob"></div>
+        <p class="footer-tagline">Available for remote &amp; full-time roles in NYC.
+          <br>
+          <a href="mailto:anne@anneleedesigns.com">Say hello
+          <svg class="hero-cta-arrow" width="12" height="18" viewBox="0 0 12 18" fill="none" aria-hidden="true"><line x1="6" y1="1" x2="6" y2="17" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"></line><polyline points="1,12 6,17 11,12" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>          </a>
+        </p>
+      </div>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>

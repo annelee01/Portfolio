@@ -22,6 +22,15 @@ function buildNavbar() {
   `;
 
   const currentFile = window.location.pathname.split('/').pop() || 'index.html';
+  const onIndexPage = currentFile === 'index.html' || currentFile === '';
+
+  // On case study pages, nav links go back to index + anchor rather than scrolling in-page
+  if (!onIndexPage) {
+    navbar.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+      link.href = 'index.html' + link.getAttribute('href');
+    });
+  }
+
   const navLinks = navbar.querySelectorAll('.nav-links a');
   navLinks.forEach((link) => {
     const href = link.getAttribute('href');
@@ -39,12 +48,13 @@ function buildNavbar() {
     overlay.id = 'nav-mobile-overlay';
     overlay.className = 'nav-mobile-overlay';
     overlay.setAttribute('aria-hidden', 'true');
+    const base = onIndexPage ? '' : 'index.html';
     overlay.innerHTML = `
       <nav class="nav-mobile-links">
-        <a href="#case-studies">Case Studies</a>
-        <a href="#technology">Tech</a>
-        <a href="#values">Values</a>
-        <a href="#collaborators">Collaborators</a>
+        <a href="${base}#case-studies">Case Studies</a>
+        <a href="${base}#technology">Tech</a>
+        <a href="${base}#values">Values</a>
+        <a href="${base}#collaborators">Collaborators</a>
       </nav>
     `;
     document.body.appendChild(overlay);
@@ -357,8 +367,10 @@ function initCaseStudyPagination() {
   const prevBtn = document.querySelector('.cs-arrow--prev');
   const nextBtn = document.querySelector('.cs-arrow--next');
   const dots    = document.querySelectorAll('.cs-progress-seg');
+  const hint    = document.querySelector('.cs-keyboard-hint');
   let current   = 0;
   const total   = slides.length;
+  let hintDismissed = false;
 
   function goTo(index) {
     slides[current].classList.remove('cs-hero-slide--active');
@@ -368,6 +380,23 @@ function initCaseStudyPagination() {
     dots[current].classList.add('cs-progress-seg--active');
     if (prevBtn) prevBtn.disabled = current === 0;
     if (nextBtn) nextBtn.disabled = current === total - 1;
+    const id = slides[current].id;
+    if (id) history.replaceState(null, '', '#' + id);
+    // Dismiss hint once user navigates past slide 2
+    if (current >= 1 && hint && !hintDismissed) {
+      hintDismissed = true;
+      hint.classList.remove('cs-keyboard-hint--visible');
+    }
+  }
+
+  // Show hint on next-arrow hover, hide on leave (unless dismissed)
+  if (nextBtn && hint) {
+    nextBtn.addEventListener('mouseenter', () => {
+      if (!hintDismissed) hint.classList.add('cs-keyboard-hint--visible');
+    });
+    nextBtn.addEventListener('mouseleave', () => {
+      hint.classList.remove('cs-keyboard-hint--visible');
+    });
   }
 
   if (prevBtn) prevBtn.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
@@ -379,7 +408,10 @@ function initCaseStudyPagination() {
     if (e.key === 'ArrowRight' && current < total - 1) goTo(current + 1);
   });
 
-  goTo(0); // set initial state: slide 0 active, prev disabled
+  // If a hash is present on load, jump to the matching slide
+  const hash = window.location.hash.slice(1);
+  const initial = hash ? Array.from(slides).findIndex(s => s.id === hash) : -1;
+  goTo(initial >= 0 ? initial : 0);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
