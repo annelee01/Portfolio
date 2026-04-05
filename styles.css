@@ -2013,10 +2013,31 @@ footer {
 
 /* ── Case study responsive ── (showcase + detail removed) ────── */
 
-/* 1280px: right panel shifts to col 5 to give more image room */
-@media (max-width: 1280px) {
-  .cs-hero-right { grid-column: 5 / span 8; }
-  .cs-nav-right  { grid-column: 5 / span 8; }
+
+/* ── Case study responsive ── */
+
+/* ≤1279px: stacked, centered, scaled type */
+@media (max-width: 1279px) {
+  .cs-title {
+    font-size:      var(--type-h2-size);
+    line-height:    var(--type-h2-lh);
+    letter-spacing: var(--type-h2-ls);
+  }
+  .cs-hero-headline { gap: var(--space-5); }
+  .cs-subtitle {
+    font-family:    var(--font-text);
+    font-size:      var(--type-title-s-size);
+    font-weight:    var(--type-title-s-weight);
+    line-height:    var(--type-title-s-lh);
+    letter-spacing: var(--type-title-s-ls);
+  }
+  .cs-hero-left     { grid-column: 4 / -4; height: auto; }
+  .cs-hero-right    { grid-column: 3 / -3; height: auto; aspect-ratio: 3 / 2; }
+  .cs-footnote      { margin-top: var(--space-5); margin-bottom: var(--space-7); }
+  .cs-nav-right     { grid-column: span 12; }
+  .cs-next-link svg *,
+  .cs-prev-link svg * { stroke-width: 1.25; }
+  .cs-bottom-nav .page-shell { align-items: flex-end; }
 }
 
 /* 1024px (9-col): hero indented — col 2 start, text 6-wide, slides 7-wide */
