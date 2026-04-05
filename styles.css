@@ -2043,21 +2043,14 @@ footer {
 /* 1024px (9-col): hero indented — col 2 start, text 6-wide, slides 7-wide */
 @media (max-width: 1024px) {
   :root { --cs-col-width: calc((100vw - 2 * var(--space-3) - 8 * var(--space-2)) / 9); }
-  .cs-hero-left {
-    grid-column: 2 / span 6;
-    height: auto;
-  }
-  .cs-hero-right {
-    grid-column: 2 / span 7;
-    height: 494px;
-  }
+  .cs-hero-left     { grid-column: 3 / -2; height: auto; }
+  .cs-hero-right    { grid-column: 2 / -2; height: auto; aspect-ratio: 3 / 2; }
   .cs-hero-card,
   .cs-hero-img-wrap { min-height: 320px; }
   .cs-nav-inner { grid-template-columns: repeat(9, minmax(0, 1fr)); }
   .cs-nav-right { grid-column: 2 / span 7; }
   .cs-subtitle,
   .cs-footnote { max-width: calc(5 * var(--cs-col-width) + 4 * var(--space-2)); }
-  .cs-footnote { margin-top: var(--space-6); margin-bottom: var(--space-9); }
 }
 
 /* 768px: no column offset — text and hero full 9-col width, hero height 468px */
@@ -2071,11 +2064,10 @@ footer {
 }
 
 /* 767px: stacked scrollable slides, H2 type, col-3 left-aligned, pagination hidden */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .cs-next-link svg *,
   .cs-prev-link svg * { stroke-width: 1.25; }
   .cs-bottom-nav .page-shell { align-items: flex-end; }
-  .cs-hero         { padding-top: var(--space-3); }
   .cs-hero-left    { grid-column: 3 / span 6; }
   .cs-hero-right   { grid-column: 3 / span 5; height: auto; }
   .cs-nav-inner    { grid-template-columns: repeat(9, minmax(0, 1fr)); }
@@ -2095,8 +2087,7 @@ footer {
   }
   .cs-subtitle,
   .cs-footnote     { max-width: calc(5 * var(--cs-col-width) + 4 * var(--space-2)); }
-  .cs-footnote     { margin-top: var(--space-5); margin-bottom: var(--space-5); }
-  .cs-hero-slide   { display: grid; grid-template-columns: 1fr; height: auto; }
+  .cs-hero-slide   { display: grid; grid-template-columns: 1fr; height: auto; margin-bottom: var(--space-8); }
   .cs-hero-card     { min-height: calc((5 * var(--cs-col-width) + 4 * var(--space-2)) * 4 / 3); max-width: unset; height: auto; }
   .cs-hero-img-wrap { min-height: unset; aspect-ratio: 3 / 4; max-width: unset; width: 100%; }
   .cs-nav-strip    { display: none; }
@@ -2105,7 +2096,6 @@ footer {
 /* 500px (6-col): same type/gaps, left-aligned */
 @media (max-width: 500px) {
   :root { --cs-col-width: calc((100vw - 2 * var(--space-3) - 5 * var(--space-2)) / 6); }
-  .cs-hero         { padding-top: var(--space-3); }
   .cs-title,
   .cs-subtitle,
   .cs-footnote     { max-width: calc(5 * var(--cs-col-width) + 4 * var(--space-2)); }
