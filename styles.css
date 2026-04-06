@@ -1638,7 +1638,6 @@ footer {
 
 /* Large tablet: 9-col */
 @media (max-width: 1024px) {
-  .page-shell { padding: 0 24px; }
   .grid-inner { grid-template-columns: repeat(9, minmax(0, 1fr)); }
   .span-1  { grid-column: span 1; }
   .span-2  { grid-column: span 2; }
@@ -1654,7 +1653,7 @@ footer {
 
 /* Small tablet: 9-col */
 @media (max-width: 768px) {
-  .page-shell { padding: 0 24px; }
+  .page-shell { padding: 0 24px 48px 24px; }
   .grid-inner { grid-template-columns: repeat(9, minmax(0, 1fr)); }
   .span-1  { grid-column: span 1; }
   .span-2  { grid-column: span 2; }
@@ -1670,7 +1669,6 @@ footer {
 
 /* Mobile + mini mobile: 6-col */
 @media (max-width: 500px) {
-  .page-shell { padding: 0 24px; }
   .grid-inner { grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: var(--space-3); }
   .span-1 { grid-column: span 1; }
   .span-2 { grid-column: span 2; }
@@ -1767,7 +1765,7 @@ footer {
   margin: 0;
 }
 
-.cs-subtitle {
+.cs-subtitle, .cs-hero-annotation {
   font-family: var(--font-display);
   font-size: var(--type-title-l-size);
   font-weight: var(--type-title-l-weight);
@@ -1849,6 +1847,25 @@ footer {
   overflow: hidden;
   height: 100%;
   background: #D9D9D9; /* placeholder until image loads */
+}
+
+.cs-hero-img-wrap--annotated {
+  position: relative;
+}
+
+.cs-hero-img-wrap--dark-grad {
+  background: linear-gradient(180deg, #141414 0%, #7A7A7A 100%);
+}
+
+.cs-hero-annotation {
+  position: absolute;
+  bottom: var(--space-7);
+  left: var(--space-4);
+  right: var(--space-4);
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.369);
+  margin: 0;
+  pointer-events: none;
 }
 
 .cs-hero-img {
@@ -1953,6 +1970,10 @@ footer {
 
 .cs-keyboard-hint--visible {
   opacity: 1;
+}
+
+@media (hover: none) {
+  .cs-keyboard-hint { display: none; }
 }
 
 /* ── Case study navigation links (top Next + bottom Prev/Next) ── */
@@ -2087,7 +2108,7 @@ footer {
   }
   .cs-subtitle,
   .cs-footnote     { max-width: calc(5 * var(--cs-col-width) + 4 * var(--space-2)); }
-  .cs-hero-slide   { display: grid; grid-template-columns: 1fr; height: auto; margin-bottom: var(--space-8); }
+  .cs-hero-slide   { display: grid; grid-template-columns: 1fr; height: auto; gap: var(--space-2); margin-bottom: var(--space-2); }
   .cs-hero-card     { min-height: calc((5 * var(--cs-col-width) + 4 * var(--space-2)) * 4 / 3); max-width: unset; height: auto; }
   .cs-hero-img-wrap { min-height: unset; aspect-ratio: 3 / 4; max-width: unset; width: 100%; }
   .cs-nav-strip    { display: none; }
