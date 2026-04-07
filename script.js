@@ -360,6 +360,23 @@ function initCardScaling() {
   cards.forEach(({ container }) => { if (container) ro.observe(container); });
 }
 
+function animateCountUp(slide) {
+  slide.querySelectorAll('.cs-count-up').forEach(el => {
+    const target   = +el.dataset.target;
+    const prefix   = el.dataset.prefix || '';
+    const suffix   = el.dataset.suffix || '';
+    const duration = 1400;
+    const start    = performance.now();
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - t, 4); // ease-out quartic: fast start, crawls to exact value
+      el.textContent = prefix + Math.round(ease * target) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
 function initCaseStudyPagination() {
   const slides = document.querySelectorAll('.cs-hero-slide');
   if (!slides.length) return;
@@ -382,6 +399,8 @@ function initCaseStudyPagination() {
     if (nextBtn) nextBtn.disabled = current === total - 1;
     const id = slides[current].id;
     if (id) history.replaceState(null, '', '#' + id);
+    // Trigger count-up animation if this slide has metrics
+    if (slides[current].querySelector('.cs-count-up')) animateCountUp(slides[current]);
     // Dismiss hint once user navigates past slide 2
     if (current >= 1 && hint && !hintDismissed) {
       hintDismissed = true;
