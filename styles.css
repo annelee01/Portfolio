@@ -359,7 +359,7 @@ h1, h2, h3, h4, h5, h6, p, button,
   --type-body-sm-size:   11px;
   --type-body-sm-weight: 500;
   --type-body-sm-lh:     14px;
-  --type-body-sm-ls:     0.02em;
+  --type-body-sm-ls:     0.0em;
 
   /* Single column width at each breakpoint — drives cs-progress-seg width.
      Formula: (viewport_or_max - 2×margin - (cols-1)×gutter) / cols
@@ -1738,7 +1738,7 @@ footer {
 /* ── Hero ───────────────────────────────────────────────────── */
 
 .cs-hero {
-  padding-top: var(--space-6);
+  padding-top: var(--space-4);
 }
 
 .cs-hero-left {
@@ -1746,7 +1746,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 526px;
+  height: auto;
 }
 
 .cs-hero-headline {
@@ -1789,7 +1789,8 @@ footer {
    Each .cs-hero-slide is a card+image pair — shown one at a time. */
 .cs-hero-right {
   grid-column: 6 / span 7;
-  height: 526px;
+  height: auto;
+  aspect-ratio: 3 / 2;
 }
 
 .cs-hero-slide {
@@ -1812,6 +1813,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: var(--space-4); /* 32px minimum between meta items */
   padding: var(--space-6) var(--space-5); /* 48px top/bottom, 40px left/right */
 }
 
@@ -1857,6 +1859,168 @@ footer {
   background: linear-gradient(180deg, #141414 0%, #7A7A7A 100%);
 }
 
+.cs-hero-img-wrap--video {
+  background: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.cs-hero-video-mask {
+  width: 89.6%; /* 353/395 per Figma */
+  overflow: hidden;
+  flex-shrink: 0;
+  margin: -2px;
+}
+
+.cs-hero-video {
+  display: block;
+  width: calc(100% + 10px);
+  height: auto;
+  margin: -8px;
+}
+
+/* eBay API slide (finde slide 3) */
+.cs-ebay-wrap {
+  background: #fff;
+  position: relative;
+}
+
+.cs-ebay-logo {
+  position: absolute;
+  left: 12.2%;
+  top: 40.1%;
+  width: 75.7%;
+}
+
+.cs-ebay-caption {
+  position: absolute;
+  left: 10.1%;
+  bottom: 7%;
+  width: 79.7%;
+  text-align: center;
+}
+
+/* Image → video crossfade (finde slide 2) */
+.cs-morph-wrap {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-4);
+}
+
+.cs-morph-inner {
+  display: grid;
+  place-items: center;
+  width: 100%;
+}
+
+.cs-morph-video,
+.cs-morph-img {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cs-morph-img {
+  animation: cs-morph-fade 1.2s ease-in-out 2s forwards;
+  border-radius: 3px;
+}
+
+.cs-morph-video {
+  transform-origin: top left;
+  animation: cs-morph-zoom 1.5s ease-in-out 3.5s forwards;
+  border-radius: 3px;
+}
+
+@keyframes cs-morph-fade {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes cs-morph-zoom {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-10%, -78%) scale(2.6); }
+}
+
+/* Laptop ground shadow (finde slide 6) */
+.cs-laptop-wrap {
+  position: relative;
+  width: 100%;
+  isolation: isolate;
+}
+
+.cs-laptop-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 2%;
+  width: 98%;
+  height: 5px;
+  background: rgba(0, 0, 0, 0.4);
+  filter: blur(5px);
+  border-radius: 40%;
+  z-index: -1;
+}
+
+/* iPhone mockup (finde slide 4) */
+.cs-iphone-mockup-wrap {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cs-iphone-mockup {
+  position: relative;
+  height: 88%;
+  aspect-ratio: 536 / 1102;
+}
+
+.cs-iphone-video {
+  position: absolute;
+  top: 1.8%;
+  left: 4.48%;
+  width: 90.86%;
+  height: 96.3%;
+  object-fit: cover;
+  border-radius: 6%;
+}
+
+.cs-iphone-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Outcomes stat block (slide 5) */
+.cs-outcomes-stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: 18% 10% 10% 10%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.cs-stat-intro {
+  font-family: var(--font-text);
+  font-size: var(--type-title-s-size);
+  font-weight: var(--type-title-s-weight);
+  line-height: var(--type-title-s-lh);
+  letter-spacing: var(--type-title-s-ls);
+  color: #ADD3EB;
+  margin: 0;
+}
+
+.cs-stat-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
 .cs-hero-annotation {
   position: absolute;
   bottom: var(--space-7);
@@ -1877,7 +2041,7 @@ footer {
 /* ── Navigation strip ───────────────────────────────────────── */
 
 .cs-nav-strip {
-  padding-top: var(--space-3);    /* 24px below hero */
+  padding-top: var(--space-3);   
   padding-bottom: var(--space-6); /* consistent height before showcase across all case studies */
 }
 
@@ -1922,6 +2086,7 @@ footer {
   display: flex;
   align-items: center;
   gap: var(--space-2);
+  position: relative;
 }
 
 .cs-arrow {
@@ -1963,16 +2128,22 @@ footer {
   letter-spacing: var(--type-body-sm-ls);
   color: #2C2C2C;
   margin: 0;
+  position: absolute;
+  left: calc(100% + var(--space-2));
+  top: 50%;
+  transform: translateY(-50%);
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease .5s; /* fade-out: hold .5s, then 0.2s fade */
   pointer-events: none;
+  white-space: nowrap;
 }
 
 .cs-keyboard-hint--visible {
   opacity: 1;
+  transition: opacity 0.2s ease; /* fade-in */
 }
 
-@media (hover: none) {
+@media (max-width: 768px) {
   .cs-keyboard-hint { display: none; }
 }
 
@@ -2053,7 +2224,7 @@ footer {
     letter-spacing: var(--type-title-s-ls);
   }
   .cs-hero-left     { grid-column: 4 / -4; height: auto; }
-  .cs-hero-right    { grid-column: 3 / -3; height: auto; aspect-ratio: 3 / 2; }
+  .cs-hero-right    { grid-column: 2 / -2; height: auto; aspect-ratio: 3 / 2; }
   .cs-footnote      { margin-top: var(--space-5); margin-bottom: var(--space-7); }
   .cs-nav-right     { grid-column: span 12; }
   .cs-next-link svg *,
@@ -2065,7 +2236,7 @@ footer {
 @media (max-width: 1024px) {
   :root { --cs-col-width: calc((100vw - 2 * var(--space-3) - 8 * var(--space-2)) / 9); }
   .cs-hero-left     { grid-column: 3 / -2; height: auto; }
-  .cs-hero-right    { grid-column: 2 / -2; height: auto; aspect-ratio: 3 / 2; }
+  .cs-hero-right    { grid-column: 1 / -1; height: auto; aspect-ratio: 3 / 2; }
   .cs-hero-card,
   .cs-hero-img-wrap { min-height: 320px; }
   .cs-nav-inner { grid-template-columns: repeat(9, minmax(0, 1fr)); }
