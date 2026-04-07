@@ -359,7 +359,7 @@ h1, h2, h3, h4, h5, h6, p, button,
   --type-body-sm-size:   11px;
   --type-body-sm-weight: 500;
   --type-body-sm-lh:     14px;
-  --type-body-sm-ls:     0.0em;
+  --type-body-sm-ls:     0.01em;
 
   /* Single column width at each breakpoint — drives cs-progress-seg width.
      Formula: (viewport_or_max - 2×margin - (cols-1)×gutter) / cols
@@ -654,6 +654,7 @@ a {
 
 .hero-cta {
   grid-column: span 12;
+  width: fit-content;
   font-family: var(--font-display);
   font-size: var(--type-title-l-size);
   font-weight: var(--type-title-l-weight);
@@ -671,6 +672,11 @@ a {
 
 .hero-cta-arrow {
   flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.hero-cta:hover .hero-cta-arrow {
+  transform: translateY(3px);
 }
 
 /* 1280px: hero-left widens to span 5 to avoid appearing narrow */
@@ -783,6 +789,22 @@ a {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transform: translateY(0);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.case-study-card:hover {
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  transform: translateY(-4px);
+}
+
+.card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .card-image {
@@ -1003,9 +1025,8 @@ a {
   font-weight: var(--type-body-sm-weight);
   line-height: var(--type-body-sm-lh);
   letter-spacing: var(--type-body-sm-ls);
-  color: #2d2018;
-  padding: var(--space-1) 12px;
-  border: 1px solid #2d2018;
+  padding: 6px var(--space-1);
+  border: 1px solid #8f8f8f;
   border-radius: 100px;
   white-space: nowrap;
 }
@@ -1076,6 +1097,12 @@ a {
   display: block;
   flex-shrink: 0;
   color: #000;
+  transform: translateX(0);
+  transition: transform 0.2s ease;
+}
+
+.case-study-card:hover .card-arrow {
+  transform: translateX(6px);
 }
 
 /* Finde card illustration */
@@ -1121,7 +1148,7 @@ a {
 .finde-chip {
   background: #f0edea;
   border-radius: 100px;
-  padding: 8px 16px;
+  padding: 12px 16px;
   font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-size: 15px;
   font-weight: 500;
@@ -1232,7 +1259,6 @@ a {
   font-weight: var(--type-title-l-weight);
   line-height: var(--type-title-l-lh);
   letter-spacing: var(--type-title-l-ls);
-  padding-bottom: var(--space-7);
   color: #fff;
 }
 
@@ -1362,7 +1388,7 @@ a {
 .values-col {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+  gap: var(--space-3);
   align-self: end; /* bottom-align cols 2 & 3 to match col 1's taller height */
 }
 
@@ -1428,7 +1454,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: var(--space-11); /* 88px between project and agency groups */
-  padding-top: var(--space-9); /* 72px + 16px row-gap = 88px figma gap below description */
+  padding-top: var(--space-7); 
 }
 
 .collab-group {
@@ -1577,6 +1603,11 @@ footer {
   transform: rotate(-90deg);
   flex-shrink: 0;
   margin-left: calc(var(--space-1) / 2);
+  transition: transform 0.2s ease;
+}
+
+.footer-tagline a:hover .hero-cta-arrow {
+  transform: translateX(5px) rotate(-90deg);
 }
 
 @media (max-width: 1439px) {
@@ -1653,7 +1684,6 @@ footer {
 
 /* Small tablet: 9-col */
 @media (max-width: 768px) {
-  .page-shell { padding: 0 24px 48px 24px; }
   .grid-inner { grid-template-columns: repeat(9, minmax(0, 1fr)); }
   .span-1  { grid-column: span 1; }
   .span-2  { grid-column: span 2; }
@@ -1669,7 +1699,7 @@ footer {
 
 /* Mobile + mini mobile: 6-col */
 @media (max-width: 500px) {
-  .grid-inner { grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: var(--space-3); }
+  .grid-inner { grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: var(--space-8); }
   .span-1 { grid-column: span 1; }
   .span-2 { grid-column: span 2; }
   .span-3 { grid-column: span 3; }
@@ -2381,17 +2411,27 @@ footer {
   transform: rotate(-90deg);
   flex-shrink: 0;
   margin-left: 3px; /* compensate for rotation visual overflow */
+  transition: transform 0.2s ease;
 }
 
 .cs-prev-link svg {
   transform: rotate(90deg);
   flex-shrink: 0;
   margin-right: 3px; /* compensate for rotation visual overflow */
+  transition: transform 0.2s ease;
 }
 
 .cs-next-link:hover,
 .cs-prev-link:hover {
   color: #2d2018;
+}
+
+.cs-next-link:hover svg {
+  transform: translateX(5px) rotate(-90deg);
+}
+
+.cs-prev-link:hover svg {
+  transform: translateX(-5px) rotate(90deg);
 }
 
 /* ── Case study responsive ── (showcase + detail removed) ────── */
@@ -2534,14 +2574,14 @@ footer {
 /* ≤768px: stacked full-width */
 @media (max-width: 768px) {
   .collab-heading { grid-column: 1 / span 9; }
-  .collab-description { grid-column: 1 / span 9; padding-top: var(--space-4); }
+  .collab-description { grid-column: 1 / span 9; }
   .collab-groups { grid-column: 1 / span 9; }
 }
 
 /* 500px: stacked layout, 3 modules per row */
 @media (max-width: 570px) {
   .collab-heading { grid-column: 1 / span 6; }
-  .collab-description { grid-column: 1 / span 6; padding-top: var(--space-4); }
+  .collab-description { grid-column: 1 / span 6; }
   .collab-groups { grid-column: 1 / span 6; }
 
   /* 3 modules per row (each module = 2 of 6 page cols) */
