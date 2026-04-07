@@ -1882,10 +1882,59 @@ footer {
 /* Brand slide (finde slide 4) */
 .cs-brand-wrap {
   background: #fff;
+  display: grid;
+  padding: var(--space-4);
+}
+
+.cs-brand-panel {
+  grid-area: 1/1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-4);
+  animation: cs-brand-ui 10s ease-in-out infinite;
+}
+
+.cs-brand-panel--icons {
+  animation: cs-brand-icons 10s ease-in-out infinite;
+}
+
+.cs-brand-icons-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  width: 100%;
+}
+
+.cs-brand-wordmark {
+  width: 160px;
+  height: auto;
+}
+
+.cs-brand-tagline {
+  width: 100%;
+  max-width: 305px;
+  height: auto;
+  position: relative;
+  left:-5%; /* to optically center the text with the wordmark above it */
+}
+
+.cs-brand-iconset {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+}
+
+@keyframes cs-brand-ui {
+  0%, 40%  { opacity: 1; }
+  50%, 90% { opacity: 0; }
+  100%     { opacity: 1; }
+}
+
+@keyframes cs-brand-icons {
+  0%, 40%  { opacity: 0; }
+  50%, 90% { opacity: 1; }
+  100%     { opacity: 0; }
 }
 
 .cs-finde-ui {
@@ -2064,13 +2113,13 @@ footer {
 }
 
 .cs-morph-img {
-  animation: cs-morph-fade 1.2s ease-in-out 2s forwards;
+  animation: cs-morph-fade 1.2s ease-in-out 1.5s forwards;
   border-radius: 3px;
 }
 
 .cs-morph-video {
   transform-origin: top left;
-  animation: cs-morph-zoom 1.5s ease-in-out 3.5s forwards;
+  animation: cs-morph-zoom 1.5s ease-in-out 3s forwards;
   border-radius: 3px;
 }
 
@@ -2447,6 +2496,16 @@ footer {
     font-family: var(--font-text);
     font-size: var(--type-body--size);
     line-height: var(--type-body-lh);
+  }
+  .cs-brand-wrap {
+    padding: var(--space-2);
+  }
+  .cs-finde-row {
+    gap: var(--space-1) var(--space-1);
+
+  }
+  .cs-finde-ui {
+    gap: var(--space-1);
   }
 }
 

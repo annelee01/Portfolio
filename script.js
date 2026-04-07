@@ -399,6 +399,18 @@ function initCaseStudyPagination() {
     if (nextBtn) nextBtn.disabled = current === total - 1;
     const id = slides[current].id;
     if (id) history.replaceState(null, '', '#' + id);
+    // Reset morph animation and video if this slide has one
+    const morphImg = slides[current].querySelector('.cs-morph-img');
+    const morphVideo = slides[current].querySelector('.cs-morph-video');
+    if (morphImg && morphVideo) {
+      [morphImg, morphVideo].forEach(el => {
+        el.style.animation = 'none';
+        el.offsetHeight; // force reflow
+        el.style.animation = '';
+      });
+      morphVideo.currentTime = 0;
+      morphVideo.play();
+    }
     // Trigger count-up animation if this slide has metrics
     if (slides[current].querySelector('.cs-count-up')) animateCountUp(slides[current]);
     // Dismiss hint once user navigates past slide 2
