@@ -397,7 +397,7 @@ function initCaseStudyPagination() {
     dots[current].classList.add('cs-progress-seg--active');
     if (prevBtn) prevBtn.disabled = current === 0;
     if (nextBtn) nextBtn.disabled = current === total - 1;
-    const id = slides[current].id;
+    const id = slides[current].dataset.slideId;
     if (id) history.replaceState(null, '', '#' + id);
     // Reset morph animation and video if this slide has one
     const morphImg = slides[current].querySelector('.cs-morph-img');
@@ -443,7 +443,7 @@ function initCaseStudyPagination() {
 
   // If a hash is present on load, jump to the matching slide
   const hash = window.location.hash.slice(1);
-  const initial = hash ? Array.from(slides).findIndex(s => s.id === hash) : -1;
+  const initial = hash ? Array.from(slides).findIndex(s => s.dataset.slideId === hash) : -1;
   goTo(initial >= 0 ? initial : 0);
 }
 
