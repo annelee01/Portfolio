@@ -399,6 +399,8 @@ function initCardScaling() {
 }
 
 function animateCountUp(slide) {
+  if (slide.dataset.counted) return;
+  slide.dataset.counted = '1';
   slide.querySelectorAll('.cs-count-up').forEach(el => {
     const target   = +el.dataset.target;
     const prefix   = el.dataset.prefix || '';
@@ -413,6 +415,20 @@ function animateCountUp(slide) {
     }
     requestAnimationFrame(tick);
   });
+}
+
+function initCountUpOnScroll() {
+  const slidesWithStats = document.querySelectorAll('.cs-hero-slide:has(.cs-count-up)');
+  if (!slidesWithStats.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCountUp(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  slidesWithStats.forEach(slide => observer.observe(slide));
 }
 
 function initCaseStudyPagination() {
@@ -491,6 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initValuesSystemsIllustration();
   initCardScaling();
   initCaseStudyPagination();
+  initCountUpOnScroll();
 
   const introBtn = document.getElementById('introBtn');
   if (introBtn) {
