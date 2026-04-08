@@ -430,6 +430,8 @@ function initCaseStudyPagination() {
     });
   }
 
+  dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
   if (prevBtn) prevBtn.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
   if (nextBtn) nextBtn.addEventListener('click', () => { if (current < total - 1) goTo(current + 1); });
 
