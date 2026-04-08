@@ -1709,7 +1709,7 @@ footer {
 
 /* Mobile + mini mobile: 6-col */
 @media (max-width: 500px) {
-  .grid-inner { grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: var(--space-8); }
+  .grid-inner { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .span-1 { grid-column: span 1; }
   .span-2 { grid-column: span 2; }
   .span-3 { grid-column: span 3; }
