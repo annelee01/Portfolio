@@ -1931,11 +1931,11 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: cs-brand-ui 10s ease-in-out infinite;
+  animation: cs-brand-icons 10s ease-in-out infinite;
 }
 
 .cs-brand-panel--icons {
-  animation: cs-brand-icons 10s ease-in-out infinite;
+  animation: cs-brand-ui 10s ease-in-out infinite;
 }
 
 .cs-brand-icons-wrap {
