@@ -778,7 +778,7 @@ a {
   display: grid;
   grid-template-columns: subgrid;
   row-gap: var(--space-3); /* 24px between wrapped rows */
-  scroll-margin-top: var(--space-9);
+  scroll-margin-top: var(--space-10);
   margin-bottom: var(--space-15);
 }
 
@@ -1361,28 +1361,6 @@ a {
   letter-spacing: var(--type-title-l-ls);
   color: #000;
   margin: 0 0 var(--space-7);
-}
-
-.illustration-values-pixel-art {
-  display: block;
-  width: 352px;
-  max-width: 100%;
-  height: auto;
-}
-
-.illustration-values-systems {
-  display: block;
-  width: 352px;
-  max-width: 100%;
-  aspect-ratio: 780 / 512;
-  overflow: hidden;
-}
-
-.illustration-values-ethical-work {
-  display: block;
-  width: 352px;
-  max-width: 100%;
-  height: auto;
 }
 
 .values-col {
@@ -2259,6 +2237,90 @@ footer {
   object-fit: cover;
 }
 
+/* Casper iteration crossfade */
+.cs-iter-wrap {
+  display: grid;
+}
+
+/* Casper problem slide — top overlay to highlight cross-sell module */
+.cs-problem-wrap {
+  position: relative;
+}
+
+.cs-problem-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 31.6% 0; /* covers top 75% */
+  background: #181642;
+  opacity: 0;
+  animation: cs-problem-overlay 3s ease-out 2s forwards;
+  pointer-events: none;
+}
+
+@keyframes cs-problem-overlay {
+  to { opacity: 0.9; }
+}
+
+/* Casper design slide — top overlay */
+.cs-design-wrap {
+  position: relative;
+}
+
+.cs-design-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 48.35% 0;
+  background: #ADD3EB;
+  opacity: 0;
+  animation: cs-design-overlay 3s ease-out 2s forwards;
+  pointer-events: none;
+}
+
+@keyframes cs-design-overlay {
+  to { opacity: 0.9; }
+}
+
+.cs-iter-caption {
+  grid-area: 1/1;
+  align-self: end;
+  justify-self: center;
+  padding-bottom: 40px;
+  font-family: var(--font-text);
+  color: #141414;
+  text-align: center;
+}
+
+.cs-iter-img {
+  grid-area: 1/1;
+  opacity: 0;
+}
+
+.cs-iter-img--1 { animation: cs-iter-1 9s ease-in-out infinite; }
+.cs-iter-img--2 { animation: cs-iter-2 9s ease-in-out infinite; }
+.cs-iter-img--3 { animation: cs-iter-3 9s ease-in-out infinite; }
+
+@keyframes cs-iter-1 {
+  0%, 25%  { opacity: 1; }
+  33%      { opacity: 0; }
+  92%      { opacity: 0; }
+  100%     { opacity: 1; }
+}
+
+@keyframes cs-iter-2 {
+  0%, 25%  { opacity: 0; }
+  33%      { opacity: 1; }
+  58%      { opacity: 1; }
+  66%      { opacity: 0; }
+  100%     { opacity: 0; }
+}
+
+@keyframes cs-iter-3 {
+  0%, 58%  { opacity: 0; }
+  66%      { opacity: 1; }
+  92%      { opacity: 1; }
+  100%     { opacity: 0; }
+}
+
 /* ── Navigation strip ───────────────────────────────────────── */
 
 .cs-nav-strip {
@@ -2291,10 +2353,14 @@ footer {
 .cs-progress-seg {
   display: block;
   width: var(--cs-col-width); /* tracks the current grid column width */
-  height: 2px;
+  height: 18px;
   background: #B5B5B5;
+  background-clip: content-box;
   border-radius: 2px;
+  padding-block: 8px;
   flex-shrink: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .cs-progress-seg--active {
@@ -2323,7 +2389,15 @@ footer {
   padding: 0;
   appearance: none;
   -webkit-appearance: none;
-  transition: opacity 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+.cs-arrow:hover:not([disabled]) {
+  background: #000;
+}
+
+.cs-arrow:hover:not([disabled]) svg {
+  color: #fff;
 }
 
 .cs-arrow[disabled] {
