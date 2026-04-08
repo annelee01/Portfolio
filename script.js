@@ -230,13 +230,13 @@ function initValuesSystemsIllustration() {
   const canvas = document.querySelector('.illustration-values-systems');
   if (!canvas) return;
 
-  const W = 780, H = 512;
+  const W = 704, H = 512;
   canvas.width = W;
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
   const baseColors = [
-    '#CAFFD6', '#FFA961', '#FDFD6D', '#917851',
+    '#f3e7ce', '#FFA961', '#fcfc6d', '#917851',
     '#FA8DAA', '#8B5586', '#6791E3', '#5C57A4', '#1C1C1C',
   ];
   const totalCols = baseColors.length;
@@ -305,8 +305,46 @@ function initValuesSystemsIllustration() {
 
   const imageData = ctx.getImageData(0, 0, W, H);
   const data = imageData.data;
+
+  // Gaussian-approx box blur on the gradient band (4 passes, radius 20)
+  const blurRadius = 20, blurPasses = 4;
+  const tmp = new Uint8ClampedArray((H - gradY) * W * 4);
+  for (let p = 0; p < blurPasses; p++) {
+    // Horizontal pass: data -> tmp
+    for (let y = gradY; y < H; y++) {
+      for (let x = 0; x < W; x++) {
+        let r = 0, g = 0, b = 0;
+        for (let dx = -blurRadius; dx <= blurRadius; dx++) {
+          const nx = Math.max(0, Math.min(W - 1, x + dx));
+          const si = (y * W + nx) * 4;
+          r += data[si]; g += data[si + 1]; b += data[si + 2];
+        }
+        const d = blurRadius * 2 + 1;
+        const ti = ((y - gradY) * W + x) * 4;
+        tmp[ti] = r / d; tmp[ti + 1] = g / d; tmp[ti + 2] = b / d; tmp[ti + 3] = 255;
+      }
+    }
+    // Vertical pass: tmp -> data
+    for (let y = gradY; y < H; y++) {
+      for (let x = 0; x < W; x++) {
+        let r = 0, g = 0, b = 0;
+        for (let dy = -blurRadius; dy <= blurRadius; dy++) {
+          const ny = Math.max(0, Math.min(H - gradY - 1, y - gradY + dy));
+          const si = (ny * W + x) * 4;
+          r += tmp[si]; g += tmp[si + 1]; b += tmp[si + 2];
+        }
+        const d = blurRadius * 2 + 1;
+        const di = (y * W + x) * 4;
+        data[di] = r / d; data[di + 1] = g / d; data[di + 2] = b / d;
+      }
+    }
+  }
+
+  // Progressive noise: 0 at top, full at bottom
   for (let i = 0; i < data.length; i += 4) {
-    const n = (Math.random() - 0.5) * 14;
+    const y = Math.floor((i / 4) / W);
+    const noiseAmt = (y / (H - 1)) * 24;
+    const n = (Math.random() - 0.5) * noiseAmt;
     data[i]   = Math.max(0, Math.min(255, data[i]   + n));
     data[i+1] = Math.max(0, Math.min(255, data[i+1] + n));
     data[i+2] = Math.max(0, Math.min(255, data[i+2] + n));
