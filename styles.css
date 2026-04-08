@@ -1248,7 +1248,7 @@ a {
    ============================================================ */
 
 .tech-section {
-  background: #000;
+  background: #1b1717;
   color: #fff;
   padding: var(--space-15) 0;
 }
@@ -1294,7 +1294,7 @@ a {
 }
 
 .tech-card {
-  background: #1c1c1c;
+  background: #282222;
   border-radius: 32px;
   padding: var(--space-4);
   display: flex;
@@ -1351,6 +1351,7 @@ a {
 .values-section {
   background: #dad2be;
   padding: var(--space-15) 0;
+  overflow-x: hidden;
 }
 
 .values-heading {
@@ -1394,6 +1395,36 @@ a {
   letter-spacing: var(--type-body-ls);
   color: #000;
   margin: 0;
+}
+
+.illustration-wrapper {
+  width: 100%;
+  aspect-ratio: 352 / 256;
+  position: relative;
+}
+
+.illustration-values-pixel-art {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.illustration-wrapper--blur {
+  overflow: visible;
+}
+
+.illustration-values-ethical-blur {
+  position: absolute;
+  width: 160%;
+  left: -29%;
+  top: -42%;
+  height: auto;
+}
+
+.illustration-values-systems {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* ============================================================
