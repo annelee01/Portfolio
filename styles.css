@@ -2023,7 +2023,7 @@ footer {
   border-radius: 16px;
   border: 1px solid #C3BEBB;
   background: #FFF;
-  min-width: 190px;
+  min-width: 150px;
 }
 
 .cs-finde-pill--search svg {
@@ -2033,7 +2033,7 @@ footer {
 }
 
 .cs-finde-pill--icon-search {
-  padding: 6.5px 11px;
+  padding: 6.5px;
   line-height: 0;
 }
 
@@ -2236,6 +2236,11 @@ footer {
   padding: var(--space-6) var(--space-5);
   height: 100%;
   box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .cs-outcomes-stats {
+    gap: var(--space-4);
+  }
 }
 
 .cs-stat-intro {
@@ -2622,6 +2627,7 @@ footer {
   .cs-hero-slide   { display: grid; grid-template-columns: 1fr; height: auto; gap: var(--space-2); margin-bottom: var(--space-2); }
   .cs-hero-card     { min-height: calc((5 * var(--cs-col-width) + 4 * var(--space-2)) * 4 / 3); max-width: unset; height: auto; }
   .cs-hero-img-wrap { min-height: unset; aspect-ratio: 3 / 4; max-width: unset; width: 100%; }
+  .cs-brand-wrap    { aspect-ratio: auto; height: auto; align-self: start; }
   .cs-nav-strip    { display: none; }
 }
 
@@ -2640,7 +2646,13 @@ footer {
 }
 
 /* 425px (6-col) */
-@media (max-width: 375px) {
+@keyframes cs-morph-zoom-sm {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-13%, -78%) scale(2.6); }
+}
+
+@media (max-width: 425px) {
+  .cs-morph-video { animation-name: cs-morph-zoom-sm; }
   .cs-stat-intro {
     font-family: var(--font-text);
     font-size: var(--type-body--size);
@@ -2651,10 +2663,32 @@ footer {
   }
   .cs-finde-row {
     gap: var(--space-1) var(--space-1);
-
   }
   .cs-finde-ui {
     gap: var(--space-1);
+  }
+  .cs-finde-ui,
+  .cs-brand-icons-wrap {
+    transform: scale(0.88);
+    transform-origin: center center;
+  }
+}
+
+@media (max-width: 320px) {
+  .cs-morph-video { animation-name: cs-morph-zoom-xs; }
+  .cs-brand-wrap {
+    align-items: center;
+    justify-items: center;
+    padding: 0px;
+  }
+  .cs-brand-panel {
+    width: 100%;
+    height: 100%;
+  }
+  .cs-finde-ui,
+  .cs-brand-icons-wrap {
+    transform: scale(0.75);
+    transform-origin: center center;
   }
 }
 
