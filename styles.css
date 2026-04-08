@@ -2324,8 +2324,8 @@ footer {
 /* ── Navigation strip ───────────────────────────────────────── */
 
 .cs-nav-strip {
-  padding-top: var(--space-3);   
-  padding-bottom: var(--space-6); /* consistent height before showcase across all case studies */
+  padding-top: var(--space-2);   
+  padding-bottom: var(--space-7);
 }
 
 /* Grid mirrors the 12-col hero so nav elements sit centered under hero-right (col 6–12) */
@@ -2340,7 +2340,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center; /* centered under the full width of cs-hero-right */
-  gap: var(--space-3);
+  gap: var(--space-2);
 }
 
 /* 2px progress bar — each segment = one column width at the active breakpoint */
@@ -2456,8 +2456,8 @@ footer {
 
 /* Bottom nav: Previous (left) and Next (right) after detail section */
 .cs-bottom-nav {
-  padding-top: var(--space-10);
-  padding-bottom: var(--space-10);
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
   border-top: 1px solid #000;
 }
 
@@ -2584,7 +2584,7 @@ footer {
   }
   .cs-subtitle,
   .cs-footnote     { max-width: calc(5 * var(--cs-col-width) + 4 * var(--space-2)); }
-  .cs-hero-slide   { display: grid; grid-template-columns: 1fr; height: auto; gap: var(--space-2); margin-bottom: var(--space-2); }
+  .cs-hero-slide   { display: grid; grid-template-columns: 1fr; height: auto; gap: var(--space-2); margin-bottom: var(--space-7); }
   .cs-hero-card     { min-height: calc((5 * var(--cs-col-width) + 4 * var(--space-2)) * 4 / 3); max-width: unset; height: auto; }
   .cs-hero-img-wrap { min-height: unset; aspect-ratio: 3 / 4; max-width: unset; width: 100%; }
   .cs-nav-strip    { display: none; }
