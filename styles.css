@@ -339,7 +339,7 @@ h1, h2, h3, h4, h5, h6, p, button,
 
   /* Title Medium — Neue Haas Display Pro 55 Roman */
   --type-title-m-size:   32px;
-  --type-title-m-weight: 450;
+  --type-title-m-weight: 400;
   --type-title-m-lh:     40px;
   --type-title-m-ls:     0;
 
@@ -359,7 +359,7 @@ h1, h2, h3, h4, h5, h6, p, button,
   --type-body-sm-size:   11px;
   --type-body-sm-weight: 500;
   --type-body-sm-lh:     14px;
-  --type-body-sm-ls:     0.01em;
+  --type-body-sm-ls:     0.02em;
 
   /* Single column width at each breakpoint — drives cs-progress-seg width.
      Formula: (viewport_or_max - 2×margin - (cols-1)×gutter) / cols
@@ -1006,7 +1006,7 @@ a {
 }
 
 .card-body {
-  padding: var(--space-5) var(--space-4);
+  padding: var(--space-5);
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
@@ -1026,7 +1026,8 @@ a {
   line-height: var(--type-body-sm-lh);
   letter-spacing: var(--type-body-sm-ls);
   padding: 6px var(--space-1);
-  border: 1px solid #8f8f8f;
+  background-color: #D4E8F3;
+  color:#54656e;
   border-radius: 100px;
   white-space: nowrap;
 }
@@ -1116,7 +1117,7 @@ a {
   top: 0;
   left: 0;
   width: 453px;
-  height: 340px;
+  height: 339px;
   transform-origin: top left;
   overflow: hidden;
 }
@@ -2316,8 +2317,9 @@ footer {
   align-self: end;
   justify-self: center;
   padding-bottom: 40px;
-  font-family: var(--font-text);
+  font-size: var(--type-body-sm-size);;
   color: #141414;
+  opacity: 0.65;
   text-align: center;
 }
 
@@ -2554,10 +2556,10 @@ footer {
   .cs-hero-headline { gap: var(--space-5); }
   .cs-subtitle {
     font-family:    var(--font-text);
-    font-size:      var(--type-title-s-size);
-    font-weight:    var(--type-title-s-weight);
-    line-height:    var(--type-title-s-lh);
-    letter-spacing: var(--type-title-s-ls);
+    font-size:      var(--type-title-m-size);
+    font-weight:    var(--type-title-m-weight);
+    line-height:    var(--type-title-m-lh);
+    letter-spacing: var(--type-title-m-ls);
   }
   .cs-hero-left     { grid-column: 4 / -4; height: auto; }
   .cs-hero-right    { grid-column: 2 / -2; height: auto; aspect-ratio: 3 / 2; }
