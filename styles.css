@@ -2283,7 +2283,7 @@ footer {
 .cs-problem-wrap::after {
   content: '';
   position: absolute;
-  inset: 0 0 31.6% 0; /* covers top 75% */
+  inset: 0 0 30% 0; /* covers top 75% */
   background: #181642;
   opacity: 0;
   pointer-events: none;
@@ -2300,24 +2300,53 @@ footer {
 /* Casper design slide — top overlay */
 .cs-design-wrap {
   position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.cs-design-wrap::after {
+.cs-design-inner {
+  position: relative;
+  overflow: hidden;
+  margin: 48px;
+}
+
+.cs-design-inner::after {
   content: '';
   position: absolute;
-  inset: 0 0 48.35% 0;
+  inset: 0 0 49% 0;
   background: #ADD3EB;
   opacity: 0;
   pointer-events: none;
+  z-index: 3;
 }
 
-.cs-design-wrap.is-animated::after {
-  animation: cs-design-overlay 3s ease-out 0.5s forwards;
+.cs-design-wrap.is-animated .cs-design-inner::after {
+  animation: cs-design-overlay 3s ease-out 2s forwards;
 }
 
 @keyframes cs-design-overlay {
   to { opacity: 0.9; }
 }
+
+.cs-design-cart-img {
+  display: block;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.cs-design-scroll-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  transform: translateY(0);
+  transition: transform 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 
 .cs-iter-caption {
   grid-area: 1/1;

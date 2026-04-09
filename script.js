@@ -417,14 +417,58 @@ function animateCountUp(slide) {
   });
 }
 
+function triggerDesignAnimation(wrap) {
+  const cartImg = wrap.querySelector('.cs-design-cart-img');
+  const scrollImg = wrap.querySelector('.cs-design-scroll-img');
+  const inner = wrap.querySelector('.cs-design-inner');
+  if (cartImg && scrollImg && inner) {
+    const run = () => {
+      wrap.classList.remove('is-animated');
+      scrollImg.style.transition = 'none';
+      scrollImg.style.transform = 'translateY(0)';
+      inner.style.height = cartImg.offsetHeight + 'px';
+      scrollImg.offsetHeight; // force reflow
+      scrollImg.style.transition = '';
+      setTimeout(() => {
+        scrollImg.style.transform = `translateY(-${scrollImg.offsetHeight - cartImg.offsetHeight}px)`;
+        wrap.classList.add('is-animated');
+      }, 800);
+    };
+    Promise.all([
+      cartImg.complete ? Promise.resolve() : new Promise(r => cartImg.addEventListener('load', r, { once: true })),
+      scrollImg.complete ? Promise.resolve() : new Promise(r => scrollImg.addEventListener('load', r, { once: true })),
+    ]).then(() => {
+      run();
+      // Keep inner height in sync as the browser resizes
+      if (!wrap._resizeObserver) {
+        wrap._resizeObserver = new ResizeObserver(() => {
+          inner.style.height = cartImg.offsetHeight + 'px';
+        });
+        wrap._resizeObserver.observe(cartImg);
+      }
+    });
+  } else {
+    wrap.classList.add('is-animated');
+  }
+}
+
 function initOverlayAnimationsOnScroll() {
   const wraps = document.querySelectorAll('.cs-problem-wrap, .cs-design-wrap');
   if (!wraps.length) return;
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
+      // Only handle scroll-triggered animation in stacked (mobile) layout
+      if (window.innerWidth > 768) return;
       if (entry.isIntersecting) {
-        entry.target.classList.add('is-animated');
-        observer.unobserve(entry.target);
+        triggerDesignAnimation(entry.target);
+      } else {
+        // Reset when scrolled out so it replays on re-entry
+        const scrollImg = entry.target.querySelector('.cs-design-scroll-img');
+        if (scrollImg) {
+          entry.target.classList.remove('is-animated');
+          scrollImg.style.transition = 'none';
+          scrollImg.style.transform = 'translateY(0)';
+        }
       }
     });
   }, { threshold: 0.4 });
@@ -481,9 +525,11 @@ function initCaseStudyPagination() {
     }
     // Trigger count-up animation if this slide has metrics
     if (slides[current].querySelector('.cs-count-up')) animateCountUp(slides[current]);
-    // Trigger overlay animations on problem/design slides
-    const overlay = slides[current].querySelector('.cs-problem-wrap, .cs-design-wrap');
-    if (overlay) overlay.classList.add('is-animated');
+    // Trigger overlay animations on problem/design slides (paginated layout only)
+    if (window.innerWidth > 768) {
+      const overlay = slides[current].querySelector('.cs-problem-wrap, .cs-design-wrap');
+      if (overlay) triggerDesignAnimation(overlay);
+    }
     // Dismiss hint once user navigates past slide 2
     if (current >= 1 && hint && !hintDismissed) {
       hintDismissed = true;
