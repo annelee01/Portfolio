@@ -417,6 +417,20 @@ function animateCountUp(slide) {
   });
 }
 
+function initOverlayAnimationsOnScroll() {
+  const wraps = document.querySelectorAll('.cs-problem-wrap, .cs-design-wrap');
+  if (!wraps.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-animated');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  wraps.forEach(wrap => observer.observe(wrap));
+}
+
 function initCountUpOnScroll() {
   const slidesWithStats = document.querySelectorAll('.cs-hero-slide:has(.cs-count-up)');
   if (!slidesWithStats.length) return;
@@ -467,6 +481,9 @@ function initCaseStudyPagination() {
     }
     // Trigger count-up animation if this slide has metrics
     if (slides[current].querySelector('.cs-count-up')) animateCountUp(slides[current]);
+    // Trigger overlay animations on problem/design slides
+    const overlay = slides[current].querySelector('.cs-problem-wrap, .cs-design-wrap');
+    if (overlay) overlay.classList.add('is-animated');
     // Dismiss hint once user navigates past slide 2
     if (current >= 1 && hint && !hintDismissed) {
       hintDismissed = true;
@@ -507,6 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initValuesSystemsIllustration();
   initCardScaling();
   initCaseStudyPagination();
+  initOverlayAnimationsOnScroll();
   initCountUpOnScroll();
 
   const introBtn = document.getElementById('introBtn');
