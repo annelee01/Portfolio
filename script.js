@@ -452,6 +452,48 @@ function triggerDesignAnimation(wrap) {
   }
 }
 
+function triggerMorphAnimation(slide) {
+  const morphImg = slide.querySelector('.cs-morph-img');
+  const morphVideo = slide.querySelector('.cs-morph-video');
+  if (morphImg && morphVideo) {
+    [morphImg, morphVideo].forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight; // force reflow
+      el.style.animation = '';
+    });
+    morphVideo.currentTime = 0;
+    morphVideo.play();
+  }
+}
+
+function initMorphAnimationOnScroll() {
+  const morphWraps = document.querySelectorAll('.cs-morph-wrap');
+  if (!morphWraps.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (window.innerWidth > 768) return;
+      const slide = entry.target.closest('.cs-hero-slide');
+      if (entry.isIntersecting) {
+        triggerMorphAnimation(slide);
+      } else {
+        // Reset so animations replay on re-entry
+        const morphImg = slide.querySelector('.cs-morph-img');
+        const morphVideo = slide.querySelector('.cs-morph-video');
+        const captions = slide.querySelectorAll('.cs-morph-caption');
+        if (morphImg && morphVideo) {
+          [morphImg, morphVideo, ...captions].forEach(el => {
+            el.style.animation = 'none';
+            el.offsetHeight; // force reflow
+            el.style.animation = '';
+          });
+          morphVideo.currentTime = 0;
+        }
+      }
+    });
+  }, { threshold: 0.4 });
+  morphWraps.forEach(wrap => observer.observe(wrap));
+}
+
 function initOverlayAnimationsOnScroll() {
   const wraps = document.querySelectorAll('.cs-problem-wrap, .cs-design-wrap');
   if (!wraps.length) return;
@@ -512,17 +554,7 @@ function initCaseStudyPagination() {
     const id = slides[current].dataset.slideId;
     if (id) history.replaceState(null, '', '#' + id);
     // Reset morph animation and video if this slide has one
-    const morphImg = slides[current].querySelector('.cs-morph-img');
-    const morphVideo = slides[current].querySelector('.cs-morph-video');
-    if (morphImg && morphVideo) {
-      [morphImg, morphVideo].forEach(el => {
-        el.style.animation = 'none';
-        el.offsetHeight; // force reflow
-        el.style.animation = '';
-      });
-      morphVideo.currentTime = 0;
-      morphVideo.play();
-    }
+    triggerMorphAnimation(slides[current]);
     // Trigger count-up animation if this slide has metrics
     if (slides[current].querySelector('.cs-count-up')) animateCountUp(slides[current]);
     // Trigger overlay animations on problem/design slides (paginated layout only)
@@ -571,6 +603,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCardScaling();
   initCaseStudyPagination();
   initOverlayAnimationsOnScroll();
+  initMorphAnimationOnScroll();
   initCountUpOnScroll();
 
   const introBtn = document.getElementById('introBtn');
