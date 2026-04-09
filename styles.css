@@ -2134,6 +2134,7 @@ footer {
 
 /* Image → video crossfade (finde slide 2) */
 .cs-morph-wrap {
+  position: relative;
   display: flex;
   align-items: center;
   padding: 0 var(--space-4);
@@ -2172,6 +2173,44 @@ footer {
 @keyframes cs-morph-zoom {
   from { transform: translate(0, 0) scale(1); }
   to   { transform: translate(-10%, -78%) scale(2.6); }
+}
+
+.cs-morph-caption {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  font-size: var(--type-body-sm-size);
+  opacity: 1;
+  text-align: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cs-morph-caption--wireframe {
+  opacity: 1;
+  animation: cs-morph-caption-out 1.5s ease-in-out 1.5s forwards;
+}
+
+@keyframes cs-morph-caption-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+.cs-morph-caption--final {
+  opacity: 0;
+  animation: cs-morph-caption-in-out 2s ease-in-out 2.3s forwards;
+}
+
+@keyframes cs-morph-caption-in-out {
+  0%   { opacity: 0; }
+  50%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes cs-morph-caption-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* Laptop ground shadow (finde slide 6) */
@@ -2712,6 +2751,11 @@ footer {
   .cs-stat-group {
     gap: var(--space-1);
   }
+}
+
+@keyframes cs-morph-zoom-xs {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-18%, -78%) scale(2.6); }
 }
 
 @media (max-width: 320px) {
