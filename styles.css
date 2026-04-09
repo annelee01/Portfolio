@@ -1779,7 +1779,7 @@ footer {
 /* ── Hero ───────────────────────────────────────────────────── */
 
 .cs-hero {
-  padding-top: var(--space-4);
+  padding-top: var(--space-6);
 }
 
 .cs-hero-left {
@@ -2286,8 +2286,11 @@ footer {
   inset: 0 0 31.6% 0; /* covers top 75% */
   background: #181642;
   opacity: 0;
-  animation: cs-problem-overlay 3s ease-out 2s forwards;
   pointer-events: none;
+}
+
+.cs-problem-wrap.is-animated::after {
+  animation: cs-problem-overlay 3s ease-out 0.5s forwards;
 }
 
 @keyframes cs-problem-overlay {
@@ -2305,8 +2308,11 @@ footer {
   inset: 0 0 48.35% 0;
   background: #ADD3EB;
   opacity: 0;
-  animation: cs-design-overlay 3s ease-out 2s forwards;
   pointer-events: none;
+}
+
+.cs-design-wrap.is-animated::after {
+  animation: cs-design-overlay 3s ease-out 0.5s forwards;
 }
 
 @keyframes cs-design-overlay {
@@ -2570,7 +2576,7 @@ footer {
     line-height:    var(--type-title-m-lh);
     letter-spacing: var(--type-title-m-ls);
   }
-  .cs-hero-left     { grid-column: 4 / -4; height: auto; }
+  .cs-hero-left     { grid-column: 2 / -8; height: auto; }
   .cs-hero-right    { grid-column: 2 / -2; height: auto; aspect-ratio: 3 / 2; }
   .cs-footnote      { margin-top: var(--space-5); margin-bottom: var(--space-7); }
   .cs-nav-right     { grid-column: span 12; }
@@ -2582,14 +2588,15 @@ footer {
 /* 1024px (9-col): hero indented — col 2 start, text 6-wide, slides 7-wide */
 @media (max-width: 1024px) {
   :root { --cs-col-width: calc((100vw - 2 * var(--space-3) - 8 * var(--space-2)) / 9); }
-  .cs-hero-left     { grid-column: 3 / -2; height: auto; }
+  .cs-hero { padding-top: var(--space-7);}
+  .cs-hero-left     { grid-column: 1 / -2; height: auto; }
   .cs-hero-right    { grid-column: 1 / -1; height: auto; aspect-ratio: 3 / 2; }
   .cs-hero-card,
   .cs-hero-img-wrap { min-height: 320px; }
   .cs-nav-inner { grid-template-columns: repeat(9, minmax(0, 1fr)); }
   .cs-nav-right { grid-column: 2 / span 7; }
   .cs-subtitle,
-  .cs-footnote { max-width: calc(5 * var(--cs-col-width) + 4 * var(--space-2)); }
+  .cs-footnote { max-width: calc(3 * var(--cs-col-width) + 4 * var(--space-2)); }
 }
 
 /* 768px: no column offset — text and hero full 9-col width, hero height 468px */
@@ -2639,7 +2646,7 @@ footer {
   :root { --cs-col-width: calc((100vw - 2 * var(--space-3) - 5 * var(--space-2)) / 6); }
   .cs-title,
   .cs-subtitle,
-  .cs-footnote     { max-width: calc(5 * var(--cs-col-width) + 4 * var(--space-2)); }
+  .cs-footnote     { max-width: calc(5 * var(--cs-col-width) + 5 * var(--space-2)); }
   .cs-hero-left    { grid-column: span 6; }
   .cs-hero-right   { grid-column: span 6; }
   .cs-hero-card,
@@ -2694,6 +2701,8 @@ footer {
     transform: scale(0.75);
     transform-origin: center center;
   }
+  .cs-subtitle,
+  .cs-footnote     { max-width: calc(5 * var(--cs-col-width) + 6 * var(--space-2)); }
 }
 
 /* ============================================================
