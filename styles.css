@@ -2232,15 +2232,10 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: var(--space-5);
+  gap: var(--space-4);
   padding: var(--space-6) var(--space-5);
   height: 100%;
   box-sizing: border-box;
-}
-@media (max-width: 768px) {
-  .cs-outcomes-stats {
-    gap: var(--space-4);
-  }
 }
 
 .cs-stat-intro {
@@ -2551,6 +2546,14 @@ footer {
 
 
 /* ── Case study responsive ── */
+@media (max-width: 1370px) {
+  .cs-finde-row, .cs-finde-ui {
+    gap: var(--space-1) var(--space-1);
+  }
+  .cs-finde-pill {
+    font-size: 15px;
+  }
+}
 
 /* ≤1279px: stacked, centered, scaled type */
 @media (max-width: 1279px) {
@@ -2561,7 +2564,7 @@ footer {
   }
   .cs-hero-headline { gap: var(--space-5); }
   .cs-subtitle {
-    font-family:    var(--font-text);
+    font-family:    var(--font-display);
     font-size:      var(--type-title-m-size);
     font-weight:    var(--type-title-m-weight);
     line-height:    var(--type-title-m-lh);
@@ -2653,24 +2656,25 @@ footer {
 
 @media (max-width: 425px) {
   .cs-morph-video { animation-name: cs-morph-zoom-sm; }
-  .cs-stat-intro {
-    font-family: var(--font-text);
-    font-size: var(--type-body--size);
-    line-height: var(--type-body-lh);
-  }
   .cs-brand-wrap {
     padding: var(--space-2);
-  }
-  .cs-finde-row {
-    gap: var(--space-1) var(--space-1);
-  }
-  .cs-finde-ui {
-    gap: var(--space-1);
   }
   .cs-finde-ui,
   .cs-brand-icons-wrap {
     transform: scale(0.88);
     transform-origin: center center;
+  }
+}
+
+@media (max-width: 375px) {
+  .cs-stat-intro {
+    font-family: var(--font-text);
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    line-height: var(--type-body-lh);
+  }
+  .cs-stat-group {
+    gap: var(--space-1);
   }
 }
 
