@@ -482,7 +482,7 @@ a {
   display: none; /* hidden on desktop; mobile block overrides to flex */
 }
 
-/* Mobile navbar: Contact (left) + hamburger (right), no nav links */
+/* Mobile navbar: Email (left) + hamburger (right), no nav links */
 @media (max-width: 1023px) {
   .site-header .inner-nav {
     justify-content: space-between;
@@ -1611,14 +1611,14 @@ footer {
 }
 
 .footer-tagline .hero-cta-arrow {
-  transform: rotate(-90deg);
+  transform: rotate(-135deg);
   flex-shrink: 0;
   margin-left: calc(var(--space-1) / 2);
   transition: transform 0.2s ease;
 }
 
 .footer-tagline a:hover .hero-cta-arrow {
-  transform: translateX(5px) rotate(-90deg);
+  transform: translateX(3px) translateY(-3px) rotate(-135deg);
 }
 
 @media (max-width: 1439px) {
@@ -1631,7 +1631,7 @@ footer {
   }
 
   .footer-tagline {
-    grid-column: 4 / span 5;
+    grid-column: 4 / span 4;
   }
 }
 
