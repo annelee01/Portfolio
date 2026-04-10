@@ -1362,7 +1362,6 @@ a {
   line-height: var(--type-title-l-lh);
   letter-spacing: var(--type-title-l-ls);
   color: #1b1717;
-  margin: 0 0 var(--space-7);
 }
 
 .values-col {
@@ -1766,7 +1765,8 @@ footer {
 @media (max-width: 500px) {
   .values-col,
   .values-col:nth-child(3),
-  .values-col:nth-child(4) { grid-column: span 6; }
+  .values-col:nth-child(4) { grid-column: span 6; gap: var(--space-4); }
+  .values-section .grid-inner { row-gap: var(--space-12); }
 }
 
 /* ============================================================
