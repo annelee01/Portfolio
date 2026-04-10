@@ -10,7 +10,7 @@ function buildNavbar() {
         <a href="#values">Values</a>
         <a href="#collaborators">Collaborators</a>
       </nav>
-      <a href="mailto:anne@anneleedesigns.com" class="btn-contact">Contact</a>
+      <a href="mailto:anne@anneleedesigns.com" class="btn-contact">Email</a>
       <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
         <div class="nav-hamburger-icon">
           <span></span>
