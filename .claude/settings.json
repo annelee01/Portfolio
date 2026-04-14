@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/annelee/Documents/Development/Portfolio/img/kettle/nike-women-branding.webp)",
+      "Bash(python3 -)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/annelee/Documents/Development/Portfolio/img/kettle/rflt-brand-image.webp)",
+      "Bash(git -C /Users/annelee/Documents/Development/Portfolio show HEAD:img/kettle/rflt-brand-image.webp)",
+      "Bash(sips -g pixelWidth -g pixelHeight /tmp/rflt-original.webp)",
+      "Bash(python3 -m http.server 8080 --bind 0.0.0.0)",
+      "Bash(python3 -m http.server 8888 --bind 0.0.0.0 --directory /Users/annelee/Documents/Development/Portfolio)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:8888)",
+      "Bash(lsof -i :8888 -sTCP:LISTEN)"
+    ]
+  }
+}
