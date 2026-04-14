@@ -785,7 +785,7 @@ a {
 .case-study-card {
   grid-column: span 4;
   background: #fff;
-  border-radius: 32px;
+  border-radius: var(--space-4);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1274,7 +1274,7 @@ a {
 /* Col 2: rainbow circle SVG */
 .tech-col-rainbow {
   overflow: hidden;
-  border-radius: 32px;
+  border-radius: var(--space-4);
   position: relative;
   min-height: 643px;
 }
@@ -1297,7 +1297,7 @@ a {
 
 .tech-card {
   background: #282222;
-  border-radius: 32px;
+  border-radius: var(--space-4);
   padding: var(--space-4);
   display: flex;
   flex-direction: column;
@@ -1345,6 +1345,109 @@ a {
   transform: translate(-50%, -50%);
 }
 
+
+/* ============================================================
+   Brand Section
+   ============================================================ */
+
+.brand-section {
+  background: #1b1717;
+  color: #fff;
+  padding: var(--space-15) 0;
+}
+
+.brand-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-bottom: var(--space-9);
+}
+
+.brand-heading {
+  font-family: var(--font-display);
+  font-size: var(--type-title-l-size);
+  font-weight: var(--type-title-l-weight);
+  line-height: var(--type-title-l-lh);
+  letter-spacing: var(--type-title-l-ls);
+  color: #fff;
+  margin: 0;
+  flex: 0 0 calc(33.333% - 8px);
+}
+
+.brand-col {
+  align-self: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--space-4);
+}
+
+.brand-col-video {
+  aspect-ratio: 1 / 1;
+  background: #dfc2cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-col-video .brand-media {
+  width: 100%;
+  height: auto;
+}
+
+.brand-media {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.brand-overlay {
+  position: absolute;
+  inset: 0;
+  background: #1c1c1c;
+  padding: var(--space-7) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.brand-col:hover .brand-overlay,
+.brand-col.overlay-active .brand-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.brand-overlay-desc {
+  font-family: var(--font-text);
+  font-size: var(--type-title-s-size);
+  font-weight: var(--type-title-s-weight);
+  line-height: var(--type-title-s-lh);
+  letter-spacing: var(--type-title-s-ls);
+  color: #fff;
+  margin: 0;
+}
+
+.brand-overlay p {
+  margin: 0;
+}
+
+@media screen and (max-width: 500px) {
+  .brand-overlay {
+    padding: var(--space-9) var(--space-4);
+  }
+  .brand-overlay-desc {
+    font-family: var(--font-text);
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    line-height: var(--type-body-lh);
+    letter-spacing: var(--type-body-ls);
+    color: #fff;
+    margin: 0;
+  }
+}
 
 /* ============================================================
    Values Section
@@ -1448,7 +1551,7 @@ a {
   align-self: start;
 }
 
-.collab-description {
+.project-description {
   grid-column: 5 / span 6;
   font-family: var(--font-text);
   font-size: var(--type-title-s-size);
@@ -1717,6 +1820,24 @@ footer {
   .span-5 { grid-column: span 5; }
   .span-6 { grid-column: span 6; }
   .span-7, .span-8, .span-9, .span-10, .span-11, .span-12 { grid-column: span 6; }
+}
+
+/* ============================================================
+   Brand section responsive — after grid system so these win cascade
+   ============================================================ */
+@media (max-width: 1024px) {
+  .brand-col { grid-column: span 3; } /* span-4 → span-3 on 9-col */
+}
+
+@media (max-width: 768px) {
+  .brand-heading { margin-bottom: var(--space-7); }
+  .brand-header { flex-direction: column; }
+  .brand-heading { flex: none; }
+}
+
+@media (max-width: 500px) {
+  .brand-col { grid-column: span 6; margin-bottom: var(--space-3); }
+  .brand-col:last-child { margin-bottom: 0; }
 }
 
 /* ============================================================
@@ -2788,7 +2909,7 @@ footer {
 /* 769px–1024px: side-by-side heading (3 cols) + description+groups (6 cols) */
 @media (min-width: 769px) and (max-width: 1024px) {
   .collab-heading { grid-column: 1 / span 3; }
-  .collab-description { grid-column: 4 / span 6; }
+  .project-description { grid-column: 4 / span 6; }
   .collab-groups { grid-column: 4 / span 6; }
 }
 
@@ -2806,14 +2927,14 @@ footer {
 /* ≤768px: stacked full-width */
 @media (max-width: 768px) {
   .collab-heading { grid-column: 1 / span 9; margin-bottom: var(--space-4); }
-  .collab-description { grid-column: 1 / span 9; }
+  .project-description { grid-column: 1 / span 9; }
   .collab-groups { grid-column: 1 / span 9; }
 }
 
 /* 500px: stacked layout, 3 modules per row */
 @media (max-width: 570px) {
   .collab-heading { grid-column: 1 / span 6; margin-bottom: var(--space-4);}
-  .collab-description { grid-column: 1 / span 7; }
+  .project-description { grid-column: 1 / span 7; }
   .collab-groups { grid-column: 1 / span 6; padding-top: var(--space-7); }
 
   /* 3 modules per row (each module = 2 of 6 page cols) */

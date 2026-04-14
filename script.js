@@ -596,9 +596,21 @@ function initCaseStudyPagination() {
   goTo(initial >= 0 ? initial : 0);
 }
 
+function initBrandOverlayTouch() {
+  if (!window.matchMedia('(pointer: coarse)').matches) return;
+  document.querySelectorAll('.brand-col').forEach(col => {
+    col.addEventListener('click', () => {
+      const isActive = col.classList.contains('overlay-active');
+      document.querySelectorAll('.brand-col.overlay-active').forEach(c => c.classList.remove('overlay-active'));
+      if (!isActive) col.classList.add('overlay-active');
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   buildNavbar();
   initTechGridAnimation();
+  initBrandOverlayTouch();
   initValuesSystemsIllustration();
   initCardScaling();
   initCaseStudyPagination();
