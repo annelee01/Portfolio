@@ -8,6 +8,7 @@ function buildNavbar() {
         <a href="#case-studies">Case Studies</a>
         <a href="#technology">Tech</a>
         <a href="#values">Values</a>
+        <a href="#brand">Brand</a>
         <a href="#collaborators">Collaborators</a>
       </nav>
       <a href="mailto:anne@anneleedesigns.com" class="btn-contact">Email</a>
@@ -54,6 +55,7 @@ function buildNavbar() {
         <a href="${base}#case-studies">Case Studies</a>
         <a href="${base}#technology">Tech</a>
         <a href="${base}#values">Values</a>
+        <a href="${base}#brand">Brand</a>
         <a href="${base}#collaborators">Collaborators</a>
       </nav>
     `;
