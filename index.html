@@ -14,6 +14,9 @@
   <meta name="twitter:image" content="https://anneleedesigns.com/img/og-img.png" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -43,7 +46,44 @@
     <section>
       <div class="page-shell">
         <div class="grid-inner">
-          <div id="case-studies" class="case-studies span-12">
+          <div class="cs-scroller span-12">
+          <div id="case-studies" class="case-studies">
+          <article class="case-study-card">
+            <a href="pockettype.html" class="card-link" aria-label="View Pocket Type case study"></a>
+            <div class="card-image pt-grwm-image" style="background:#75bafb;">
+              <div class="pt-grwm" aria-hidden="true">
+                <span class="pt-grwm-main">Get Ready</span>
+                <span class="pt-grwm-row">
+                  <span class="pt-grwm-sub">with</span>
+                  <span class="pt-grwm-main">Me</span>
+                </span>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-tags">
+                <span class="tag">Founder</span>
+                <span class="tag">Full–Stack</span>
+                <span class="tag">Creative SaaS</span>
+              </div>
+              <div class="card-text">
+                <h3 class="card-title">Pocket Type</h3>
+                <p class="card-description">A real-time typographic tool with no commercial equivalent. Built solo, end to end.</p>
+              </div>
+              <div class="card-footer">
+                <div class="card-metrics">
+                  <div class="metric">
+                    <span class="metric-value">Solo</span>
+                    <span class="metric-label">End–to–end</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-value">4</span>
+                    <span class="metric-label">Engineering Domains</span>
+                  </div>
+                </div>
+                <svg class="card-arrow" width="24" height="16" viewBox="0 0 18 12" fill="none" aria-hidden="true"><line x1="1" y1="6" x2="17" y2="6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><polyline points="12,1 17,6 12,11" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </article>
           <article class="case-study-card">
             <a href="verizon.html" class="card-link" aria-label="View Verizon case study"></a>
             <div class="card-image verizon-card-image" style="background:#fff;">
@@ -265,6 +305,13 @@
               </div>
             </div>
           </article>
+          </div>
+          <button class="cs-arrow cs-arrow--prev cs-scroll-arrow cs-scroll-arrow--prev" aria-label="Scroll case studies left" disabled>
+            <svg width="24" height="16" viewBox="0 0 18 12" fill="none" aria-hidden="true"><line x1="1" y1="6" x2="17" y2="6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><polyline points="12,1 17,6 12,11" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="cs-arrow cs-arrow--next cs-scroll-arrow cs-scroll-arrow--next" aria-label="Scroll case studies right">
+            <svg width="24" height="16" viewBox="0 0 18 12" fill="none" aria-hidden="true"><line x1="1" y1="6" x2="17" y2="6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><polyline points="12,1 17,6 12,11" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
           </div>
         </div>
       </div>
@@ -544,6 +591,33 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <!-- ── Case-studies horizontal scroll controls ── -->
+  <script>
+  (function () {
+    const row = document.getElementById("case-studies");
+    if (!row) return;
+    const prev = document.querySelector(".cs-scroll-arrow--prev");
+    const next = document.querySelector(".cs-scroll-arrow--next");
+    if (!prev || !next) return;
+
+    function step() {
+      const card = row.querySelector(".case-study-card");
+      const gap = parseFloat(getComputedStyle(row).columnGap) || 16;
+      return card ? card.getBoundingClientRect().width + gap : row.clientWidth * 0.8;
+    }
+    function update() {
+      const max = row.scrollWidth - row.clientWidth - 1;
+      prev.disabled = row.scrollLeft <= 0;
+      next.disabled = row.scrollLeft >= max;
+    }
+    prev.addEventListener("click", () => row.scrollBy({ left: -step(), behavior: "smooth" }));
+    next.addEventListener("click", () => row.scrollBy({ left: step(), behavior: "smooth" }));
+    row.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  })();
+  </script>
 </body>
 </html>
 

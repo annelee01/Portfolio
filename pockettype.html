@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pocket Type — Anne Lee</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kapakana&display=swap" rel="stylesheet">
+  <script defer src="/_vercel/insights/script.js"></script>
+
+  <style>
+    /* ── Solid pastel image backgrounds (slides 2–4) ─────────── */
+    .pt-hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    [data-slide-id="architecture"]  .pt-hero-visual { background: #A6D490; }
+    [data-slide-id="product-build"] .pt-hero-visual { background: #F4FFB3; }
+    [data-slide-id="why-different"] .pt-hero-visual { background: #F99BCC; }
+    .pt-footnote-link { color: inherit; }
+
+    /* ── Slide 1 — animated product showcase ────────────────── */
+    .pts-visual {
+      background: var(--pts-blue-light);
+      position: relative;
+      overflow: hidden;
+      --pts-blue: #005BBC;       
+      --pts-blue-light: #98CFFF;
+      --pts-blue-fill: #75bafb;  
+    }
+    .pts-stage { position: absolute; inset: 0; }
+    .pts-pane {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-4);
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      pointer-events: none;
+    }
+    .pts-pane--visible { opacity: 1; }
+
+    /* Typing */
+    .pts-input-row { display: flex; align-items: center; }
+    .pts-typed {
+      font-family: var(--font-text);
+      font-size: clamp(20px, 3.4vw, 30px);
+      letter-spacing: -0.01em;
+      color: var(--pts-blue);
+      white-space: pre;
+    }
+    .pts-cursor {
+      width: 1px;
+      height: 2.1em;
+      margin-left: 2px;
+      background: var(--pts-blue);
+      display: inline-block;
+    }
+    .pts-cursor--blink { animation: pts-blink 1s steps(1, end) infinite; }
+    @keyframes pts-blink { 50% { opacity: 0; } }
+
+    /* Composition lockup */
+    .pts-lockup {
+      color: var(--pts-blue);
+      font-family: "Kapakana", cursive;
+      text-align: center;
+      line-height: 0.86;
+      white-space: nowrap;
+    }
+    .pts-main { display: block; font-size: clamp(44px, 7.6vw, 80px); }
+    /* Pull the bottom row up toward "Romanticize" (em-scaled with the lockup) */
+    .pts-lockup > .pts-main { margin-bottom: -0.16em; }
+    .pts-bottom-row { display: flex; align-items: baseline; justify-content: center; gap: 0.06em; }
+    /* "Your" tucks up toward the top of "Life", matching the original lockup */
+    .pts-sub { font-size: clamp(28px, 4.5vw, 47px); transform: translate(-0.1em, -0.25em); }
+    .pts-char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(0.18em);
+      animation: pts-char-in 0.45s cubic-bezier(.2,.7,.2,1) forwards;
+    }
+    @keyframes pts-char-in { to { opacity: 1; transform: none; } }
+
+    /* Export ratios */
+    .pts-ratios-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(4px, 1vw, 9px);
+    }
+    .pts-ratio-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-1);
+      opacity: 0;
+      transform: translateY(10px) scale(0.94);
+      animation: pts-spring 0.5s cubic-bezier(.2,.8,.25,1) forwards;
+    }
+    .pts-ratio-box {
+      position: relative;
+      background: var(--pts-blue-fill);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    /* Same lockup component, in the darker blue and scaled (via JS) to fit
+       each ratio box — a faithful miniature of the hero composition. */
+    .pts-lockup--mini {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      transform-origin: center;
+      color: var(--pts-blue);
+    }
+    .pts-lockup--mini .pts-main { font-size: 64px; }
+    .pts-lockup--mini .pts-sub { font-size: 38px; }
+    .pts-ratio-label {
+      font-family: var(--font-text);
+      font-size: 10px;
+      letter-spacing: 0.02em;
+      color: var(--pts-blue);
+      text-box-trim: trim-both;
+      text-box-edge: cap alphabetic;
+    }
+    @keyframes pts-spring { to { opacity: 1; transform: none; } }
+
+    /* Morphing pill */
+    .pts-btn-slot {
+      position: absolute;
+      left: 50%;
+      bottom: var(--space-15);
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    .pts-pill {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-text);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--pts-blue);
+      background: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 20px;
+      white-space: nowrap;
+      transition: transform 0.25s cubic-bezier(.2,.8,.2,1), opacity 0.25s ease;
+    }
+    .pts-pill--hidden,
+    .pts-pill--entering,
+    .pts-pill--exiting { opacity: 0; transform: scale(0.8); }
+    .pts-pill--pressed { transform: scale(0.92); }
+
+    /* Slide 2 — technical pipeline */
+    .pt-pipeline { padding: var(--space-4); }
+    .pt-pipeline-inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      width: 100%;
+      max-width: 280px;
+    }
+    .pt-stage {
+      position: relative;
+      font-family: "Neue Haas Grotesk Text Pro", "Helvetica Neue", sans-serif;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+      color: #000;
+      padding: var(--space-2);
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      text-align: center;
+      text-box-trim: trim-both;
+      text-box-edge: cap alphabetic;
+    }
+    .pt-pipeline-inner .pt-stage:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: calc(var(--space-2) * -1);
+      width: 1px;
+      height: var(--space-2);
+      background: rgba(0, 0, 0, 0.3);
+      transform: translateX(-50%);
+    }
+
+    /* Slide 2 — architecture list (in card) */
+    .pt-arch-list {
+      margin: 0;
+      padding-left: var(--space-3);
+      color: inherit;
+    }
+    .pt-arch-list li {
+      font-family: var(--font-text);
+      font-size: var(--type-body-size);
+      line-height: var(--type-body-lh);
+      letter-spacing: var(--type-body-ls);
+      text-box-trim: trim-both;
+      text-box-edge: cap alphabetic;
+    }
+    .pt-arch-list li + li { margin-top: var(--space-1); }
+    .pt-arch-list li::marker { color: rgba(255, 255, 255, 0.45); }
+
+    /* Slide 3 — product-build stack */
+    .pt-stack-inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      width: 100%;
+      max-width: 280px;
+    }
+    .pt-stack-label {
+      font-family: var(--font-text);
+      font-size: var(--type-body-sm-size);
+      letter-spacing: var(--type-body-sm-ls);
+      color: rgba(0, 0, 0, 0.85);
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: var(--space-1);
+      text-box-trim: trim-both;
+      text-box-edge: cap alphabetic;
+    }
+
+    /* Slide 4 — comparison */
+    .pt-compare-inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      width: 100%;
+      max-width: 340px;
+    }
+    .pt-compare-row {
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: var(--space-2);
+    }
+    .pt-compare-row strong {
+      display: block;
+      font-family: var(--font-text);
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.5);
+      text-box-trim: trim-both;
+      text-box-edge: cap alphabetic;
+    }
+    .pt-compare-row span {
+      display: block;
+      margin-top: var(--space-1);
+      font-family: var(--font-text);
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.5);
+      text-box-trim: trim-both;
+      text-box-edge: cap alphabetic;
+    }
+    .pt-compare-row--active {
+      border-color: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.06);
+    }
+    /* Active row stays full strength so Pocket Type reads as the answer */
+    .pt-compare-row--active strong { color: #000; }
+    .pt-compare-row--active span { color: rgba(0, 0, 0, 0.7); }
+  </style>
+</head>
+<body>
+
+  <header id="site-navbar" class="site-header"></header>
+
+  <main class="cs-page">
+
+    <!-- ── Hero ─────────────────────────────────────────────── -->
+    <section class="cs-hero">
+      <div class="page-shell">
+        <div class="grid-inner">
+
+          <!-- Left: title, subtitle, footnote -->
+          <div class="cs-hero-left">
+            <div class="cs-hero-headline">
+              <h1 class="cs-title">Pocket Type</h1>
+              <p class="cs-subtitle">Building a typographic tool for content creators.</p>
+            </div>
+            <p class="cs-footnote">Live at <a class="pt-footnote-link" href="https://pockettype.app" target="_blank" rel="noopener noreferrer">pockettype.app</a>, launched June 2026.</p> </div>
+
+          <!-- Right: single slide (card + visual) -->
+          <div class="cs-hero-right">
+            <div data-slide-id="product" class="cs-hero-slide cs-hero-slide--active">
+              <div class="cs-hero-card">
+                <div class="cs-card-meta-item">
+                  <span class="cs-label">PRODUCT</span>
+                  <p class="cs-card-value">Pocket Type is a real-time typographic layout tool that generates interlocking script and serif compositions from any text input. It runs on deterministic constraint solving rather than AI inference, so every composition is mathematically precise and instantly reproducible.</p>
+                </div>
+                <div class="cs-card-meta-item">
+                  <span class="cs-label">ROLE</span>
+                  <p class="cs-card-value">Founder, Designer & Technical Architect</p>
+                </div>
+              </div>
+              <div class="cs-hero-img-wrap pts-visual">
+                <div class="pts-stage" id="pts-stage" aria-hidden="true">
+                  <div class="pts-pane pts-pane--visible" data-pane="typing">
+                    <div class="pts-input-row">
+                      <span class="pts-typed"></span>
+                      <span class="pts-cursor pts-cursor--blink"></span>
+                    </div>
+                  </div>
+                  <div class="pts-pane" data-pane="composition">
+                    <div class="pts-lockup-host"></div>
+                  </div>
+                  <div class="pts-pane" data-pane="ratios">
+                    <div class="pts-ratios-row"></div>
+                  </div>
+                  <div class="pts-btn-slot">
+                    <button class="pts-pill pts-pill--hidden" type="button" tabindex="-1">Typeset</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2 — Architecture -->
+            <div data-slide-id="architecture" class="cs-hero-slide">
+              <div class="cs-hero-card">
+                <div class="cs-card-meta-item">
+                  <span class="cs-label">ARCHITECTURE</span>
+                  <p class="cs-card-value">The system combines four engineering domains in a single live pipeline:</p>
+                  <ul class="pt-arch-list">
+                    <li>DAG longest-path solving</li>
+                    <li>Constraint satisfaction</li>
+                    <li>HarfBuzz OpenType shaping, compiled to WebAssembly</li>
+                    <li>Rasterized ink-cell collision detection</li>
+                  </ul>
+                  <p class="cs-card-value">Each composition resolves on input, with no model inference and no templates.</p>
+                </div>
+              </div>
+              <div class="cs-hero-img-wrap pt-hero-visual pt-pipeline">
+                <div class="pt-pipeline-inner">
+                  <span class="pt-stage">DAG longest-path</span>
+                  <span class="pt-stage">Constraint satisfaction</span>
+                  <span class="pt-stage">HarfBuzz shaping · WASM</span>
+                  <span class="pt-stage">Ink-cell collision</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3 — Product Build -->
+            <div data-slide-id="product-build" class="cs-hero-slide">
+              <div class="cs-hero-card">
+                <div class="cs-card-meta-item">
+                  <span class="cs-label">PRODUCT BUILD</span>
+                  <p class="cs-card-value">The full SaaS sits on a Next.js front end with Drizzle ORM on Neon Postgres, Stripe billing, and Better Auth. Freemium model. I designed the product, brand, and go-to-market around it.</p>
+                </div>
+                 <div class="cs-card-meta-item">
+                  <span class="cs-label">AI WORKFLOW</span>
+                  <p class="cs-card-value">Solo build, AI-assisted coding. Every significant technical and aesthetic decision was mine.</p>
+                </div>
+              </div>
+              <div class="cs-hero-img-wrap pt-hero-visual pt-pipeline">
+                <div class="pt-stack-inner">
+                  <span class="pt-stage">Next.js</span>
+                  <span class="pt-stage">Drizzle ORM · Neon Postgres </span>
+                  <span class="pt-stage">Stripe billing</span>
+                  <span class="pt-stage">Better Auth</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 4 — Why It's Different -->
+            <div data-slide-id="why-different" class="cs-hero-slide">
+              <div class="cs-hero-card">
+                <div class="cs-card-meta-item">
+                  <span class="cs-label">WHY IT'S DIFFERENT</span>
+                  <p class="cs-card-value">There's currently no commercial equivalent. Existing tools either rely on AI generation, which carries per-composition compute cost and non-deterministic output, or on static templates with no live composition from arbitrary input.</p>
+                </div>
+                  <div class="cs-card-meta-item">
+                  <span class="cs-label">UNIT ECONOMICS</span>
+                  <p class="cs-card-value">Pocket Type generates infinite compositions at zero marginal cost. Structural margin advantage at scale.</p>
+                </div>
+              </div>
+              <div class="cs-hero-img-wrap pt-hero-visual pt-pipeline">
+                <div class="pt-compare-inner">
+                  <div class="pt-compare-row">
+                    <strong>AI generation</strong>
+                    <span>Per-composition compute · non-deterministic</span>
+                  </div>
+                  <div class="pt-compare-row">
+                    <strong>Static templates</strong>
+                    <span>No real-time composition from input</span>
+                  </div>
+                  <div class="pt-compare-row pt-compare-row--active">
+                    <strong>Pocket Type</strong>
+                    <span>Infinite compositions · $0 marginal cost</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Navigation strip ─────────────────────────────────── -->
+    <div class="cs-nav-strip">
+      <div class="page-shell">
+        <div class="cs-nav-inner">
+          <div class="cs-nav-right">
+            <div class="cs-progress" role="img" aria-label="Slide 1 of 4">
+              <span class="cs-progress-seg cs-progress-seg--active"></span>
+              <span class="cs-progress-seg"></span>
+              <span class="cs-progress-seg"></span>
+              <span class="cs-progress-seg"></span>
+            </div>
+            <div class="cs-arrows">
+              <button class="cs-arrow cs-arrow--prev" aria-label="Previous slide" disabled>
+                <svg width="24" height="16" viewBox="0 0 18 12" fill="none" aria-hidden="true"><line x1="1" y1="6" x2="17" y2="6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><polyline points="12,1 17,6 12,11" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="cs-arrow cs-arrow--next" aria-label="Next slide">
+                <svg width="24" height="16" viewBox="0 0 18 12" fill="none" aria-hidden="true"><line x1="1" y1="6" x2="17" y2="6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><polyline points="12,1 17,6 12,11" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <p class="cs-keyboard-hint">Use your keyboard arrows</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Bottom navigation ────────────────────────────────── -->
+    <nav class="cs-bottom-nav" aria-label="Case study navigation">
+      <div class="page-shell">
+        <a href="verizon.html" class="cs-prev-link"><svg class="hero-cta-arrow" width="12" height="18" viewBox="0 0 12 18" fill="none" aria-hidden="true"><line x1="6" y1="1" x2="6" y2="17" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"></line><polyline points="1,12 6,17 11,12" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline></svg> Previous</a>
+        <a href="finde.html" class="cs-next-link">Next <svg class="hero-cta-arrow" width="12" height="18" viewBox="0 0 12 18" fill="none" aria-hidden="true"><line x1="6" y1="1" x2="6" y2="17" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"></line><polyline points="1,12 6,17 11,12" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline></svg></a>
+      </div>
+    </nav>
+
+  </main>
+
+  <footer>
+    <div class="page-shell">
+      <div class="footer-inner">
+        <div class="footer-blob"></div>
+        <p class="footer-tagline">Available for senior/lead roles in NYC
+          <br>
+          <a href="mailto:anne@anneleedesigns.com" style="margin-right: var(--space-2); margin-bottom: var(--space-2); margin-top: var(--space-2);">Email
+          <svg class="hero-cta-arrow" width="12" height="18" viewBox="0 0 12 18" fill="none" aria-hidden="true"><line x1="6" y1="1" x2="6" y2="17" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"></line><polyline points="1,12 6,17 11,12" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>          </a>
+          <a href="https://www.linkedin.com/in/anneleedesigns/" target="_blank" rel="noopener noreferrer">LinkedIn
+          <svg class="hero-cta-arrow" width="12" height="18" viewBox="0 0 12 18" fill="none" aria-hidden="true"><line x1="6" y1="1" x2="6" y2="17" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"></line><polyline points="1,12 6,17 11,12" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>          </a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- ── Slide 1 showcase animation (type → compose → export ratios) ── -->
+  <script>
+  (function () {
+    const root = document.getElementById("pts-stage");
+    if (!root) return;
+
+    const PHRASE = "Romanticize Your Life";
+    const CHAR_DELAY = 80;
+    const LOCKUP_WORDS = ["Romanticize", "Your", "Life"];
+    const STEP = 45;
+    // Char-index offset per word, counting a 1-char gap between words.
+    const OFFSETS = LOCKUP_WORDS.reduce((acc, _, i) => {
+      acc.push(i === 0 ? 0 : acc[i - 1] + LOCKUP_WORDS[i - 1].length + 1);
+      return acc;
+    }, []);
+
+    // Each export ratio shows the same lockup component, scaled down to fit.
+    const RATIOS = [
+      { key: "16:9", w: 86, h: 48, pad: 18 },
+      { key: "1:1",  w: 64, h: 64 },
+      { key: "4:5",  w: 54, h: 67 },
+      { key: "3:4",  w: 50, h: 67 },
+      { key: "9:16", w: 41, h: 74 },
+    ];
+
+    const typedEl  = root.querySelector(".pts-typed");
+    const cursorEl = root.querySelector(".pts-cursor");
+    const lockHost = root.querySelector(".pts-lockup-host");
+    const ratiosRow = root.querySelector(".pts-ratios-row");
+    const pill = root.querySelector(".pts-pill");
+    const panes = {
+      typing: root.querySelector('[data-pane="typing"]'),
+      composition: root.querySelector('[data-pane="composition"]'),
+      ratios: root.querySelector('[data-pane="ratios"]'),
+    };
+
+    let timers = [];
+    const go = (fn, ms) => timers.push(setTimeout(fn, ms));
+    const clear = () => { timers.forEach(clearTimeout); timers = []; };
+
+    function setPane(name) {
+      for (const k in panes) panes[k].classList.toggle("pts-pane--visible", k === name);
+    }
+    function pillSet(state) {
+      pill.classList.remove("pts-pill--hidden", "pts-pill--entering", "pts-pill--exiting");
+      if (state !== "visible") pill.classList.add("pts-pill--" + state);
+    }
+    const pillPress = (on) => pill.classList.toggle("pts-pill--pressed", on);
+
+    function renderLockup() {
+      lockHost.innerHTML = "";
+      const lock = document.createElement("div");
+      lock.className = "pts-lockup";
+      const top = document.createElement("span");
+      top.className = "pts-main";
+      const row = document.createElement("div");
+      row.className = "pts-bottom-row";
+      const sub = document.createElement("span");
+      sub.className = "pts-sub";
+      const life = document.createElement("span");
+      life.className = "pts-main";
+      const fill = (host, word, offset) => {
+        word.split("").forEach((ch, i) => {
+          const s = document.createElement("span");
+          s.className = "pts-char";
+          s.style.animationDelay = ((offset + i) * STEP) + "ms";
+          s.textContent = ch;
+          host.appendChild(s);
+        });
+      };
+      fill(top, LOCKUP_WORDS[0], OFFSETS[0]);
+      fill(sub, LOCKUP_WORDS[1], OFFSETS[1]);
+      fill(life, LOCKUP_WORDS[2], OFFSETS[2]);
+      row.appendChild(sub);
+      row.appendChild(life);
+      lock.appendChild(top);
+      lock.appendChild(row);
+      lockHost.appendChild(lock);
+    }
+
+    // Static (non-animated, connected-script) copy of the lockup for the cards.
+    function buildStaticLockup() {
+      const lock = document.createElement("div");
+      lock.className = "pts-lockup pts-lockup--mini";
+      const top = document.createElement("span");
+      top.className = "pts-main";
+      top.textContent = LOCKUP_WORDS[0];
+      const row = document.createElement("div");
+      row.className = "pts-bottom-row";
+      const sub = document.createElement("span");
+      sub.className = "pts-sub";
+      sub.textContent = LOCKUP_WORDS[1];
+      const life = document.createElement("span");
+      life.className = "pts-main";
+      life.textContent = LOCKUP_WORDS[2];
+      row.appendChild(sub);
+      row.appendChild(life);
+      lock.appendChild(top);
+      lock.appendChild(row);
+      return lock;
+    }
+
+    // Natural size of the lockup (constant; same font + fixed font-size).
+    // Cached from the first successful measurement so re-renders that happen
+    // while slide 1 is display:none (and thus measure 0) still scale correctly.
+    let natCache = null;
+
+    function renderRatios() {
+      ratiosRow.innerHTML = "";
+      const built = RATIOS.map((r, i) => {
+        const item = document.createElement("div");
+        item.className = "pts-ratio-item";
+        item.style.animationDelay = (i * 100) + "ms";
+        const box = document.createElement("div");
+        box.className = "pts-ratio-box";
+        box.style.width = r.w + "px";
+        box.style.height = r.h + "px";
+        const lock = buildStaticLockup();
+        box.appendChild(lock);
+        const label = document.createElement("span");
+        label.className = "pts-ratio-label";
+        label.textContent = r.key;
+        item.appendChild(box);
+        item.appendChild(label);
+        ratiosRow.appendChild(item);
+        return { r, lock };
+      });
+      // Scale each lockup to fit its box (measured at natural size, then shrunk).
+      built.forEach(({ r, lock }) => {
+        const rect = lock.getBoundingClientRect();
+        let nw = rect.width, nh = rect.height;
+        if (nw && nh) {
+          natCache = { w: nw, h: nh };        // live measurement worked — cache it
+        } else if (natCache) {
+          nw = natCache.w; nh = natCache.h;   // hidden (display:none) — reuse cache
+        } else {
+          nw = 300; nh = 150;                 // first render while hidden — estimate
+        }
+        const pad = r.pad ?? 13;
+        const s = Math.min((r.w - pad) / nw, (r.h - pad) / nh);
+        lock.style.transform = "translate(-50%, -50%) scale(" + s + ")";
+      });
+    }
+
+    let first = true;
+
+    function loop() {
+      clear();
+      setPane("typing");
+      typedEl.textContent = "";
+      cursorEl.classList.add("pts-cursor--blink");
+      pillSet(first ? "hidden" : "exiting");
+      if (!first) go(() => { pillSet("hidden"); pill.textContent = "Typeset"; }, 250);
+      first = false;
+
+      let t = 500;
+      for (let i = 1; i <= PHRASE.length; i++) {
+        go(((n) => () => { typedEl.textContent = PHRASE.slice(0, n); })(i), t + i * CHAR_DELAY);
+      }
+      const typeEnd = t + PHRASE.length * CHAR_DELAY;
+      go(() => { pill.textContent = "Typeset"; pillSet("entering"); }, typeEnd);
+      go(() => pillSet("visible"), typeEnd + 600);
+      t += PHRASE.length * CHAR_DELAY + 700;
+
+      // Enter press
+      go(() => cursorEl.classList.remove("pts-cursor--blink"), t);
+      go(() => pillPress(true),  t + 250);
+      go(() => pillPress(false), t + 700);
+      t += 950;
+
+      // Composition — lockup springs in as the Enter pill exits
+      go(() => { setPane("composition"); renderLockup(); pillSet("exiting"); }, t);
+      go(() => pillSet("hidden"), t + 250);
+      go(() => { pill.textContent = "Batch Export"; }, t + 2790);
+      t += 2800;
+
+      // Ratios — Batch Export pill springs in with the cards
+      go(() => { setPane("ratios"); renderRatios(); pillSet("entering"); }, t);
+      go(() => pillSet("visible"), t + 600);
+      go(() => pillPress(true),  t + 1800);
+      go(() => pillPress(false), t + 2250);
+      t += 3000;
+
+      go(loop, t);
+    }
+
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(loop);
+    else loop();
+  })();
+  </script>
+</body>
+</html>
