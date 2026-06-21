@@ -356,10 +356,10 @@ h1, h2, h3, h4, h5, h6, p, button,
   --type-body-ls:     0.0em;
 
   /* Body Small — Neue Haas Text Pro 65 Medium */
-  --type-body-sm-size:   11px;
+  --type-body-sm-size:   12px;
   --type-body-sm-weight: 500;
-  --type-body-sm-lh:     14px;
-  --type-body-sm-ls:     0.02em;
+  --type-body-sm-lh:     16px;
+  --type-body-sm-ls:     0.01em;
 
   /* Single column width at each breakpoint — drives cs-progress-seg width.
      Formula: (viewport_or_max - 2×margin - (cols-1)×gutter) / cols
@@ -648,7 +648,7 @@ a {
   font-weight: var(--type-body-sm-weight);
   line-height: var(--type-body-sm-lh);
   letter-spacing: var(--type-body-sm-ls);
-  color: #1b1717;
+  color: #2b2424;
   margin: 0;
 }
 
