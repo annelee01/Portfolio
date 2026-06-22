@@ -185,6 +185,39 @@
             </div>
           </article>
           <article class="case-study-card">
+            <a href="google-posters.html" class="card-link" aria-label="View AI Poster Series case study"></a>
+            <div class="card-image posters-card-image" style="background:#c6c7cc;">
+              <div class="posters-scaler">
+                <img class="posters-thumb posters-thumb--back" src="img/google-posters/4-Besley%20-%20Combo.png" alt="" aria-hidden="true">
+                <img class="posters-thumb posters-thumb--front" src="img/google-posters/6-Inter%20-%20Combo.png" alt="" aria-hidden="true">
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-tags">
+                <span class="tag">AI</span>
+                <span class="tag">Design System</span>
+                <span class="tag">Type Design</span>
+              </div>
+              <div class="card-text">
+                <h3 class="card-title">AI Poster Series</h3>
+                <p class="card-description">Architected a design system to generate type specimen posters.</p>
+              </div>
+              <div class="card-footer">
+                <div class="card-metrics">
+                  <div class="metric">
+                    <span class="metric-value">2</span>
+                    <span class="metric-label">Days to build</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-value">16</span>
+                    <span class="metric-label">Posters Generated</span>
+                  </div>
+                </div>
+                <svg class="card-arrow" width="24" height="16" viewBox="0 0 18 12" fill="none" aria-hidden="true"><line x1="1" y1="6" x2="17" y2="6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><polyline points="12,1 17,6 12,11" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </article>
+          <article class="case-study-card">
             <a href="finde.html" class="card-link" aria-label="View Finde case study"></a>
             <div class="card-image finde-card-image">
               <div class="finde-scaler">
@@ -610,8 +643,31 @@
       prev.disabled = row.scrollLeft <= 0;
       next.disabled = row.scrollLeft >= max;
     }
-    prev.addEventListener("click", () => row.scrollBy({ left: -step(), behavior: "smooth" }));
-    next.addEventListener("click", () => row.scrollBy({ left: step(), behavior: "smooth" }));
+    function go(dir) { row.scrollBy({ left: dir * step(), behavior: "smooth" }); }
+    prev.addEventListener("click", () => go(-1));
+    next.addEventListener("click", () => go(1));
+
+    // Keyboard: ← / → step through whenever the carousel is in view, without
+    // needing to focus an arrow first.
+    row.setAttribute("role", "region");
+    row.setAttribute("aria-label", "Case studies, use left and right arrow keys to scroll");
+    let inView = true;
+    if ("IntersectionObserver" in window) {
+      inView = false;
+      new IntersectionObserver(
+        (entries) => { inView = entries[0].isIntersecting; },
+        { threshold: 0.2 }
+      ).observe(row);
+    }
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      if (!inView) return;
+      const t = e.target;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+      e.preventDefault();
+      go(e.key === "ArrowRight" ? 1 : -1);
+    });
+
     row.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
     update();

@@ -803,13 +803,17 @@ a {
   top: 50%;
   z-index: 3;
   border: none;
-  background: #fff;
+  background: #1b1717;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
 }
-/* Straddle the card edge, but extend outward only as far as the page margin
-   allows minus 8px, so the arrow never gets closer than 8px to the viewport. */
-.cs-scroller .cs-scroll-arrow--prev { left: 0;  transform: translate(calc(8px - var(--space-3)), -50%); }
-.cs-scroller .cs-scroll-arrow--next { right: 0; transform: translate(calc(var(--space-3) - 8px), -50%); }
+/* Active: inverted black fill, white arrow. Hover: white fill, black arrow. */
+.cs-scroller .cs-scroll-arrow svg { color: #fff; }
+.cs-scroller .cs-scroll-arrow:hover:not([disabled]) { background: #fff; }
+.cs-scroller .cs-scroll-arrow:hover:not([disabled]) svg { color: #1b1717; }
+/* Center each arrow on the card-row edge: half over the card, half over the
+   page margin (the 24px page-shell padding ≈ the arrow's outer half). */
+.cs-scroller .cs-scroll-arrow--prev { left: 0;  transform: translate(-50%, -50%); }
+.cs-scroller .cs-scroll-arrow--next { right: 0; transform: translate(50%, -50%); }
 
 /* Invisible enlarged hit area so near-misses don't click the card underneath.
    Extends outward only to the 8px viewport gap, and further over the card. */
@@ -822,12 +826,13 @@ a {
 }
 .cs-scroller .cs-scroll-arrow--prev::before { left: -8px; right: -16px; }
 .cs-scroller .cs-scroll-arrow--next::before { left: -16px; right: -8px; }
-/* Keep the white fill on the disabled arrow; fade only its icon */
+/* Flat light grey fill on the disabled arrow — no white/shadow overlap */
 .cs-scroller .cs-scroll-arrow[disabled] {
   opacity: 1;
-  background: #fff;
+  background: #dadada;
+  box-shadow: none;
 }
-.cs-scroller .cs-scroll-arrow[disabled] svg { color: rgba(27, 23, 23, 0.25); }
+.cs-scroller .cs-scroll-arrow[disabled] svg { color: #a8a8a8; }
 
 .case-study-card {
   flex: 0 0 calc((100% - 2 * var(--space-2)) / 3); /* 3 visible; 4th scrolls */
@@ -1155,6 +1160,41 @@ a {
 }
 
 /* Finde card illustration */
+/* AI Poster Series card illustration — a fan of two posters on the mat color */
+.posters-card-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.posters-scaler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 453px;
+  height: 340px;
+  transform-origin: top left;
+}
+
+.posters-thumb {
+  position: absolute;
+  top: 46px;
+  width: 198px;
+  height: 248px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(20, 20, 30, 0.18);
+}
+
+.posters-thumb--back {
+  left: 64px;
+  transform: rotate(-6deg);
+}
+
+.posters-thumb--front {
+  left: 191px;
+  transform: rotate(6deg);
+}
+
 .finde-card-image {
   position: relative;
   background: #f7f7f7;
@@ -2004,6 +2044,10 @@ footer {
   display: grid;
 }
 
+/* Intro/statement slides reuse the default card layout — statements anchor to
+   the card's top and bottom via the inherited space-between (matching the
+   original card layout). The class is kept as a semantic marker. */
+
 /* Dark overlay card (left half)
    PRODUCT anchored top, ROLE anchored bottom — space-between pushes them apart */
 .cs-hero-card {
@@ -2468,6 +2512,17 @@ footer {
   object-fit: cover;
 }
 
+/* Poster slides — show the full image within the frame instead of cropping.
+   Frame fills with the posters' shared mat color (#d8dae0) so the letterbox
+   space blends seamlessly with each poster's margin. */
+.cs-hero-right--posters .cs-hero-img-wrap {
+  background: #d8dae0;
+}
+
+.cs-hero-right--posters .cs-hero-img {
+  object-fit: contain;
+}
+
 /* Casper iteration crossfade */
 .cs-iter-wrap {
   display: grid;
@@ -2635,6 +2690,17 @@ footer {
   background-clip: content-box;
 }
 
+/* Fill variant — segments share the container width evenly (used when there
+   are more slides than the 7-column strip can fit at one column-width each). */
+.cs-progress--fill {
+  width: 100%;
+}
+
+.cs-progress--fill .cs-progress-seg {
+  width: auto;
+  flex: 1 1 0;
+}
+
 /* Arrow navigation — circular stroke buttons */
 .cs-arrows {
   display: flex;
@@ -2668,8 +2734,13 @@ footer {
 }
 
 .cs-arrow[disabled] {
-  opacity: 0.25;
+  background: #dadada;
+  border-color: transparent;
   cursor: default;
+}
+
+.cs-arrow[disabled] svg {
+  color: #a8a8a8;
 }
 
 .cs-arrow svg {
