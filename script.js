@@ -377,6 +377,13 @@ function initCardScaling() {
       designH:   340,
       center:    false,
     },
+    {
+      container: document.querySelector('.posters-card-image'),
+      el:        document.querySelector('.posters-scaler'),
+      designW:   453,
+      designH:   340,
+      center:    false,
+    },
   ];
 
   function applyScale() {
