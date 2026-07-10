@@ -1354,6 +1354,11 @@ a {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  /* Size the text off the card's own width (container query), not the
+     viewport — vw units broke down at the 2-up breakpoint (~768–1024px),
+     where the card is relatively wider than at 3-up but a vw-based size
+     doesn't know that, so the text read too small for the card. */
+  container-type: inline-size;
 }
 .pt-grwm {
   font-family: "Pinyon Script", cursive;
@@ -1362,9 +1367,9 @@ a {
   line-height: 0.92;
   white-space: nowrap;
 }
-.pt-grwm-main { display: block; font-size: clamp(60px, 8.2vw, 98px); }
+.pt-grwm-main { display: block; font-size: clamp(60px, 21cqi, 98px); }
 .pt-grwm-row { display: flex; align-items: baseline; justify-content: center; gap: 0.08em; }
-.pt-grwm-sub { font-size: clamp(30px, 4.2vw, 50px); transform: translate(-0.1em, -0.4em); }
+.pt-grwm-sub { font-size: clamp(30px, 11cqi, 50px); transform: translate(-0.1em, -0.4em); }
 
 /* ============================================================
    Technology Section
