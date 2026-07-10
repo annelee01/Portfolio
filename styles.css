@@ -391,7 +391,7 @@ body {
   line-height: var(--type-body-lh);
   letter-spacing: var(--type-body-ls);
   color: #222;
-  background: #E5E2DB;
+  background: #edeae4;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -408,7 +408,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #E5E2DB;
+  background: #EDEAE4;
   border-bottom: 1px solid #e5e7eb;
   position: sticky;
   top: 0;
@@ -551,7 +551,7 @@ a {
     position: fixed;
     inset: 0;
     z-index: 998;
-    background: #E5E2DB;
+    background: #EDEAE4;
     flex-direction: column;
     /* 112px top padding = navbar height (72px) + --space-5 gap (40px), matching Figma y:112 */
     padding: var(--space-14) var(--space-3) var(--space-3);
