@@ -9,7 +9,31 @@
       "Bash(python3 -m http.server 8080 --bind 0.0.0.0)",
       "Bash(python3 -m http.server 8888 --bind 0.0.0.0 --directory /Users/annelee/Documents/Development/Portfolio)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:8888)",
-      "Bash(lsof -i :8888 -sTCP:LISTEN)"
+      "Bash(lsof -i :8888 -sTCP:LISTEN)",
+      "Read(//Applications/**)",
+      "Bash(brew list *)",
+      "Bash(ps -p 880 -o pid,comm)",
+      "Bash(ps -p 880 -o args)",
+      "Bash(rm -v ~/Downloads/Cursor-darwin-universal.dmg 2>/dev/null && echo \"removed installer\" || echo \"installer already gone\")",
+      "Bash(brew install *)",
+      "Read(//usr/local/bin/**)",
+      "Bash(rm -v /usr/local/bin/cursor && echo \"removed dead symlink\")",
+      "Bash(curl -fL -o Cursor-darwin-universal.dmg \"https://download.cursor.sh/mac/dmg/universal\")",
+      "Bash(curl -fL -o Cursor-darwin-universal.dmg \"https://downloader.cursor.sh/mac/dmg/universal\")",
+      "Bash(brew --cache --cask cursor)",
+      "Bash(set -e)",
+      "Bash(rm -rf /Applications/Cursor.app)",
+      "Bash(cp -R __TRACKED_VAR__/Cursor.app /Applications/Cursor.app)",
+      "Bash(/usr/libexec/PlistBuddy -c \"Print :CFBundleShortVersionString\" /Applications/Cursor.app/Contents/Info.plist)",
+      "Bash(codesign --verify --deep --verbose=1 /Applications/Cursor.app)",
+      "Bash(spctl --assess --type execute --verbose /Applications/Cursor.app)",
+      "Bash(xattr -p com.apple.quarantine /Applications/Cursor.app)",
+      "Bash(xattr -dr com.apple.quarantine /Applications/Cursor.app)",
+      "Bash(open -a /Applications/Cursor.app)"
+    ],
+    "additionalDirectories": [
+      "/Users/annelee/Downloads",
+      "/usr/local/bin"
     ]
   }
 }

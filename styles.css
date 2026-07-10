@@ -782,57 +782,84 @@ a {
 
 .case-studies {
   display: flex;
-  gap: var(--space-2); /* 16px — matches grid gutter */
+  gap: var(--space-3);
   overflow-x: auto;
   scroll-snap-type: x proximity;
   scroll-behavior: smooth;
   /* overflow-x:auto forces overflow-y to clip too, which cuts the hover
      shadow/lift. Pad vertically to make room, then cancel with an equal
      negative margin so page layout is unchanged. */
-  padding-block: 44px;
-  margin-block: -44px;
+  padding-block: 32px;
+  margin-block: -48px;
   scroll-margin-top: var(--space-10);
   scrollbar-width: none; /* Firefox */
 }
 .case-studies::-webkit-scrollbar { display: none; } /* WebKit */
 
-/* Round arrows straddling the left/right edges of the card row (half-overlap).
-   Scoped under .cs-scroller to win over the base .cs-arrow rules. */
-.cs-scroller .cs-scroll-arrow {
-  position: absolute;
-  top: 50%;
-  z-index: 3;
-  border: none;
-  background: #1b1717;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+@media (max-width: 768px) {
+  /* Center-snap: a spacer on each end lets the first/last card reach the
+     middle of the viewport too, so the peek either side reads as equal. */
+  .case-studies::before,
+  .case-studies::after { content: ""; flex: 0 0 calc((100% - 72%) / 2); }
 }
-/* Active: inverted black fill, white arrow. Hover: white fill, black arrow. */
-.cs-scroller .cs-scroll-arrow svg { color: #fff; }
-.cs-scroller .cs-scroll-arrow:hover:not([disabled]) { background: #fff; }
-.cs-scroller .cs-scroll-arrow:hover:not([disabled]) svg { color: #1b1717; }
-/* Center each arrow on the card-row edge: half over the card, half over the
-   page margin (the 24px page-shell padding ≈ the arrow's outer half). */
-.cs-scroller .cs-scroll-arrow--prev { left: 0;  transform: translate(-50%, -50%); }
-.cs-scroller .cs-scroll-arrow--next { right: 0; transform: translate(50%, -50%); }
+
+/* Desktop/tablet: side gutter on the cards, aligned with the rest of the page. */
+@media (min-width: 769px) {
+  .case-studies {
+    /* span the true viewport edges — off-screen cards now clip at the
+       screen edge, so peeks run off cleanly instead of getting sliced */
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+
+    /* rest gutter that stays aligned with the nav + other sections at any width */
+    --page-inset: max(var(--space-3), calc((100vw - 1600px) / 2 + var(--space-3)));
+    padding-inline: var(--page-inset);
+    scroll-padding-inline: var(--page-inset);
+  }
+}
+
+/* Arrow bar sits in the space below the case-study row, right-aligned. */
+.cs-scroller .cs-arrows {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding-right: var(--space-3);
+}
+
+/* At desktop nav widths, line the arrows' right edge up with the Email
+   button's right edge. .cs-arrows normally sits inset inside the 1400px
+   page-shell, which has its own (different) outer margin at wide viewports
+   — padding alone can't compensate for that. So break it out to span the
+   true viewport width first, then apply .site-header .inner-nav's own
+   inset formula (100rem container, var(--space-2) padding) from that same
+   viewport-relative baseline. */
+@media (min-width: 1024px) {
+  .cs-scroller .cs-arrows {
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    padding-right: max(var(--space-2), calc((100vw - 100rem) / 2 + var(--space-2)));
+  }
+}
+
+/* Appearance matches the .cs-arrow outline buttons on the case-study pages
+   (transparent fill, black stroke, invert on hover, grey when disabled) —
+   only the position and enlarged hit area are specific to this row. */
+.cs-scroller .cs-scroll-arrow {
+  position: relative;
+}
 
 /* Invisible enlarged hit area so near-misses don't click the card underneath.
-   Extends outward only to the 8px viewport gap, and further over the card. */
+   Extends 16px past the button's edge on every side. */
 .cs-scroller .cs-scroll-arrow::before {
   content: "";
   position: absolute;
-  top: -12px;
-  bottom: -12px;
+  top: -16px;
+  bottom: -16px;
+  left: -16px;
+  right: -16px;
   border-radius: 999px;
 }
-.cs-scroller .cs-scroll-arrow--prev::before { left: -8px; right: -16px; }
-.cs-scroller .cs-scroll-arrow--next::before { left: -16px; right: -8px; }
-/* Flat light grey fill on the disabled arrow — no white/shadow overlap */
-.cs-scroller .cs-scroll-arrow[disabled] {
-  opacity: 1;
-  background: #dadada;
-  box-shadow: none;
-}
-.cs-scroller .cs-scroll-arrow[disabled] svg { color: #a8a8a8; }
 
 .case-study-card {
   flex: 0 0 calc((100% - 2 * var(--space-2)) / 3); /* 3 visible; 4th scrolls */
@@ -891,15 +918,6 @@ a {
   height: 340px;
   transform-origin: top left;
   overflow: hidden;
-}
-
-.casper-cross-sell-nav {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  flex-shrink: 0;
-  display: flex;
 }
 
 .casper-cross-sell-card {
@@ -1059,10 +1077,10 @@ a {
 }
 
 .card-body {
-  padding: var(--space-5);
+  padding: var(--space-4);
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+  gap: var(--space-3);
   flex: 1;
 }
 
@@ -1255,13 +1273,6 @@ a {
   text-box-edge: cap alphabetic;
 }
 
-.finde-close {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  color: #1b1717;
-}
-
 .finde-filter-divider {
   height: 1px;
   background: #d6d6d6;
@@ -1305,7 +1316,7 @@ a {
 
   .card-body {
     padding: var(--space-4) var(--space-3); /* 32px top/bottom, 24px left/right */
-    gap: var(--space-4);
+    gap: var(--space-2);
   }
 
   .card-text {
@@ -1325,11 +1336,16 @@ a {
 }
 
 @media (max-width: 768px) {
-  .case-study-card { flex-basis: 72%; } /* ~1.3 visible, peek next */
+  .case-study-card {
+    flex-basis: 72%; /* ~1.3 visible, peek next */
+    scroll-snap-align: center;
+  }
 }
 
 @media (max-width: 500px) {
   .case-study-card { flex-basis: 84%; } /* ~1.1 visible, peek next */
+  .case-studies::before,
+  .case-studies::after { flex-basis: calc((100% - 84%) / 2); }
 }
 
 /* Pocket Type card — "Get Ready with Me" sample composition */
@@ -1824,7 +1840,7 @@ footer {
 
 /* Page structure + 12-col grid (24px margin / 16px gutter) */
 .page-shell {
-  max-width: 1600px;
+  max-width: 1400px;
   min-width: 320px;
   width: 100%;
   margin: 0 auto;
@@ -2734,8 +2750,8 @@ footer {
 }
 
 .cs-arrow[disabled] {
-  background: #dadada;
-  border-color: transparent;
+  background: none;
+  border-color: #a8a8a8;
   cursor: default;
 }
 
