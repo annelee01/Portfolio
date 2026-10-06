@@ -1,64 +1,65 @@
-# Portfolio
+# anneleedesigns.com
 
-A personal portfolio website built with plain HTML, CSS, and JavaScript.
+My portfolio site. Designed and hand-built in plain HTML, CSS, and JavaScript. No framework, no build step.
+
+**Live site:** [anneleedesigns.com](https://anneleedesigns.com)
+
+## Design approach
+
+Swiss editorial. Neue Haas Grotesk, a strict 12-column grid. The layout design system is defined in `design.md` first, then implemented in CSS.
+
+### Grid
+
+| Breakpoint | Columns |
+| ---------- | ------- |
+| Desktop    | 12      |
+| Medium     | 8       |
+| Tablet     | 4       |
+| Mobile     | 1       |
+
+Every page uses the same shell:
+
+```html
+<main class="page-shell">
+  <div class="grid-inner">...</div>
+</main>
+```
+
+Blocks are placed with `.span-1` through `.span-12`.
 
 ## Project structure
 
-- `index.html` - home landing with hero, about, and project links.
-- `casper.html` - project case study page.
-- `finde.html` - project case study page.
-- `verizon.html` - project case study page.
-- `styles.css` - global styles, navbar styling, and responsive grid styling implementation.
-- `design.md` - design system "skill" source of truth: column/gutter/breakpoint rules, component spacing intent, grid strategy.
-- `script.js` - reusable site navbar component injection and page highlight logic.
+```
+index.html        Home: hero, about, project links
+pockettype.html   Case study
+casper.html       Case study
+finde.html        Case study
+verizon.html      Case study
+styles.css        Global styles, nav, responsive grid
+script.js         Shared navbar injection and active-page highlighting
+design.md         Design system spec: columns, gutters, breakpoints, spacing
+```
 
-## Key features
+## How it's built
 
-- Centralizable, repeatable navbar rendering from `script.js`.
-- Figma-inspired style: sticky top nav, typography, spacing, and CTA button.
-- 12-column responsive grid system:
-  - desktop: 12 columns
-  - medium: 8 columns
-  - tablet: 4 columns
-  - mobile: 1 column
-- CSS design tokens via `:root` (font families).
+- **Shared nav.** The navbar is rendered from `script.js`, so it's defined once and reused on every page.
+- **Tokens.** Font families and core values live as CSS custom properties on `:root`.
+- **Spec first.** Grid and spacing decisions are written in `design.md`, then ported to `styles.css`. To change the system, update the spec, then the CSS.
 
-## How to run
-
-1. Clone repo:
+## Run locally
 
 ```bash
 git clone https://github.com/annelee01/Portfolio.git
 cd Portfolio
-```
-
-2. Open `index.html` in a browser.
-
-3. Or run a local dev server (recommended):
-
-```bash
 python -m http.server 8000
 ```
 
-Open `http://localhost:8000`.
-
-## Development notes
-
-- Keep the nav structure in `script.js` so it’s shared and maintainable.
-- Each page uses `<main class="page-shell"><div class="grid-inner">...</div></main>` for layout.
-- Use `.span-1 ... .span-12` to place any block in the grid.
-- Use `design.md` as the design system source of truth for column/gutter/breakpoint rules.
-  - Define the column structure in `design.md` (e.g., 12 → 9 → 6 column breakpoints)
-  - Internally implement those values in `styles.css` and component CSS classes.
-  - When starting a new project, update `design.md` and port values into CSS/HTML layouts.
+Then open [http://localhost:8000](http://localhost:8000).
 
 ## Deployment
 
-This is a static site and is ready for GitHub Pages.
-
-1. In GitHub repo settings, enable Pages from `main` branch.
-2. Optionally set root folder.
+Static site, deployed on Vercel.
 
 ## License
 
-MIT (or your preferred license)
+Code is MIT licensed. Case study content, images, and writing are © Anne Lee. All rights reserved.
